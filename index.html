@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Tech Homepage</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: url('your-background-image.jpg') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .card {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        .links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
+        .link {
+            text-decoration: none;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .link i {
+            font-size: 30px;
+            margin-bottom: 5px;
+        }
+        .socials {
+            margin-top: 20px;
+        }
+        .socials a {
+            margin: 0 10px;
+            color: white;
+            font-size: 24px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Amsyar Putra</h1>
+        <p>TECH</p>
+        <div class="card">
+            <div class="links">
+                <a href="#" class="link"><i class="fas fa-print"></i> Discord</a>
+                <a href="#" class="link"><i class="fas fa-desktop"></i> PCGamingWiki</a>
+                <a href="#" class="link"><i class="fas fa-headphones"></i> Spotify</a>
+                <a href="#" class="link"><i class="fas fa-cloud"></i> ChatGPT</a>
+                <a href="#" class="link"><i class="fas fa-microchip"></i> Steam</a>
+                <a href="#" class="link"><i class="fas fa-envelope"></i> Email</a>
+            </div>
+        </div>
+        <div class="socials">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+    </div>
+</body>
+</html>
