@@ -1,0 +1,24 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://amsyarputra.net/",
+      "item": [
+        {
+          "href": "https://amsyarputra.net/",
+          "type": "text/html",
+          "title": "Amsyar Putra Personal Tech Portal"
+        },
+        {
+          "href": "https://amsyarputra.net/sitemap.xml",
+          "type": "application/xml",
+          "title": "Sitemap"
+        },
+        {
+          "href": "https://amsyarputra.net/robots.txt",
+          "type": "text/plain",
+          "title": "Robots.txt"
+        }
+      ]
+    }
+  ]
+}
