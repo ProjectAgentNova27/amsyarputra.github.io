@@ -2,8 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Amsyar Putra | Personal Tech Portal</title>
+
+    <meta name="description" content="Amsyar Putra's personal tech homepage and portal.">
+
+    <!-- Social Preview / Open Graph -->
+    <meta property="og:title" content="Amsyar Putra | Personal Tech Portal">
+    <meta property="og:description" content="Personal tech homepage and portal.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://amsyarputra.net/">
+    <meta property="og:image" content="https://amsyarputra.net/style/32993418_771486081870.jpg">
+
+    <!-- Twitter / X Preview -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Amsyar Putra | Personal Tech Portal">
+    <meta name="twitter:description" content="Personal tech homepage and portal.">
+    <meta name="twitter:image" content="https://amsyarputra.net/style/32993418_771486081870.jpg">
+
+    <!-- Theme Colour -->
+    <meta name="theme-color" content="#0f172a">
 
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -15,10 +35,15 @@
             --card-border: rgba(255, 255, 255, 0.15);
             --hover-bg: rgba(255, 255, 255, 0.15);
             --accent-color: #38bdf8;
+            --muted-text: rgba(255, 255, 255, 0.75);
         }
 
         * {
             box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -35,7 +60,7 @@
             content: "";
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.35);
+            background: rgba(0, 0, 0, 0.42);
             z-index: -1;
         }
 
@@ -55,10 +80,18 @@
 
         .tagline {
             margin-top: 0;
-            margin-bottom: 25px;
+            margin-bottom: 10px;
             letter-spacing: 4px;
             color: var(--accent-color);
             font-weight: bold;
+        }
+
+        .intro {
+            max-width: 650px;
+            margin: 0 auto 25px;
+            color: var(--muted-text);
+            font-size: 0.95rem;
+            line-height: 1.5;
         }
 
         .card {
@@ -67,8 +100,9 @@
             border-radius: 16px;
             border: 1px solid var(--card-border);
             backdrop-filter: blur(10px);
-            width: min(720px, 100%);
+            width: min(760px, 100%);
             margin-bottom: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
         }
 
         .section-title {
@@ -96,11 +130,14 @@
             padding: 18px 10px;
             border-radius: 12px;
             transition: 0.2s ease;
+            min-height: 115px;
         }
 
-        .link:hover {
+        .link:hover,
+        .link:focus {
             background: var(--hover-bg);
             transform: translateY(-3px);
+            outline: none;
         }
 
         .link i {
@@ -109,11 +146,30 @@
             color: var(--accent-color);
         }
 
+        .link span {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .link small {
+            font-size: 0.75rem;
+            color: var(--muted-text);
+            line-height: 1.3;
+        }
+
         .warning {
             font-size: 0.85rem;
-            opacity: 0.8;
+            color: var(--muted-text);
             margin-top: -6px;
             margin-bottom: 18px;
+            line-height: 1.5;
+        }
+
+        .status-note {
+            font-size: 0.85rem;
+            color: var(--muted-text);
+            margin-top: 15px;
+            line-height: 1.5;
         }
 
         .socials {
@@ -128,11 +184,24 @@
             transition: 0.2s ease;
         }
 
-        .socials a:hover {
+        .socials a:hover,
+        .socials a:focus {
             color: var(--accent-color);
+            outline: none;
+        }
+
+        footer {
+            margin-top: 15px;
+            font-size: 0.8rem;
+            color: var(--muted-text);
         }
 
         @media (max-width: 700px) {
+            .container {
+                justify-content: flex-start;
+                padding-top: 45px;
+            }
+
             .links {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -146,6 +215,10 @@
             .card {
                 padding: 18px;
             }
+
+            .link {
+                min-height: 100px;
+            }
         }
     </style>
 </head>
@@ -155,6 +228,10 @@
         <h1>Amsyar Putra</h1>
         <p class="tagline">TECH PORTAL</p>
 
+        <p class="intro">
+            Personal homepage for quick access to public links, tools, and selected private services.
+        </p>
+
         <!-- MAIN PUBLIC LINKS -->
         <div class="card">
             <h2 class="section-title">Main Links</h2>
@@ -162,32 +239,38 @@
             <div class="links">
                 <a href="#" class="link" target="_blank" rel="noopener noreferrer">
                     <i class="fab fa-discord"></i>
-                    Discord
+                    <span>Discord</span>
+                    <small>Community and chat</small>
                 </a>
 
                 <a href="https://www.pcgamingwiki.com" class="link" target="_blank" rel="noopener noreferrer">
                     <i class="fas fa-desktop"></i>
-                    PCGamingWiki
+                    <span>PCGamingWiki</span>
+                    <small>Game fixes and tweaks</small>
                 </a>
 
                 <a href="https://open.spotify.com" class="link" target="_blank" rel="noopener noreferrer">
                     <i class="fab fa-spotify"></i>
-                    Spotify
+                    <span>Spotify</span>
+                    <small>Music and playlists</small>
                 </a>
 
                 <a href="https://chatgpt.com" class="link" target="_blank" rel="noopener noreferrer">
                     <i class="fas fa-robot"></i>
-                    ChatGPT
+                    <span>ChatGPT</span>
+                    <small>AI assistant</small>
                 </a>
 
                 <a href="https://store.steampowered.com" class="link" target="_blank" rel="noopener noreferrer">
                     <i class="fab fa-steam"></i>
-                    Steam
+                    <span>Steam</span>
+                    <small>Games and library</small>
                 </a>
 
                 <a href="mailto:your-email@amsyarputra.net" class="link">
                     <i class="fas fa-envelope"></i>
-                    Email
+                    <span>Email</span>
+                    <small>Contact me</small>
                 </a>
             </div>
         </div>
@@ -195,39 +278,52 @@
         <!-- HOME NETWORK / PRIVATE PORTAL -->
         <div class="card">
             <h2 class="section-title">Home Portal</h2>
-            <p class="warning">Private services should only be exposed through VPN, Cloudflare Access, or proper authentication.</p>
+
+            <p class="warning">
+                Private services should only be accessed through VPN, Cloudflare Access, or proper authentication.
+            </p>
 
             <div class="links">
                 <a href="#" class="link" target="_blank" rel="noopener noreferrer">
                     <i class="fas fa-house-signal"></i>
-                    Home Dashboard
+                    <span>Home Dashboard</span>
+                    <small>Private access only</small>
                 </a>
 
                 <a href="#" class="link" target="_blank" rel="noopener noreferrer">
                     <i class="fas fa-wifi"></i>
-                    Router
+                    <span>Router</span>
+                    <small>VPN required</small>
                 </a>
 
                 <a href="#" class="link" target="_blank" rel="noopener noreferrer">
                     <i class="fas fa-server"></i>
-                    NAS / Files
+                    <span>NAS / Files</span>
+                    <small>Private file access</small>
                 </a>
 
                 <a href="#" class="link" target="_blank" rel="noopener noreferrer">
                     <i class="fas fa-shield-halved"></i>
-                    VPN
+                    <span>VPN</span>
+                    <small>Secure remote access</small>
                 </a>
 
-                <a href="#" class="link" target="_blank" rel="noopener noreferrer">
+                <a href="https://dash.cloudflare.com" class="link" target="_blank" rel="noopener noreferrer">
                     <i class="fas fa-cloud"></i>
-                    Cloudflare
+                    <span>Cloudflare</span>
+                    <small>DNS and security</small>
                 </a>
 
                 <a href="#" class="link" target="_blank" rel="noopener noreferrer">
                     <i class="fas fa-gamepad"></i>
-                    Game Stream
+                    <span>Game Stream</span>
+                    <small>Moonlight / Sunshine</small>
                 </a>
             </div>
+
+            <p class="status-note">
+                Public site is online. Private services are not intended for direct public access.
+            </p>
         </div>
 
         <!-- SOCIAL LINKS -->
@@ -248,6 +344,14 @@
                 <i class="fab fa-github"></i>
             </a>
         </div>
+
+        <footer>
+            © <span id="year"></span> Amsyar Putra
+        </footer>
     </div>
+
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>
