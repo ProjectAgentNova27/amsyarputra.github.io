@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>404 | Amsyar Putra</title>
+
+    <meta name="description" content="Page not found on Amsyar Putra's personal tech portal.">
+    <meta name="robots" content="noindex">
+    <meta name="theme-color" content="#0f172a">
+
+    <meta property="og:title" content="404 | Amsyar Putra">
+    <meta property="og:description" content="The requested page could not be found.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://amsyarputra.net/404.html">
+    <meta property="og:image" content="https://amsyarputra.net/style/32993418_771486081870.jpg">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        :root {
+            --text-color: white;
+            --card-bg: rgba(0, 0, 0, 0.62);
+            --card-border: rgba(255, 255, 255, 0.15);
+            --hover-bg: rgba(255, 255, 255, 0.15);
+            --accent-color: #38bdf8;
+            --muted-text: rgba(255, 255, 255, 0.75);
+            --yellow: #facc15;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: url('style/32993418_771486081870.jpg') no-repeat center center/cover;
+            color: var(--text-color);
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            text-align: center;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.52);
+            z-index: -1;
+        }
+
+        .card {
+            width: min(620px, 92%);
+            background: var(--card-bg);
+            padding: 34px 26px;
+            border-radius: 18px;
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+        }
+
+        .icon {
+            font-size: 3rem;
+            color: var(--yellow);
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(3rem, 12vw, 6rem);
+            line-height: 1;
+            color: var(--accent-color);
+        }
+
+        .tagline {
+            margin: 10px 0 18px;
+            letter-spacing: 3px;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        p {
+            color: var(--muted-text);
+            line-height: 1.6;
+            margin: 0 auto 22px;
+            max-width: 480px;
+        }
+
+        .button-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 22px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-width: 150px;
+            color: white;
+            text-decoration: none;
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.08);
+            transition: 0.2s ease;
+        }
+
+        .button:hover,
+        .button:focus {
+            background: var(--hover-bg);
+            transform: translateY(-2px);
+            outline: none;
+        }
+
+        .small {
+            margin-top: 22px;
+            font-size: 0.8rem;
+            color: var(--muted-text);
+        }
+
+        @media (max-width: 420px) {
+            .card {
+                padding: 28px 18px;
+            }
+
+            .button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="card">
+        <div class="icon">
+            <i class="fas fa-triangle-exclamation"></i>
+        </div>
+
+        <h1>404</h1>
+        <p class="tagline">PAGE NOT FOUND</p>
+
+        <p>
+            The page you are looking for does not exist, has been moved, or is not meant to be publicly accessible.
+        </p>
+
+        <div class="button-row">
+            <a href="/" class="button">
+                <i class="fas fa-house"></i>
+                Portal
+            </a>
+
+            <a href="/status.html" class="button">
+                <i class="fas fa-chart-line"></i>
+                Status
+            </a>
+
+            <a href="/vpn.html" class="button">
+                <i class="fas fa-shield-halved"></i>
+                VPN Guide
+            </a>
+        </div>
+
+        <div class="small">
+            Private endpoints, DDNS fallback URLs, and VPN configuration are not published here.
+        </div>
+    </main>
+</body>
+
+</html>

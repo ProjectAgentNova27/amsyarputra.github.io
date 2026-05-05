@@ -1,0 +1,12 @@
+.env
+*.key
+*.pem
+*.p12
+*.ovpn
+*.conf
+*.zip
+*.bak
+*.old
+secrets/
+private/
+wireguard/

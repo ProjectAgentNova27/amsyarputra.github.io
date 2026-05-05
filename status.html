@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Status | Amsyar Putra</title>
+
+    <meta name="description" content="Service status overview for Amsyar Putra's personal tech portal.">
+    <meta name="theme-color" content="#0f172a">
+
+    <meta property="og:title" content="Status | Amsyar Putra">
+    <meta property="og:description" content="Service status overview for the personal tech portal.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://amsyarputra.net/status.html">
+    <meta property="og:image" content="https://amsyarputra.net/style/32993418_771486081870.jpg">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        :root {
+            --text-color: white;
+            --card-bg: rgba(0, 0, 0, 0.62);
+            --card-border: rgba(255, 255, 255, 0.15);
+            --hover-bg: rgba(255, 255, 255, 0.15);
+            --accent-color: #38bdf8;
+            --muted-text: rgba(255, 255, 255, 0.75);
+            --green: #4ade80;
+            --yellow: #facc15;
+            --purple: #c084fc;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: url('style/32993418_771486081870.jpg') no-repeat center center/cover;
+            color: var(--text-color);
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.48);
+            z-index: -1;
+        }
+
+        .container {
+            width: min(900px, 92%);
+            margin: 0 auto;
+            padding: 45px 0;
+        }
+
+        .back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-color);
+            text-decoration: none;
+            margin-bottom: 20px;
+            opacity: 0.85;
+            transition: 0.2s ease;
+        }
+
+        .back:hover,
+        .back:focus {
+            color: var(--accent-color);
+            outline: none;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 28px;
+            border-radius: 18px;
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+            margin-bottom: 18px;
+        }
+
+        h1 {
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-size: clamp(2rem, 6vw, 3.5rem);
+        }
+
+        .tagline {
+            color: var(--accent-color);
+            letter-spacing: 3px;
+            font-weight: bold;
+            margin-top: 0;
+            margin-bottom: 24px;
+        }
+
+        .status-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .status-row {
+            display: grid;
+            grid-template-columns: 42px 1fr auto;
+            gap: 12px;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 14px;
+        }
+
+        .status-row i {
+            color: var(--accent-color);
+            font-size: 1.3rem;
+            text-align: center;
+        }
+
+        .status-row strong {
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .status-row small {
+            color: var(--muted-text);
+            line-height: 1.4;
+        }
+
+        .pill {
+            font-size: 0.72rem;
+            font-weight: bold;
+            letter-spacing: 0.8px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            white-space: nowrap;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .online {
+            color: var(--green);
+            background: rgba(74, 222, 128, 0.12);
+        }
+
+        .access {
+            color: var(--purple);
+            background: rgba(192, 132, 252, 0.12);
+        }
+
+        .vpn {
+            color: var(--yellow);
+            background: rgba(250, 204, 21, 0.12);
+        }
+
+        .disabled {
+            color: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .note {
+            color: var(--muted-text);
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+
+        footer {
+            margin-top: 18px;
+            color: var(--muted-text);
+            font-size: 0.85rem;
+            text-align: center;
+        }
+
+        @media (max-width: 540px) {
+            .card {
+                padding: 22px;
+            }
+
+            .status-row {
+                grid-template-columns: 34px 1fr;
+            }
+
+            .pill {
+                grid-column: 2;
+                width: fit-content;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <a href="/" class="back">
+            <i class="fas fa-arrow-left"></i>
+            Back to portal
+        </a>
+
+        <div class="card">
+            <h1>Status</h1>
+            <p class="tagline">SERVICE OVERVIEW</p>
+
+            <div class="status-grid">
+                <div class="status-row">
+                    <i class="fas fa-globe"></i>
+                    <div>
+                        <strong>Main Website</strong>
+                        <small>Static GitHub Pages site served through Cloudflare.</small>
+                    </div>
+                    <span class="pill online">ONLINE</span>
+                </div>
+
+                <div class="status-row">
+                    <i class="fas fa-wifi"></i>
+                    <div>
+                        <strong>Router Portal</strong>
+                        <small>Protected by Cloudflare Access. Direct DDNS router admin access is not published.</small>
+                    </div>
+                    <span class="pill access">ACCESS</span>
+                </div>
+
+                <div class="status-row">
+                    <i class="fas fa-sun"></i>
+                    <div>
+                        <strong>Sunshine Admin</strong>
+                        <small>Protected by Cloudflare Access. Used for Sunshine web administration only.</small>
+                    </div>
+                    <span class="pill access">ACCESS</span>
+                </div>
+
+                <div class="status-row">
+                    <i class="fas fa-gamepad"></i>
+                    <div>
+                        <strong>Moonlight Game Stream</strong>
+                        <small>Actual game streaming should be accessed through WireGuard VPN.</small>
+                    </div>
+                    <span class="pill vpn">VPN</span>
+                </div>
+
+                <div class="status-row">
+                    <i class="fas fa-shield-halved"></i>
+                    <div>
+                        <strong>WireGuard VPN</strong>
+                        <small>Private access method for router, LAN services, and game streaming.</small>
+                    </div>
+                    <span class="pill vpn">PRIVATE</span>
+                </div>
+
+                <div class="status-row">
+                    <i class="fas fa-server"></i>
+                    <div>
+                        <strong>NAS / Files</strong>
+                        <small>Not publicly configured on this portal.</small>
+                    </div>
+                    <span class="pill disabled">DISABLED</span>
+                </div>
+            </div>
+
+            <p class="note">
+                This page is a public overview only. It does not probe private services, reveal DDNS fallback URLs,
+                expose internal IP addresses, or publish VPN configuration.
+            </p>
+        </div>
+
+        <footer>
+            Last updated manually. © <span id="year"></span> Amsyar Putra
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+</body>
+
+</html>
