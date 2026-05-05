@@ -1,20 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>VPN Access | Amsyar Putra</title>
 
     <meta name="description" content="Private VPN access instructions for Amsyar Putra's home network.">
+
     <meta name="theme-color" content="#0f172a">
 
+    <!-- Social Preview / Open Graph -->
+    <meta property="og:title" content="VPN Access | Amsyar Putra">
+    <meta property="og:description" content="Private VPN access guide for selected home network services.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://amsyarputra.net/vpn.html">
+    <meta property="og:image" content="https://amsyarputra.net/style/32993418_771486081870.jpg">
+
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    
+
     <style>
         :root {
             --text-color: white;
             --card-bg: rgba(0, 0, 0, 0.62);
             --card-border: rgba(255, 255, 255, 0.15);
+            --hover-bg: rgba(255, 255, 255, 0.15);
             --accent-color: #38bdf8;
             --muted-text: rgba(255, 255, 255, 0.75);
             --danger: #f87171;
@@ -23,6 +36,10 @@
 
         * {
             box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -56,10 +73,13 @@
             text-decoration: none;
             margin-bottom: 20px;
             opacity: 0.85;
+            transition: 0.2s ease;
         }
 
-        .back:hover {
+        .back:hover,
+        .back:focus {
             color: var(--accent-color);
+            outline: none;
         }
 
         .card {
@@ -92,7 +112,8 @@
             font-size: 1.2rem;
         }
 
-        p, li {
+        p,
+        li {
             color: var(--muted-text);
             line-height: 1.6;
         }
@@ -108,6 +129,7 @@
             border-radius: 12px;
             color: white;
             margin: 20px 0;
+            line-height: 1.5;
         }
 
         .good {
@@ -117,6 +139,7 @@
             border-radius: 12px;
             color: white;
             margin: 20px 0;
+            line-height: 1.5;
         }
 
         code {
@@ -146,9 +169,11 @@
             transition: 0.2s ease;
         }
 
-        .button:hover {
+        .button:hover,
+        .button:focus {
             background: rgba(255, 255, 255, 0.16);
             transform: translateY(-2px);
+            outline: none;
         }
 
         footer {
@@ -184,7 +209,8 @@
 
             <div class="notice">
                 <strong>Private access only.</strong><br>
-                WireGuard configuration files, QR codes, private keys, and internal service addresses are not published here.
+                WireGuard configuration files, QR codes, private keys, DDNS fallback links, and internal service
+                addresses are not published here.
             </div>
 
             <h2>Purpose</h2>
@@ -201,9 +227,22 @@
                 <li>Disconnect when no longer needed.</li>
             </ul>
 
-            <h2>Moonlight / Sunshine</h2>
+            <h2>Router Access</h2>
+            <p>
+                The router portal link uses Cloudflare Access when available.
+                If Cloudflare Access or the tunnel is offline, connect to WireGuard first and access the router using
+                its private LAN address.
+            </p>
+
+            <div class="notice">
+                Direct DDNS router-admin fallback URLs are intentionally not shown on this public page.
+            </div>
+
+            <h2 id="moonlight-sunshine">Moonlight / Sunshine</h2>
+
             <div class="good">
-                For game streaming, connect to WireGuard first, then open Moonlight and connect using the gaming PC's VPN or LAN IP.
+                For game streaming, connect to WireGuard first, then open Moonlight and connect using the gaming PC's
+                VPN or LAN IP.
             </div>
 
             <ul>
@@ -211,6 +250,7 @@
                 <li>Recommended mobile MTU: <code>1280</code></li>
                 <li>Sunshine PC should remain powered on.</li>
                 <li>Moonlight may need manual host entry if auto-discovery does not work over VPN.</li>
+                <li>For manual Moonlight pairing, use the gaming PC's VPN IP instead of your public IP.</li>
             </ul>
 
             <h2>Security Notes</h2>
@@ -218,7 +258,19 @@
                 <li>Do not share VPN profiles publicly.</li>
                 <li>Do not upload WireGuard QR codes to this website.</li>
                 <li>Do not expose router or NAS admin pages directly to the internet.</li>
+                <li>Do not publish direct DDNS router admin URLs on the public portal.</li>
                 <li>Use strong device passwords and keep Sunshine updated.</li>
+                <li>Only create VPN profiles for devices you trust.</li>
+            </ul>
+
+            <h2>Quick Flow</h2>
+            <ul>
+                <li>Install WireGuard on your phone, tablet, or laptop.</li>
+                <li>Import your private WireGuard profile locally.</li>
+                <li>Connect to VPN.</li>
+                <li>Open Moonlight.</li>
+                <li>Add the gaming PC manually using its VPN IP.</li>
+                <li>Start streaming through Sunshine.</li>
             </ul>
 
             <div class="button-row">
@@ -248,4 +300,5 @@
         document.getElementById("year").textContent = new Date().getFullYear();
     </script>
 </body>
+
 </html>
