@@ -36,6 +36,7 @@
             --disabled-text: rgba(255, 255, 255, 0.45);
             --green: #4ade80;
             --yellow: #facc15;
+            --red: #f87171;
             --purple: #c084fc;
         }
 
@@ -207,8 +208,23 @@
         }
 
         .badge.access {
-            color: var(--purple);
-            background: rgba(192, 132, 252, 0.12);
+            color: var(--green);
+            background: rgba(74, 222, 128, 0.12);
+        }
+
+        .badge.checking {
+            color: var(--accent-color);
+            background: rgba(56, 189, 248, 0.12);
+        }
+
+        .badge.offline {
+            color: var(--red);
+            background: rgba(248, 113, 113, 0.12);
+        }
+
+        .badge.unknown {
+            color: var(--yellow);
+            background: rgba(250, 204, 21, 0.12);
         }
 
         .badge.vpn {
@@ -316,7 +332,6 @@
             Personal homepage for quick access to public links, tools, protected services, and private network guides.
         </p>
 
-        <!-- VISITOR SESSION -->
         <div class="card">
             <h2 class="section-title">Visitor Session</h2>
 
@@ -357,7 +372,6 @@
             </p>
         </div>
 
-        <!-- MAIN PUBLIC LINKS -->
         <div class="card">
             <h2 class="section-title">Main Links</h2>
 
@@ -406,7 +420,6 @@
             </div>
         </div>
 
-        <!-- HOME NETWORK / PRIVATE PORTAL -->
         <div class="card">
             <h2 class="section-title">Home Portal</h2>
 
@@ -420,15 +433,15 @@
                     <em class="badge public">STATUS</em>
                     <i class="fas fa-chart-line"></i>
                     <span>Status Page</span>
-                    <small>Service overview</small>
+                    <small>Live service overview</small>
                 </a>
 
                 <a href="https://router.amsyarputra.net" class="link protected-link" target="_blank"
                     rel="noopener noreferrer">
-                    <em class="badge access">ACCESS</em>
+                    <em id="router-home-status" class="badge checking">CHECKING</em>
                     <i class="fas fa-wifi"></i>
                     <span>Router</span>
-                    <small>Access protected</small>
+                    <small>Cloudflare Access / PC tunnel</small>
                 </a>
 
                 <a href="#" class="link disabled" aria-disabled="true">
@@ -447,10 +460,10 @@
 
                 <a href="https://sunshine.amsyarputra.net" class="link protected-link" target="_blank"
                     rel="noopener noreferrer">
-                    <em class="badge access">ACCESS</em>
+                    <em id="sunshine-home-status" class="badge checking">CHECKING</em>
                     <i class="fas fa-sun"></i>
                     <span>Sunshine Admin</span>
-                    <small>Access protected</small>
+                    <small>PC must be online</small>
                 </a>
 
                 <a href="/vpn.html#moonlight-sunshine" class="link">
@@ -466,7 +479,6 @@
             </p>
         </div>
 
-        <!-- SOCIAL LINKS -->
         <div class="socials">
             <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                 <i class="fab fa-instagram"></i>
@@ -526,6 +538,50 @@
             document.getElementById("sg-time").textContent = singaporeTime + " SGT";
         }
 
+        async function loadHomeServiceStatus() {
+            const routerBadge = document.getElementById("router-home-status");
+            const sunshineBadge = document.getElementById("sunshine-home-status");
+
+            if (!routerBadge || !sunshineBadge) return;
+
+            try {
+                const response = await fetch("https://status-api.amsyarputra.net/status.json", {
+                    cache: "no-store"
+                });
+
+                if (!response.ok) {
+                    throw new Error("Status API returned " + response.status);
+                }
+
+                const data = await response.json();
+
+                updateHomeBadge(routerBadge, data.router);
+                updateHomeBadge(sunshineBadge, data.sunshine);
+
+            } catch (error) {
+                setHomeUnknown(routerBadge);
+                setHomeUnknown(sunshineBadge);
+            }
+        }
+
+        function updateHomeBadge(element, service) {
+            element.classList.remove("access", "offline", "public", "vpn", "disabled-badge", "checking", "unknown");
+
+            if (service && service.status === "online") {
+                element.textContent = "ONLINE";
+                element.classList.add("access");
+            } else {
+                element.textContent = "OFFLINE";
+                element.classList.add("offline");
+            }
+        }
+
+        function setHomeUnknown(element) {
+            element.classList.remove("access", "offline", "public", "vpn", "disabled-badge", "checking");
+            element.textContent = "UNKNOWN";
+            element.classList.add("unknown");
+        }
+
         document.getElementById("year").textContent = new Date().getFullYear();
         document.getElementById("browser-info").textContent = detectBrowser();
         document.getElementById("platform-info").textContent = navigator.platform || "Unknown";
@@ -533,6 +589,9 @@
 
         updateVisitorSession();
         setInterval(updateVisitorSession, 1000);
+
+        loadHomeServiceStatus();
+        setInterval(loadHomeServiceStatus, 60000);
 
         document.querySelectorAll(".protected-link").forEach(function (link) {
             link.addEventListener("click", function (event) {

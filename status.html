@@ -29,6 +29,7 @@
             --muted-text: rgba(255, 255, 255, 0.75);
             --green: #4ade80;
             --yellow: #facc15;
+            --red: #f87171;
             --purple: #c084fc;
         }
 
@@ -163,6 +164,21 @@
             background: rgba(255, 255, 255, 0.08);
         }
 
+        .checking {
+            color: var(--accent-color);
+            background: rgba(56, 189, 248, 0.12);
+        }
+
+        .offline {
+            color: var(--red);
+            background: rgba(248, 113, 113, 0.12);
+        }
+
+        .unknown {
+            color: var(--yellow);
+            background: rgba(250, 204, 21, 0.12);
+        }
+
         .note {
             color: var(--muted-text);
             line-height: 1.6;
@@ -218,18 +234,18 @@
                     <i class="fas fa-wifi"></i>
                     <div>
                         <strong>Router Portal</strong>
-                        <small>Protected by Cloudflare Access. Direct DDNS router admin access is not published.</small>
+                        <small>Protected by Cloudflare Access. Availability depends on the tunnel connector.</small>
                     </div>
-                    <span class="pill access">ACCESS</span>
+                    <span id="router-status" class="pill checking">CHECKING</span>
                 </div>
 
                 <div class="status-row">
                     <i class="fas fa-sun"></i>
                     <div>
                         <strong>Sunshine Admin</strong>
-                        <small>Protected by Cloudflare Access. Used for Sunshine web administration only.</small>
+                        <small>Protected by Cloudflare Access. PC and Sunshine service must be online.</small>
                     </div>
-                    <span class="pill access">ACCESS</span>
+                    <span id="sunshine-status" class="pill checking">CHECKING</span>
                 </div>
 
                 <div class="status-row">
@@ -261,18 +277,68 @@
             </div>
 
             <p class="note">
-                This page is a public overview only. It does not probe private services, reveal DDNS fallback URLs,
-                expose internal IP addresses, or publish VPN configuration.
+                This page shows a safe public status only. It does not reveal DDNS fallback URLs, internal IP addresses,
+                ports, or VPN configuration.
             </p>
         </div>
 
         <footer>
-            Last updated manually. © <span id="year"></span> Amsyar Putra
+            Last checked: <span id="last-checked">Checking...</span>. © <span id="year"></span> Amsyar Putra
         </footer>
     </div>
 
     <script>
         document.getElementById("year").textContent = new Date().getFullYear();
+
+        async function loadServiceStatus() {
+            const routerBadge = document.getElementById("router-status");
+            const sunshineBadge = document.getElementById("sunshine-status");
+            const lastChecked = document.getElementById("last-checked");
+
+            try {
+                const response = await fetch("https://status-api.amsyarputra.net/status.json", {
+                    cache: "no-store"
+                });
+
+                if (!response.ok) {
+                    throw new Error("Status API returned " + response.status);
+                }
+
+                const data = await response.json();
+
+                updateBadge(routerBadge, data.router);
+                updateBadge(sunshineBadge, data.sunshine);
+
+                const checkedDate = new Date(data.checkedAt);
+                lastChecked.textContent = checkedDate.toLocaleString();
+
+            } catch (error) {
+                setUnknown(routerBadge);
+                setUnknown(sunshineBadge);
+                lastChecked.textContent = "Unable to check";
+            }
+        }
+
+        function updateBadge(element, service) {
+            element.classList.remove("checking", "online", "offline", "access", "vpn", "disabled", "unknown");
+
+            if (service && service.status === "online") {
+                element.textContent = "ONLINE";
+                element.classList.add("online");
+            } else {
+                element.textContent = "OFFLINE";
+                element.classList.add("offline");
+            }
+        }
+
+        function setUnknown(element) {
+            element.classList.remove("checking", "online", "offline", "access", "vpn", "disabled");
+            element.textContent = "UNKNOWN";
+            element.classList.add("unknown");
+        }
+
+        loadServiceStatus();
+        setInterval(loadServiceStatus, 60000);
     </script>
 </body>
 
