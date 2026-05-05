@@ -1,0 +1,5 @@
+Contact: mailto:work@amsyarputra.net
+Preferred-Languages: en
+Canonical: https://amsyarputra.net/.well-known/security.txt
+Policy: https://amsyarputra.net/privacy.html
+Expires: 2027-05-05T00:00:00.000Z

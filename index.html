@@ -3,12 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Amsyar Putra | Personal Tech Portal</title>
 
     <meta name="description" content="Amsyar Putra's personal tech homepage and portal.">
+    <meta name="theme-color" content="#0f172a">
 
     <meta property="og:title" content="Amsyar Putra | Personal Tech Portal">
     <meta property="og:description" content="Personal tech homepage and portal.">
@@ -21,438 +20,110 @@
     <meta name="twitter:description" content="Personal tech homepage and portal.">
     <meta name="twitter:image" content="https://amsyarputra.net/style/32993418_771486081870.jpg">
 
-    <meta name="theme-color" content="#0f172a">
-
+    <link rel="canonical" href="https://amsyarputra.net/">
+    <link rel="privacy-policy" href="/privacy.html">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
-    <style>
-        :root {
-            --text-color: white;
-            --card-bg: rgba(0, 0, 0, 0.6);
-            --card-border: rgba(255, 255, 255, 0.15);
-            --hover-bg: rgba(255, 255, 255, 0.15);
-            --accent-color: #38bdf8;
-            --muted-text: rgba(255, 255, 255, 0.75);
-            --disabled-text: rgba(255, 255, 255, 0.45);
-            --green: #4ade80;
-            --yellow: #facc15;
-            --red: #f87171;
-            --purple: #c084fc;
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background: url('style/32993418_771486081870.jpg') no-repeat center center/cover;
-            color: var(--text-color);
-            text-align: center;
-            min-height: 100vh;
-        }
-
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.45);
-            z-index: -1;
-        }
-
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 30px 15px;
-        }
-
-        h1 {
-            margin-bottom: 5px;
-            font-size: clamp(2.2rem, 6vw, 4rem);
-        }
-
-        .tagline {
-            margin-top: 0;
-            margin-bottom: 10px;
-            letter-spacing: 4px;
-            color: var(--accent-color);
-            font-weight: bold;
-        }
-
-        .intro {
-            max-width: 650px;
-            margin: 0 auto 25px;
-            color: var(--muted-text);
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-
-        .card {
-            background: var(--card-bg);
-            padding: 24px;
-            border-radius: 16px;
-            border: 1px solid var(--card-border);
-            backdrop-filter: blur(10px);
-            width: min(760px, 100%);
-            margin-bottom: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
-        }
-
-        .section-title {
-            margin-top: 0;
-            margin-bottom: 16px;
-            font-size: 1.1rem;
-            letter-spacing: 2px;
-            color: var(--accent-color);
-            text-transform: uppercase;
-        }
-
-        .visitor-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            text-align: left;
-        }
-
-        .visitor-item {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 12px;
-            min-height: 76px;
-        }
-
-        .visitor-item span {
-            display: block;
-            font-size: 0.72rem;
-            color: var(--muted-text);
-            margin-bottom: 6px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .visitor-item strong {
-            display: block;
-            font-size: 0.9rem;
-            word-break: break-word;
-        }
-
-        .links {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-        }
-
-        .link {
-            position: relative;
-            text-decoration: none;
-            color: var(--text-color);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 18px 10px;
-            border-radius: 12px;
-            transition: 0.2s ease;
-            min-height: 125px;
-        }
-
-        .link:hover,
-        .link:focus {
-            background: var(--hover-bg);
-            transform: translateY(-3px);
-            outline: none;
-        }
-
-        .link i {
-            font-size: 30px;
-            margin-bottom: 8px;
-            color: var(--accent-color);
-        }
-
-        .link span {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .link small {
-            font-size: 0.75rem;
-            color: var(--muted-text);
-            line-height: 1.3;
-        }
-
-        .badge {
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            font-size: 0.62rem;
-            font-weight: bold;
-            letter-spacing: 0.8px;
-            padding: 4px 7px;
-            border-radius: 999px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .badge.public {
-            color: var(--green);
-            background: rgba(74, 222, 128, 0.12);
-        }
-
-        .badge.access {
-            color: var(--green);
-            background: rgba(74, 222, 128, 0.12);
-        }
-
-        .badge.checking {
-            color: var(--accent-color);
-            background: rgba(56, 189, 248, 0.12);
-        }
-
-        .badge.offline {
-            color: var(--red);
-            background: rgba(248, 113, 113, 0.12);
-        }
-
-        .badge.unknown {
-            color: var(--yellow);
-            background: rgba(250, 204, 21, 0.12);
-        }
-
-        .badge.vpn {
-            color: var(--yellow);
-            background: rgba(250, 204, 21, 0.12);
-        }
-
-        .badge.disabled-badge {
-            color: var(--disabled-text);
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .disabled {
-            opacity: 0.55;
-            cursor: not-allowed;
-            color: var(--disabled-text);
-        }
-
-        .disabled i,
-        .disabled small {
-            color: var(--disabled-text);
-        }
-
-        .disabled:hover,
-        .disabled:focus {
-            transform: none;
-            background: transparent;
-        }
-
-        .warning {
-            font-size: 0.85rem;
-            color: var(--muted-text);
-            margin-top: -6px;
-            margin-bottom: 18px;
-            line-height: 1.5;
-        }
-
-        .status-note {
-            font-size: 0.85rem;
-            color: var(--muted-text);
-            margin-top: 15px;
-            line-height: 1.5;
-        }
-
-        .socials {
-            margin-top: 4px;
-        }
-
-        .socials a {
-            margin: 0 10px;
-            color: var(--text-color);
-            font-size: 24px;
-            text-decoration: none;
-            transition: 0.2s ease;
-        }
-
-        .socials a:hover,
-        .socials a:focus {
-            color: var(--accent-color);
-            outline: none;
-        }
-
-        footer {
-            margin-top: 15px;
-            font-size: 0.8rem;
-            color: var(--muted-text);
-        }
-
-        @media (max-width: 700px) {
-            .container {
-                justify-content: flex-start;
-                padding-top: 45px;
-            }
-
-            .links,
-            .visitor-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 420px) {
-
-            .links,
-            .visitor-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .card {
-                padding: 18px;
-            }
-
-            .link {
-                min-height: 110px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="/style/site.css">
 </head>
 
 <body>
-    <div class="container">
+    <main class="container">
         <h1>Amsyar Putra</h1>
         <p class="tagline">TECH PORTAL</p>
 
         <p class="intro">
-            Personal homepage for quick access to public links, tools, protected services, and private network guides.
+            Personal homepage for quick access to public links, tools, and selected private services.
         </p>
 
-        <div class="card">
-            <h2 class="section-title">Visitor Session</h2>
-
-            <div class="visitor-grid">
-                <div class="visitor-item">
-                    <span>Your Local Time</span>
-                    <strong id="visitor-time">Loading...</strong>
-                </div>
-
-                <div class="visitor-item">
-                    <span>Your Timezone</span>
-                    <strong id="visitor-timezone">Loading...</strong>
-                </div>
-
-                <div class="visitor-item">
-                    <span>Singapore Time</span>
-                    <strong id="sg-time">Loading...</strong>
-                </div>
-
-                <div class="visitor-item">
-                    <span>Browser</span>
-                    <strong id="browser-info">Loading...</strong>
-                </div>
-
-                <div class="visitor-item">
-                    <span>Platform</span>
-                    <strong id="platform-info">Loading...</strong>
-                </div>
-
-                <div class="visitor-item">
-                    <span>Connection</span>
-                    <strong id="secure-info">Loading...</strong>
-                </div>
+        <section class="info-strip" aria-label="Visitor information">
+            <div>
+                <span class="info-label">Visitor timezone</span>
+                <strong id="visitor-timezone">Checking...</strong>
             </div>
+            <div>
+                <span class="info-label">Local time</span>
+                <strong id="visitor-time">Checking...</strong>
+            </div>
+            <div>
+                <span class="info-label">Portal status</span>
+                <strong><span class="status-pill pending" data-status-key="website">CHECKING</span></strong>
+            </div>
+        </section>
 
-            <p class="status-note">
-                Visitor information is displayed locally in your browser and is not stored by this static page.
-            </p>
-        </div>
-
-        <div class="card">
+        <section class="card">
             <h2 class="section-title">Main Links</h2>
 
             <div class="links">
                 <a href="https://discord.com/app" class="link" target="_blank" rel="noopener noreferrer">
-                    <em class="badge public">PUBLIC</em>
                     <i class="fab fa-discord"></i>
                     <span>Discord</span>
                     <small>Web Discord</small>
                 </a>
 
                 <a href="https://www.pcgamingwiki.com" class="link" target="_blank" rel="noopener noreferrer">
-                    <em class="badge public">PUBLIC</em>
                     <i class="fas fa-desktop"></i>
                     <span>PCGamingWiki</span>
                     <small>Game fixes and tweaks</small>
                 </a>
 
                 <a href="https://open.spotify.com" class="link" target="_blank" rel="noopener noreferrer">
-                    <em class="badge public">PUBLIC</em>
                     <i class="fab fa-spotify"></i>
                     <span>Spotify</span>
                     <small>Music and playlists</small>
                 </a>
 
                 <a href="https://chatgpt.com" class="link" target="_blank" rel="noopener noreferrer">
-                    <em class="badge public">PUBLIC</em>
                     <i class="fas fa-robot"></i>
                     <span>ChatGPT</span>
                     <small>AI assistant</small>
                 </a>
 
                 <a href="https://store.steampowered.com" class="link" target="_blank" rel="noopener noreferrer">
-                    <em class="badge public">PUBLIC</em>
                     <i class="fab fa-steam"></i>
                     <span>Steam</span>
                     <small>Games and library</small>
                 </a>
 
                 <a href="mailto:work@amsyarputra.net" class="link">
-                    <em class="badge public">PUBLIC</em>
                     <i class="fas fa-envelope"></i>
                     <span>Email</span>
                     <small>Contact me</small>
                 </a>
             </div>
-        </div>
+        </section>
 
-        <div class="card">
+        <section class="card">
             <h2 class="section-title">Home Portal</h2>
 
             <p class="warning">
-                Private services should only be accessed through VPN, Cloudflare Access, or proper authentication.
+                Private services are protected through Cloudflare Access, VPN, or local authentication.
                 Direct DDNS fallback links are intentionally not published here.
             </p>
 
             <div class="links">
                 <a href="/status.html" class="link">
-                    <em class="badge public">STATUS</em>
-                    <i class="fas fa-chart-line"></i>
+                    <i class="fas fa-chart-simple"></i>
                     <span>Status Page</span>
-                    <small>Live service overview</small>
+                    <small>Live service checks</small>
                 </a>
 
                 <a href="https://router.amsyarputra.net" class="link protected-link" target="_blank"
                     rel="noopener noreferrer">
-                    <em id="router-home-status" class="badge checking">CHECKING</em>
                     <i class="fas fa-wifi"></i>
                     <span>Router</span>
-                    <small>Cloudflare Access / PC tunnel</small>
+                    <small>
+                        Access protected
+                        <span class="status-pill pending" data-status-key="router">CHECKING</span>
+                    </small>
                 </a>
 
                 <a href="#" class="link disabled" aria-disabled="true">
-                    <em class="badge disabled-badge">DISABLED</em>
                     <i class="fas fa-server"></i>
                     <span>NAS / Files</span>
                     <small>Private access only</small>
                 </a>
 
                 <a href="/vpn.html" class="link">
-                    <em class="badge vpn">VPN</em>
                     <i class="fas fa-shield-halved"></i>
                     <span>VPN</span>
                     <small>Private access guide</small>
@@ -460,14 +131,15 @@
 
                 <a href="https://sunshine.amsyarputra.net" class="link protected-link" target="_blank"
                     rel="noopener noreferrer">
-                    <em id="sunshine-home-status" class="badge checking">CHECKING</em>
                     <i class="fas fa-sun"></i>
                     <span>Sunshine Admin</span>
-                    <small>PC must be online</small>
+                    <small>
+                        Access protected
+                        <span class="status-pill pending" data-status-key="sunshine">CHECKING</span>
+                    </small>
                 </a>
 
                 <a href="/vpn.html#moonlight-sunshine" class="link">
-                    <em class="badge vpn">VPN</em>
                     <i class="fas fa-gamepad"></i>
                     <span>Game Stream</span>
                     <small>VPN required</small>
@@ -475,11 +147,11 @@
             </div>
 
             <p class="status-note">
-                If Cloudflare Access is unavailable, connect to WireGuard first and use the private LAN address.
+                Status labels are checked live. If a private service is offline, the host device or tunnel may be off.
             </p>
-        </div>
+        </section>
 
-        <div class="socials">
+        <nav class="socials" aria-label="Social links">
             <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                 <i class="fab fa-instagram"></i>
             </a>
@@ -496,112 +168,17 @@
                 aria-label="GitHub">
                 <i class="fab fa-github"></i>
             </a>
-        </div>
+        </nav>
 
         <footer>
-            © <span id="year"></span> Amsyar Putra
+            © <span id="year"></span> Amsyar Putra ·
+            <a href="/privacy.html">Privacy</a> ·
+            <a href="/status.html">Status</a>
         </footer>
-    </div>
+    </main>
 
-    <script>
-        function detectBrowser() {
-            const ua = navigator.userAgent;
-
-            if (ua.includes("Edg/")) return "Microsoft Edge";
-            if (ua.includes("Chrome/") && !ua.includes("Edg/")) return "Google Chrome";
-            if (ua.includes("Firefox/")) return "Mozilla Firefox";
-            if (ua.includes("Safari/") && !ua.includes("Chrome/")) return "Safari";
-
-            return "Unknown Browser";
-        }
-
-        function updateVisitorSession() {
-            const now = new Date();
-
-            const visitorTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone || "Unknown";
-
-            const visitorTime = now.toLocaleTimeString([], {
-                hour: "2-digit",
-                minute: "2-digit",
-                second: "2-digit"
-            });
-
-            const singaporeTime = now.toLocaleTimeString("en-SG", {
-                timeZone: "Asia/Singapore",
-                hour: "2-digit",
-                minute: "2-digit",
-                second: "2-digit"
-            });
-
-            document.getElementById("visitor-time").textContent = visitorTime;
-            document.getElementById("visitor-timezone").textContent = visitorTimezone;
-            document.getElementById("sg-time").textContent = singaporeTime + " SGT";
-        }
-
-        async function loadHomeServiceStatus() {
-            const routerBadge = document.getElementById("router-home-status");
-            const sunshineBadge = document.getElementById("sunshine-home-status");
-
-            if (!routerBadge || !sunshineBadge) return;
-
-            try {
-                const response = await fetch("https://status-api.amsyarputra.net/status.json", {
-                    cache: "no-store"
-                });
-
-                if (!response.ok) {
-                    throw new Error("Status API returned " + response.status);
-                }
-
-                const data = await response.json();
-
-                updateHomeBadge(routerBadge, data.router);
-                updateHomeBadge(sunshineBadge, data.sunshine);
-
-            } catch (error) {
-                setHomeUnknown(routerBadge);
-                setHomeUnknown(sunshineBadge);
-            }
-        }
-
-        function updateHomeBadge(element, service) {
-            element.classList.remove("access", "offline", "public", "vpn", "disabled-badge", "checking", "unknown");
-
-            if (service && service.status === "online") {
-                element.textContent = "ONLINE";
-                element.classList.add("access");
-            } else {
-                element.textContent = "OFFLINE";
-                element.classList.add("offline");
-            }
-        }
-
-        function setHomeUnknown(element) {
-            element.classList.remove("access", "offline", "public", "vpn", "disabled-badge", "checking");
-            element.textContent = "UNKNOWN";
-            element.classList.add("unknown");
-        }
-
-        document.getElementById("year").textContent = new Date().getFullYear();
-        document.getElementById("browser-info").textContent = detectBrowser();
-        document.getElementById("platform-info").textContent = navigator.platform || "Unknown";
-        document.getElementById("secure-info").textContent = location.protocol === "https:" ? "Secure HTTPS" : "Not HTTPS";
-
-        updateVisitorSession();
-        setInterval(updateVisitorSession, 1000);
-
-        loadHomeServiceStatus();
-        setInterval(loadHomeServiceStatus, 60000);
-
-        document.querySelectorAll(".protected-link").forEach(function (link) {
-            link.addEventListener("click", function (event) {
-                const confirmOpen = confirm("This opens a Cloudflare Access protected private service. Continue?");
-                if (!confirmOpen) {
-                    event.preventDefault();
-                }
-            });
-        });
-    </script>
+    <script src="/script/main.js" defer></script>
+    <script src="/script/status.js" defer></script>
 </body>
 
 </html>
