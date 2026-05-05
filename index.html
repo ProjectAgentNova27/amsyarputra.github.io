@@ -36,6 +36,7 @@
             --hover-bg: rgba(255, 255, 255, 0.15);
             --accent-color: #38bdf8;
             --muted-text: rgba(255, 255, 255, 0.75);
+            --disabled-text: rgba(255, 255, 255, 0.45);
         }
 
         * {
@@ -157,6 +158,26 @@
             line-height: 1.3;
         }
 
+        .disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+            color: var(--disabled-text);
+        }
+
+        .disabled i {
+            color: var(--disabled-text);
+        }
+
+        .disabled small {
+            color: var(--disabled-text);
+        }
+
+        .disabled:hover,
+        .disabled:focus {
+            transform: none;
+            background: transparent;
+        }
+
         .warning {
             font-size: 0.85rem;
             color: var(--muted-text);
@@ -237,10 +258,10 @@
             <h2 class="section-title">Main Links</h2>
 
             <div class="links">
-                <a href="#" class="link" target="_blank" rel="noopener noreferrer">
+                <a href="https://discord.com/app" class="link" target="_blank" rel="noopener noreferrer">
                     <i class="fab fa-discord"></i>
                     <span>Discord</span>
-                    <small>Community and chat</small>
+                    <small>Web Discord</small>
                 </a>
 
                 <a href="https://www.pcgamingwiki.com" class="link" target="_blank" rel="noopener noreferrer">
@@ -284,25 +305,25 @@
             </p>
 
             <div class="links">
-                <a href="#" class="link" target="_blank" rel="noopener noreferrer">
+                <a href="#" class="link disabled" aria-disabled="true">
                     <i class="fas fa-house-signal"></i>
                     <span>Home Dashboard</span>
                     <small>Private access only</small>
                 </a>
 
-                <a href="#" class="link" target="_blank" rel="noopener noreferrer">
+                <a href="#" class="link disabled" aria-disabled="true">
                     <i class="fas fa-wifi"></i>
                     <span>Router</span>
                     <small>VPN required</small>
                 </a>
 
-                <a href="#" class="link" target="_blank" rel="noopener noreferrer">
+                <a href="#" class="link disabled" aria-disabled="true">
                     <i class="fas fa-server"></i>
                     <span>NAS / Files</span>
                     <small>Private file access</small>
                 </a>
 
-                <a href="#" class="link" target="_blank" rel="noopener noreferrer">
+                <a href="#" class="link disabled" aria-disabled="true">
                     <i class="fas fa-shield-halved"></i>
                     <span>VPN</span>
                     <small>Secure remote access</small>
@@ -314,7 +335,7 @@
                     <small>DNS and security</small>
                 </a>
 
-                <a href="#" class="link" target="_blank" rel="noopener noreferrer">
+                <a href="#" class="link disabled" aria-disabled="true">
                     <i class="fas fa-gamepad"></i>
                     <span>Game Stream</span>
                     <small>Moonlight / Sunshine</small>
@@ -328,15 +349,15 @@
 
         <!-- SOCIAL LINKS -->
         <div class="socials">
-            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                 <i class="fab fa-instagram"></i>
             </a>
 
-            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                 <i class="fab fa-facebook"></i>
             </a>
 
-            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="X">
+            <a href="https://x.com" target="_blank" rel="noopener noreferrer" aria-label="X">
                 <i class="fab fa-x-twitter"></i>
             </a>
 
