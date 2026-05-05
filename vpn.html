@@ -241,14 +241,16 @@
             <h2 id="moonlight-sunshine">Moonlight / Sunshine</h2>
 
             <div class="good">
-                For game streaming, connect to WireGuard first, then open Moonlight and connect using the gaming PC's
-                VPN or LAN IP.
+                Sunshine Admin is protected through Cloudflare Access. Actual Moonlight game streaming should still use
+                WireGuard VPN.
             </div>
 
             <ul>
+                <li>Sunshine Admin: <code>https://sunshine.amsyarputra.net</code></li>
+                <li>Game streaming path: <code>WireGuard → Moonlight → Gaming PC VPN/LAN IP</code></li>
                 <li>VPN type: <code>WireGuard</code></li>
                 <li>Recommended mobile MTU: <code>1280</code></li>
-                <li>Sunshine PC should remain powered on.</li>
+                <li>Sunshine PC must be powered on.</li>
                 <li>Moonlight may need manual host entry if auto-discovery does not work over VPN.</li>
                 <li>For manual Moonlight pairing, use the gaming PC's VPN IP instead of your public IP.</li>
             </ul>
@@ -259,6 +261,7 @@
                 <li>Do not upload WireGuard QR codes to this website.</li>
                 <li>Do not expose router or NAS admin pages directly to the internet.</li>
                 <li>Do not publish direct DDNS router admin URLs on the public portal.</li>
+                <li>Do not expose Sunshine streaming ports directly to the internet.</li>
                 <li>Use strong device passwords and keep Sunshine updated.</li>
                 <li>Only create VPN profiles for devices you trust.</li>
             </ul>
