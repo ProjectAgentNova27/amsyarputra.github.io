@@ -1,111 +1,37 @@
-(function () {
-    const STATUS_API_URL = "https://status-api.amsyarputra.net/status.json";
-    const REFRESH_INTERVAL_MS = 60000;
+const STATUS_ENDPOINTS = {
+    website: "https://amsyarputra.net",
+    home: "https://home.amsyarputra.net",
+    dns: "https://dns.amsyarputra.net",
+    router: "https://router.amsyarputra.net",
+    sunshine: "https://sunshine.amsyarputra.net"
+};
 
-    function ready(callback) {
-        if (document.readyState === "loading") {
-            document.addEventListener("DOMContentLoaded", callback);
-        } else {
-            callback();
-        }
-    }
+function setStatus(key, state, text) {
+    const pills = document.querySelectorAll(`[data-status-key="${key}"]`);
 
-    function normaliseStatus(value) {
-        const status = String(value || "").toLowerCase();
+    pills.forEach((pill) => {
+        pill.textContent = text;
+        pill.classList.remove("pending", "online", "offline");
+        pill.classList.add(state);
+    });
+}
 
-        if (status === "online") {
-            return "online";
-        }
-
-        if (status === "offline") {
-            return "offline";
-        }
-
-        if (status === "pending" || status === "checking") {
-            return "pending";
-        }
-
-        return "unknown";
-    }
-
-    function toTitleCase(value) {
-        const text = String(value || "").toLowerCase();
-
-        if (!text) {
-            return "Unknown";
-        }
-
-        return text.charAt(0).toUpperCase() + text.slice(1);
-    }
-
-    function setBadge(element, status, label) {
-        const safeStatus = normaliseStatus(status);
-        const safeLabel = label ? toTitleCase(label) : toTitleCase(safeStatus);
-
-        element.classList.remove("online", "offline", "pending", "unknown");
-        element.classList.add(safeStatus);
-        element.textContent = safeLabel;
-    }
-
-    function setAllUnknown() {
-        document.querySelectorAll("[data-status-key]").forEach(function (badge) {
-            setBadge(badge, "unknown", "Unknown");
+async function checkStatus(key, url) {
+    try {
+        await fetch(url, {
+            method: "HEAD",
+            mode: "no-cors",
+            cache: "no-store"
         });
 
-        const checkedAtElement = document.getElementById("status-checked-at");
-
-        if (checkedAtElement) {
-            checkedAtElement.textContent = "Unable to check";
-        }
+        setStatus(key, "online", "Online");
+    } catch {
+        setStatus(key, "offline", "Offline");
     }
+}
 
-    async function updateStatus() {
-        const badges = document.querySelectorAll("[data-status-key]");
-
-        if (!badges.length) {
-            return;
-        }
-
-        try {
-            const response = await fetch(STATUS_API_URL, {
-                method: "GET",
-                cache: "no-store",
-                headers: {
-                    "Accept": "application/json"
-                }
-            });
-
-            if (!response.ok) {
-                throw new Error("Status API returned " + response.status);
-            }
-
-            const data = await response.json();
-
-            badges.forEach(function (badge) {
-                const key = badge.getAttribute("data-status-key");
-                const service = data[key];
-
-                if (!service) {
-                    setBadge(badge, "unknown", "Unknown");
-                    return;
-                }
-
-                setBadge(badge, service.status, service.label);
-            });
-
-            const checkedAtElement = document.getElementById("status-checked-at");
-
-            if (checkedAtElement) {
-                const checkedDate = data.checkedAt ? new Date(data.checkedAt) : new Date();
-                checkedAtElement.textContent = checkedDate.toLocaleString();
-            }
-        } catch (error) {
-            setAllUnknown();
-        }
-    }
-
-    ready(function () {
-        updateStatus();
-        window.setInterval(updateStatus, REFRESH_INTERVAL_MS);
+document.addEventListener("DOMContentLoaded", () => {
+    Object.entries(STATUS_ENDPOINTS).forEach(([key, url]) => {
+        checkStatus(key, url);
     });
-})();
+});

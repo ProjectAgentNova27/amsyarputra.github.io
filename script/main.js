@@ -1,78 +1,26 @@
-(function () {
-    function setYear() {
-        const yearElement = document.getElementById("year");
-        if (yearElement) {
-            yearElement.textContent = new Date().getFullYear();
-        }
+document.addEventListener("DOMContentLoaded", () => {
+    const year = document.getElementById("year");
+    const timezone = document.getElementById("visitor-timezone");
+    const time = document.getElementById("visitor-time");
+
+    if (year) {
+        year.textContent = new Date().getFullYear();
     }
 
-    function setVisitorInfo() {
-        const timezoneElement = document.getElementById("visitor-timezone");
-        const timeElement = document.getElementById("visitor-time");
-
-        if (!timezoneElement && !timeElement) {
-            return;
-        }
-
-        let timezone = "Unknown";
-
-        try {
-            timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || "Unknown";
-        } catch (error) {
-            timezone = "Unknown";
-        }
-
-        if (timezoneElement) {
-            timezoneElement.textContent = timezone;
-        }
-
-        function updateTime() {
-            if (!timeElement) {
-                return;
-            }
-
-            const now = new Date();
-            timeElement.textContent = now.toLocaleTimeString([], {
-                hour: "2-digit",
-                minute: "2-digit",
-                second: "2-digit"
-            });
-        }
-
-        updateTime();
-        window.setInterval(updateTime, 1000);
+    if (timezone) {
+        timezone.textContent = Intl.DateTimeFormat().resolvedOptions().timeZone || "Unknown";
     }
 
-    function protectDisabledLinks() {
-        const disabledLinks = document.querySelectorAll("a.disabled");
+    function updateTime() {
+        if (!time) return;
 
-        disabledLinks.forEach(function (link) {
-            link.addEventListener("click", function (event) {
-                event.preventDefault();
-            });
-        });
+        time.textContent = new Intl.DateTimeFormat(undefined, {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit"
+        }).format(new Date());
     }
 
-    function confirmProtectedLinks() {
-        const protectedLinks = document.querySelectorAll("a.protected-link");
-
-        protectedLinks.forEach(function (link) {
-            link.addEventListener("click", function (event) {
-                const confirmed = window.confirm(
-                    "This is a protected private service. Continue only if you are authorised."
-                );
-
-                if (!confirmed) {
-                    event.preventDefault();
-                }
-            });
-        });
-    }
-
-    document.addEventListener("DOMContentLoaded", function () {
-        setYear();
-        setVisitorInfo();
-        protectDisabledLinks();
-        confirmProtectedLinks();
-    });
-})();
+    updateTime();
+    setInterval(updateTime, 1000);
+});
