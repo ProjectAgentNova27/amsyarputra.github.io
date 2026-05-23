@@ -132,10 +132,84 @@
             </p>
 
             <div class="links">
-                <a href="/status.html" class="link">
-                    <i class="fas fa-chart-simple"></i>
-                    <span>Status Page</span>
-                    <small>Live service checks</small>
+                <a href="https://home.amsyarputra.net" class="link protected-link" target="_blank"
+                    rel="noopener noreferrer">
+                    <i class="fas fa-house-laptop"></i>
+                    <span>Home Dashboard</span>
+                    <small>
+                        Main private portal
+                        <span class="status-pill pending" data-status-key="home">Checking</span>
+                    </small>
+                </a>
+
+                <a href="https://dns.amsyarputra.net" class="link protected-link" target="_blank"
+                    rel="noopener noreferrer">
+                    <i class="fas fa-network-wired"></i>
+                    <span>Technitium DNS</span>
+                    <small>
+                        DNS admin
+                        <span class="status-pill pending" data-status-key="dns">Checking</span>
+                    </small>
+                </a>
+
+                <a href="https://docker.amsyarputra.net" class="link protected-link" target="_blank"
+                    rel="noopener noreferrer">
+                    <i class="fas fa-cubes"></i>
+                    <span>Docker</span>
+                    <small>
+                        Portainer
+                        <span class="status-pill pending" data-status-key="docker">Checking</span>
+                    </small>
+                </a>
+
+                <a href="https://files.amsyarputra.net" class="link protected-link" target="_blank"
+                    rel="noopener noreferrer">
+                    <i class="fas fa-folder-open"></i>
+                    <span>Files</span>
+                    <small>
+                        File Browser
+                        <span class="status-pill pending" data-status-key="files">Checking</span>
+                    </small>
+                </a>
+
+                <a href="https://sync.amsyarputra.net" class="link protected-link" target="_blank"
+                    rel="noopener noreferrer">
+                    <i class="fas fa-rotate"></i>
+                    <span>Syncthing</span>
+                    <small>
+                        Device sync
+                        <span class="status-pill pending" data-status-key="sync">Checking</span>
+                    </small>
+                </a>
+
+                <a href="https://tools.amsyarputra.net" class="link protected-link" target="_blank"
+                    rel="noopener noreferrer">
+                    <i class="fas fa-screwdriver-wrench"></i>
+                    <span>IT Tools</span>
+                    <small>
+                        Utilities
+                        <span class="status-pill pending" data-status-key="tools">Checking</span>
+                    </small>
+                </a>
+
+                <a href="https://pdf.amsyarputra.net" class="link protected-link" target="_blank"
+                    rel="noopener noreferrer">
+                    <i class="fas fa-file-pdf"></i>
+                    <span>PDF Tools</span>
+                    <small>
+                        Stirling PDF
+                        <span class="status-pill pending" data-status-key="pdf">Checking</span>
+                    </small>
+                </a>
+
+                <a href="https://budget.amsyarputra.net" class="link protected-link" target="_blank"
+                    rel="noopener noreferrer">
+                    <i class="fas fa-wallet"></i>
+                    <span>Budget</span>
+                    <small>
+                        Actual Budget
+                        <span class="status-pill pending" data-status-key="budget">Checking</span>
+                    </small>
                 </a>
 
                 <a href="https://router.amsyarputra.net" class="link protected-link" target="_blank"
@@ -143,21 +217,9 @@
                     <i class="fas fa-wifi"></i>
                     <span>Router</span>
                     <small>
-                        Access protected
+                        Network admin
                         <span class="status-pill pending" data-status-key="router">Checking</span>
                     </small>
-                </a>
-
-                <a href="#" class="link disabled" aria-disabled="true">
-                    <i class="fas fa-server"></i>
-                    <span>NAS / Files</span>
-                    <small>Private access only</small>
-                </a>
-
-                <a href="/vpn.html" class="link">
-                    <i class="fas fa-shield-halved"></i>
-                    <span>VPN</span>
-                    <small>Private access guide</small>
                 </a>
 
                 <a href="https://sunshine.amsyarputra.net" class="link protected-link" target="_blank"
@@ -165,21 +227,23 @@
                     <i class="fas fa-sun"></i>
                     <span>Sunshine Admin</span>
                     <small>
-                        Access protected
+                        Game streaming host
                         <span class="status-pill pending" data-status-key="sunshine">Checking</span>
                     </small>
+                </a>
+
+                <a href="/vpn.html" class="link">
+                    <i class="fas fa-shield-halved"></i>
+                    <span>VPN Guide</span>
+                    <small>Private access instructions</small>
                 </a>
 
                 <a href="/vpn.html#moonlight-sunshine" class="link">
                     <i class="fas fa-gamepad"></i>
                     <span>Game Stream</span>
-                    <small>VPN required</small>
+                    <small>Moonlight / Sunshine access</small>
                 </a>
             </div>
-
-            <p class="status-note">
-                Status labels are checked live. If a private service is offline, the host device or tunnel may be off.
-            </p>
         </section>
 
         <nav class="socials" aria-label="Social links">
@@ -203,8 +267,7 @@
 
         <footer>
             © <span id="year"></span> Amsyar Putra ·
-            <a href="/privacy.html">Privacy</a> ·
-            <a href="/status.html">Status</a>
+            <a href="/privacy.html">Privacy</a>
         </footer>
     </main>
 

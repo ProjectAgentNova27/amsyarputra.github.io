@@ -2,6 +2,12 @@ const STATUS_ENDPOINTS = {
     website: "https://amsyarputra.net",
     home: "https://home.amsyarputra.net",
     dns: "https://dns.amsyarputra.net",
+    docker: "https://docker.amsyarputra.net",
+    files: "https://files.amsyarputra.net",
+    sync: "https://sync.amsyarputra.net",
+    tools: "https://tools.amsyarputra.net",
+    pdf: "https://pdf.amsyarputra.net",
+    budget: "https://budget.amsyarputra.net",
     router: "https://router.amsyarputra.net",
     sunshine: "https://sunshine.amsyarputra.net"
 };
