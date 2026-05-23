@@ -6,11 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Status | Amsyar Putra</title>
 
-    <meta name="description" content="Live status page for Amsyar Putra's personal portal services.">
-    <meta name="theme-color" content="#0f172a">
+    <meta name="description" content="Live service status for Amsyar Putra's public and private portal hostnames.">
+    <meta name="theme-color" content="#0b0f16">
 
     <link rel="canonical" href="https://amsyarputra.net/status.html">
-    <link rel="privacy-policy" href="/privacy.html">
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/favicon.png">
+
+    <link rel="preload" href="/style/background.webp" as="image">
+    <link rel="preload" href="/style/site.css" as="style">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="/style/site.css">
 </head>
@@ -18,63 +23,75 @@
 <body>
     <main class="container">
         <h1>Status</h1>
-        <p class="tagline">LIVE SERVICE CHECKS</p>
+        <p class="tagline">PORTAL HEALTH</p>
 
         <p class="intro">
-            This page checks selected public and protected services through the status API.
-            Private hostnames remain protected by Cloudflare Access.
+            Live reachability checks for public and protected portal hostnames.
         </p>
+
+        <section class="info-strip" aria-label="Status summary">
+            <div>
+                <span class="info-label">Overall status</span>
+                <strong>
+                    <span id="overall-status" class="status-pill pending">Checking</span>
+                </strong>
+            </div>
+
+            <div>
+                <span class="info-label">Services online</span>
+                <strong id="services-online">Checking...</strong>
+            </div>
+
+            <div>
+                <span class="info-label">Last checked</span>
+                <strong id="last-checked">Checking...</strong>
+            </div>
+        </section>
 
         <section class="card">
             <h2 class="section-title">Services</h2>
 
-            <div class="status-list">
-                <div class="status-row">
-                    <div>
-                        <strong>Main Website</strong>
-                        <small>amsyarputra.net</small>
-                    </div>
-                    <span class="status-pill pending" data-status-key="website">CHECKING</span>
-                </div>
+            <p class="warning">
+                Cloudflare Access-protected services may show as online when the protected hostname is reachable,
+                even if authentication is required.
+            </p>
 
-                <div class="status-row">
-                    <div>
-                        <strong>Router</strong>
-                        <small>router.amsyarputra.net</small>
-                    </div>
-                    <span class="status-pill pending" data-status-key="router">CHECKING</span>
-                </div>
-
-                <div class="status-row">
-                    <div>
-                        <strong>Sunshine Admin</strong>
-                        <small>sunshine.amsyarputra.net</small>
-                    </div>
-                    <span class="status-pill pending" data-status-key="sunshine">CHECKING</span>
+            <div id="status-services" class="links" aria-live="polite">
+                <div class="link disabled">
+                    <i class="fas fa-circle-notch fa-spin"></i>
+                    <span>Loading services</span>
+                    <small>Please wait...</small>
                 </div>
             </div>
-
-            <p class="status-note">
-                Last checked: <span id="status-checked-at">Checking...</span>
-            </p>
         </section>
 
-        <section class="card">
-            <h2 class="section-title">Notes</h2>
-            <p class="warning">
-                If Sunshine is offline, the gaming PC may be off or Sunshine may not be running.
-                If Router is offline, the tunnel or protected route may be unavailable.
-            </p>
-        </section>
+        <nav class="socials" aria-label="Navigation links">
+            <a href="/" aria-label="Home">
+                <i class="fas fa-house"></i>
+            </a>
+
+            <a href="https://home.amsyarputra.net" target="_blank" rel="noopener noreferrer" aria-label="Home Dashboard">
+                <i class="fas fa-house-laptop"></i>
+            </a>
+
+            <a href="https://dash.cloudflare.com" target="_blank" rel="noopener noreferrer" aria-label="Cloudflare">
+                <i class="fas fa-cloud"></i>
+            </a>
+
+            <a href="https://github.com/ProjectAgentNova27" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+        </nav>
 
         <footer>
+            © <span id="year"></span> Amsyar Putra ·
             <a href="/">Home</a> ·
             <a href="/privacy.html">Privacy</a>
         </footer>
     </main>
 
     <script src="/script/main.js" defer></script>
-    <script src="/script/status.js" defer></script>
+    <script src="/script/status-page.js" defer></script>
 </body>
 
 </html>
