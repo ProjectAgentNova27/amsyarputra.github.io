@@ -1,14 +1,4 @@
-const STATUS_ENDPOINTS = {
-    website: "https://amsyarputra.net",
-    home: "https://home.amsyarputra.net",
-    dns: "https://dns.amsyarputra.net",
-    docker: "https://docker.amsyarputra.net",
-    files: "https://files.amsyarputra.net",
-    tools: "https://tools.amsyarputra.net",
-    pdf: "https://pdf.amsyarputra.net",
-    router: "https://router.amsyarputra.net",
-    sunshine: "https://sunshine.amsyarputra.net"
-};
+const STATUS_ENDPOINT = "https://amsyarputra.net/.well-known/portal-status";
 
 function setStatus(key, state, text) {
     const pills = document.querySelectorAll(`[data-status-key="${key}"]`);
@@ -22,24 +12,56 @@ function setStatus(key, state, text) {
     });
 }
 
-async function checkStatus(key, url) {
-    setStatus(key, "pending", "Checking");
+function normaliseStatus(status) {
+    if (status === "online" || status === "ok") return ["online", "Online"];
+    if (status === "offline") return ["offline", "Offline"];
+    return ["unknown", "Unknown"];
+}
+
+async function refreshPortalStatus() {
+    Object.keys({
+        website: true,
+        home: true,
+        dns: true,
+        docker: true,
+        files: true,
+        tools: true,
+        pdf: true,
+        router: true,
+        sunshine: true
+    }).forEach((key) => {
+        setStatus(key, "pending", "Checking");
+    });
 
     try {
-        await fetch(url, {
-            method: "HEAD",
-            mode: "no-cors",
+        const response = await fetch(STATUS_ENDPOINT, {
+            method: "GET",
             cache: "no-store"
         });
 
-        setStatus(key, "online", "Online");
+        if (!response.ok) {
+            throw new Error(`Status endpoint returned ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        if (!Array.isArray(data.services)) {
+            throw new Error("Invalid status response");
+        }
+
+        data.services.forEach((service) => {
+            const [state, text] = normaliseStatus(service.status);
+            setStatus(service.key, state, text);
+        });
     } catch (error) {
-        setStatus(key, "offline", "Offline");
+        console.error("Portal status check failed:", error);
+
+        ["website", "home", "dns", "docker", "files", "tools", "pdf", "router", "sunshine"].forEach((key) => {
+            setStatus(key, "unknown", "Unknown");
+        });
     }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    Object.entries(STATUS_ENDPOINTS).forEach(([key, url]) => {
-        checkStatus(key, url);
-    });
+    refreshPortalStatus();
 });
