@@ -13,14 +13,18 @@ const STATUS_ENDPOINTS = {
 function setStatus(key, state, text) {
     const pills = document.querySelectorAll(`[data-status-key="${key}"]`);
 
+    if (!pills.length) return;
+
     pills.forEach((pill) => {
         pill.textContent = text;
-        pill.classList.remove("pending", "online", "offline");
+        pill.classList.remove("pending", "online", "offline", "unknown", "protected");
         pill.classList.add(state);
     });
 }
 
 async function checkStatus(key, url) {
+    setStatus(key, "pending", "Checking");
+
     try {
         await fetch(url, {
             method: "HEAD",
@@ -29,7 +33,7 @@ async function checkStatus(key, url) {
         });
 
         setStatus(key, "online", "Online");
-    } catch {
+    } catch (error) {
         setStatus(key, "offline", "Offline");
     }
 }
