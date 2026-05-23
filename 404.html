@@ -4,11 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page Not Found | Amsyar Putra</title>
+    <title>404 | Amsyar Putra</title>
 
-    <meta name="description" content="The requested page could not be found.">
-    <meta name="robots" content="noindex">
-    <meta name="theme-color" content="#0f172a">
+    <meta name="description" content="Page not found.">
+    <meta name="theme-color" content="#0b0f16">
+
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/favicon.png">
+
+    <link rel="preload" href="/style/background.webp" as="image">
+    <link rel="preload" href="/style/site.css" as="style">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="/style/site.css">
@@ -19,34 +24,48 @@
         <h1>404</h1>
         <p class="tagline">PAGE NOT FOUND</p>
 
-        <section class="card text-card">
-            <h2 class="section-title">Nothing here</h2>
-            <p>
-                The page you are looking for may have been moved, renamed, or removed.
-            </p>
+        <p class="intro">
+            The page you are looking for does not exist, has moved, or is not publicly available.
+        </p>
 
-            <div class="links two-col">
+        <section class="card">
+            <h2 class="section-title">Go somewhere useful</h2>
+
+            <div class="links">
                 <a href="/" class="link">
                     <i class="fas fa-house"></i>
                     <span>Home</span>
-                    <small>Return to homepage</small>
+                    <small>Return to the public portal</small>
                 </a>
 
                 <a href="/status.html" class="link">
                     <i class="fas fa-chart-simple"></i>
                     <span>Status</span>
-                    <small>Check services</small>
+                    <small>Check portal hostname status</small>
+                </a>
+
+                <a href="/privacy.html" class="link">
+                    <i class="fas fa-user-shield"></i>
+                    <span>Privacy</span>
+                    <small>View privacy information</small>
+                </a>
+
+                <a href="https://github.com/ProjectAgentNova27" class="link" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                    <small>View public repositories</small>
                 </a>
             </div>
         </section>
 
         <footer>
             © <span id="year"></span> Amsyar Putra ·
-            <a href="/privacy.html">Privacy</a> ·
-            <a href="/status.html">Status</a>
+            <a href="/">Home</a> ·
+            <a href="/privacy.html">Privacy</a>
         </footer>
+    </main>
 
-        <script src="/script/main.js" defer></script>
+    <script src="/script/main.js" defer></script>
 </body>
 
 </html>

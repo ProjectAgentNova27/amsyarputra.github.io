@@ -2,21 +2,77 @@
   "linkset": [
     {
       "anchor": "https://amsyarputra.net/",
+      "service-desc": [
+        {
+          "href": "https://amsyarputra.net/openapi.json",
+          "type": "application/vnd.oai.openapi+json",
+          "title": "OpenAPI description"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://amsyarputra.net/docs/api",
+          "type": "text/markdown",
+          "title": "API documentation"
+        }
+      ],
+      "status": [
+        {
+          "href": "https://amsyarputra.net/.well-known/status",
+          "type": "application/json",
+          "title": "Public website status"
+        },
+        {
+          "href": "https://amsyarputra.net/.well-known/portal-status",
+          "type": "application/json",
+          "title": "Home portal hostname status"
+        }
+      ],
       "item": [
         {
           "href": "https://amsyarputra.net/",
-          "type": "text/html",
-          "title": "Amsyar Putra Personal Tech Portal"
+          "title": "Public Website",
+          "type": "text/html"
         },
         {
-          "href": "https://amsyarputra.net/sitemap.xml",
-          "type": "application/xml",
-          "title": "Sitemap"
+          "href": "https://home.amsyarputra.net",
+          "title": "Home Dashboard",
+          "type": "text/html"
         },
         {
-          "href": "https://amsyarputra.net/robots.txt",
-          "type": "text/plain",
-          "title": "Robots.txt"
+          "href": "https://dns.amsyarputra.net",
+          "title": "Technitium DNS",
+          "type": "text/html"
+        },
+        {
+          "href": "https://docker.amsyarputra.net",
+          "title": "Docker / Portainer",
+          "type": "text/html"
+        },
+        {
+          "href": "https://files.amsyarputra.net",
+          "title": "File Browser",
+          "type": "text/html"
+        },
+        {
+          "href": "https://tools.amsyarputra.net",
+          "title": "IT Tools",
+          "type": "text/html"
+        },
+        {
+          "href": "https://pdf.amsyarputra.net",
+          "title": "PDF Tools",
+          "type": "text/html"
+        },
+        {
+          "href": "https://router.amsyarputra.net",
+          "title": "Router",
+          "type": "text/html"
+        },
+        {
+          "href": "https://sunshine.amsyarputra.net",
+          "title": "Sunshine Admin",
+          "type": "text/html"
         }
       ]
     }

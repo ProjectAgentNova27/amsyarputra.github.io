@@ -2,3 +2,13 @@ User-agent: *
 Allow: /
 
 Sitemap: https://amsyarputra.net/sitemap.xml
+
+# Public discovery endpoints
+Allow: /.well-known/api-catalog
+Allow: /.well-known/api-catalog.json
+Allow: /.well-known/status
+Allow: /.well-known/portal-status
+Allow: /openapi.json
+Allow: /docs/api
+
+# Private services are protected separately by Cloudflare Access.

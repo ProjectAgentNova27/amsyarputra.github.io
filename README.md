@@ -1,73 +1,53 @@
-# Amsyar Putra Tech Portal
+# amsyarputra.net
 
-![Status](https://img.shields.io/badge/status-live-brightgreen)
-![Hosted on GitHub Pages](https://img.shields.io/badge/hosting-GitHub%20Pages-222222)
-![Protected by Cloudflare](https://img.shields.io/badge/security-Cloudflare-orange)
+Personal tech portal for Amsyar Putra.
 
-Personal homepage and portal for quick access to public links, tools, and selected private services.
+This site is hosted using GitHub Pages and fronted by Cloudflare. It provides a public homepage, discovery metadata, and links to selected private services protected through Cloudflare Access, VPN, or local authentication.
 
-## Live Site
-- https://amsyarputra.net
+## Public site
 
-## Overview
-This project is a lightweight personal portal hosted with GitHub Pages and fronted by Cloudflare.
+- `https://amsyarputra.net/` — public homepage
+- `https://amsyarputra.net/privacy.html` — privacy information
+- `https://amsyarputra.net/status.html` — portal hostname status
+- `https://amsyarputra.net/vpn.html` — private access guide
 
-It provides:
-- quick links to commonly used public services
-- protected links to selected private services
-- live service status indicators
-- static pages for privacy, VPN guidance, and status information
+## Private portal services
 
-## Features
-- Apple-glass-inspired interface
-- Mobile-friendly responsive layout
-- Live visitor timezone and local time display
-- Live private service status badges
-- Cloudflare Access-protected internal services
-- Static deployment with GitHub Pages
-- Cloudflare security headers and DNS integration
+These services are intended to be protected by Cloudflare Access or local authentication:
 
-## Main Sections
-### Public Links
-- Discord
-- Gmail
-- YouTube
-- PCGamingWiki
-- Spotify
-- ChatGPT
-- Steam
-- Email
-- Google Account
+- `https://home.amsyarputra.net` — Homepage dashboard
+- `https://dns.amsyarputra.net` — Technitium DNS
+- `https://docker.amsyarputra.net` — Portainer
+- `https://files.amsyarputra.net` — File Browser
+- `https://tools.amsyarputra.net` — IT-Tools
+- `https://pdf.amsyarputra.net` — Stirling PDF
+- `https://router.amsyarputra.net` — Router admin
+- `https://sunshine.amsyarputra.net` — Sunshine admin
 
-### Home Portal
-- Status Page
-- Router
-- NAS / Files
-- VPN
-- Sunshine Admin
-- Game Stream
+## Discovery endpoints
 
-## Tech Stack
-- HTML
-- CSS
-- JavaScript
-- GitHub Pages
-- Cloudflare
+- `/.well-known/api-catalog`
+- `/.well-known/api-catalog.json`
+- `/.well-known/status`
+- `/.well-known/portal-status`
+- `/openapi.json`
+- `/docs/api`
+- `/sitemap.xml`
+- `/robots.txt`
 
-## Project Structure
-```text
-.
-├── index.html
-├── 404.html
-├── privacy.html
-├── status.html
-├── vpn.html
-├── README.md
-├── favicon.png
-├── script/
-│   ├── main.js
-│   └── status.js
-└── style/
-    ├── site.css
-    ├── avatar.jpg
-    └── 32993418_771486081870.jpg
+## Local Mac mini stack
+
+Core stack:
+
+- Homepage
+- Technitium DNS
+- Cloudflare Tunnel
+- Portainer
+- File Browser
+- IT-Tools
+- Stirling PDF
+
+Local Mac mini IP:
+
+```txt
+192.168.50.XX

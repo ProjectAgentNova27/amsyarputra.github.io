@@ -6,11 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VPN Guide | Amsyar Putra</title>
 
-    <meta name="description" content="Private access guide for Amsyar Putra's home network services.">
-    <meta name="theme-color" content="#0f172a">
+    <meta name="description" content="Private access guide for Amsyar Putra's home portal.">
+    <meta name="theme-color" content="#0b0f16">
 
     <link rel="canonical" href="https://amsyarputra.net/vpn.html">
-    <link rel="privacy-policy" href="/privacy.html">
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/favicon.png">
+
+    <link rel="preload" href="/style/background.webp" as="image">
+    <link rel="preload" href="/style/site.css" as="style">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="/style/site.css">
 </head>
@@ -20,44 +25,86 @@
         <h1>VPN Guide</h1>
         <p class="tagline">PRIVATE ACCESS</p>
 
-        <section class="card text-card">
-            <h2 class="section-title">Access Method</h2>
-            <p>
-                Private services should be accessed through Cloudflare Access or WireGuard VPN.
-                Direct router DDNS links are not published on this website.
+        <section class="card">
+            <h2 class="section-title">Access model</h2>
+
+            <p class="intro">
+                Private home services should be accessed through Cloudflare Access, VPN, or local network access.
+                Router port forwarding should not be used unless explicitly required and properly secured.
             </p>
 
-            <div class="status-list">
-                <div class="status-row">
-                    <div>
-                        <strong>Router Portal</strong>
-                        <small>Cloudflare Access protected</small>
-                    </div>
-                    <span class="status-pill pending" data-status-key="router">CHECKING</span>
-                </div>
+            <p class="warning">
+                Admin services are not intended to be public. Cloudflare Access should remain enabled for private hostnames.
+            </p>
+        </section>
 
-                <div class="status-row">
-                    <div>
-                        <strong>Sunshine Admin</strong>
-                        <small>Cloudflare Access protected</small>
-                    </div>
-                    <span class="status-pill pending" data-status-key="sunshine">CHECKING</span>
-                </div>
+        <section class="card">
+            <h2 class="section-title">Private services</h2>
+
+            <div class="links">
+                <a href="https://home.amsyarputra.net" class="link protected-link" target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-house-laptop"></i>
+                    <span>Home Dashboard</span>
+                    <small>Main private portal</small>
+                </a>
+
+                <a href="https://dns.amsyarputra.net" class="link protected-link" target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-network-wired"></i>
+                    <span>Technitium DNS</span>
+                    <small>DNS administration</small>
+                </a>
+
+                <a href="https://docker.amsyarputra.net" class="link protected-link" target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-cubes"></i>
+                    <span>Docker</span>
+                    <small>Portainer</small>
+                </a>
+
+                <a href="https://files.amsyarputra.net" class="link protected-link" target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-folder-open"></i>
+                    <span>Files</span>
+                    <small>File Browser</small>
+                </a>
+
+                <a href="https://tools.amsyarputra.net" class="link protected-link" target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-screwdriver-wrench"></i>
+                    <span>IT Tools</span>
+                    <small>Utilities</small>
+                </a>
+
+                <a href="https://pdf.amsyarputra.net" class="link protected-link" target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-file-pdf"></i>
+                    <span>PDF Tools</span>
+                    <small>Stirling PDF</small>
+                </a>
             </div>
         </section>
 
-        <section class="card text-card" id="moonlight-sunshine">
+        <section class="card" id="moonlight-sunshine">
             <h2 class="section-title">Moonlight / Sunshine</h2>
-            <p>
-                For game streaming, connect to the VPN first, then use Moonlight to reach the Sunshine host
-                on the private network.
+
+            <p class="intro">
+                Sunshine Admin is used for game streaming host management. Remote game streaming should be accessed
+                through a secure private path and not left openly exposed.
             </p>
-            <p>
-                The Sunshine web admin page may require the gaming PC and tunnel to be online before it can be reached.
-            </p>
+
+            <div class="links">
+                <a href="https://sunshine.amsyarputra.net" class="link protected-link" target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-sun"></i>
+                    <span>Sunshine Admin</span>
+                    <small>Game streaming host</small>
+                </a>
+
+                <a href="/" class="link">
+                    <i class="fas fa-house"></i>
+                    <span>Home</span>
+                    <small>Return to public homepage</small>
+                </a>
+            </div>
         </section>
 
         <footer>
+            © <span id="year"></span> Amsyar Putra ·
             <a href="/">Home</a> ·
             <a href="/status.html">Status</a> ·
             <a href="/privacy.html">Privacy</a>
@@ -65,7 +112,6 @@
     </main>
 
     <script src="/script/main.js" defer></script>
-    <script src="/script/status.js" defer></script>
 </body>
 
 </html>
