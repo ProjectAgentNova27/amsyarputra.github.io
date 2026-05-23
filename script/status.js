@@ -6,6 +6,7 @@ const KNOWN_STATUS_KEYS = [
     "dns",
     "docker",
     "files",
+    "drop",
     "tools",
     "pdf",
     "router",

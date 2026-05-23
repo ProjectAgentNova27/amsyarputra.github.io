@@ -23,6 +23,7 @@ These services are intended to be protected by Cloudflare Access or local authen
 - `https://pdf.amsyarputra.net` — Stirling PDF
 - `https://router.amsyarputra.net` — Router admin
 - `https://sunshine.amsyarputra.net` — Sunshine admin
+- `https://drop.amsyarputra.net` — PairDrop
 
 ## Discovery endpoints
 

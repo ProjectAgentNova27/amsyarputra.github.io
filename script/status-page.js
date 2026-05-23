@@ -6,6 +6,7 @@ const SERVICE_ICONS = {
     dns: "fas fa-network-wired",
     docker: "fas fa-cubes",
     files: "fas fa-folder-open",
+    drop: "fas fa-share-nodes",
     tools: "fas fa-screwdriver-wrench",
     pdf: "fas fa-file-pdf",
     router: "fas fa-wifi",
