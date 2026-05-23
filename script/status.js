@@ -1,5 +1,17 @@
 const STATUS_ENDPOINT = "https://amsyarputra.net/.well-known/portal-status";
 
+const KNOWN_STATUS_KEYS = [
+    "website",
+    "home",
+    "dns",
+    "docker",
+    "files",
+    "tools",
+    "pdf",
+    "router",
+    "sunshine"
+];
+
 function setStatus(key, state, text) {
     const pills = document.querySelectorAll(`[data-status-key="${key}"]`);
 
@@ -13,23 +25,19 @@ function setStatus(key, state, text) {
 }
 
 function normaliseStatus(status) {
-    if (status === "online" || status === "ok") return ["online", "Online"];
-    if (status === "offline") return ["offline", "Offline"];
+    if (status === "online" || status === "ok") {
+        return ["online", "Online"];
+    }
+
+    if (status === "offline") {
+        return ["offline", "Offline"];
+    }
+
     return ["unknown", "Unknown"];
 }
 
 async function refreshPortalStatus() {
-    Object.keys({
-        website: true,
-        home: true,
-        dns: true,
-        docker: true,
-        files: true,
-        tools: true,
-        pdf: true,
-        router: true,
-        sunshine: true
-    }).forEach((key) => {
+    KNOWN_STATUS_KEYS.forEach((key) => {
         setStatus(key, "pending", "Checking");
     });
 
@@ -56,7 +64,7 @@ async function refreshPortalStatus() {
     } catch (error) {
         console.error("Portal status check failed:", error);
 
-        ["website", "home", "dns", "docker", "files", "tools", "pdf", "router", "sunshine"].forEach((key) => {
+        KNOWN_STATUS_KEYS.forEach((key) => {
             setStatus(key, "unknown", "Unknown");
         });
     }
