@@ -7,12 +7,12 @@ const SERVICE_ICONS = {
     docker: "fas fa-cubes",
     files: "fas fa-folder-open",
     drop: "fas fa-share-nodes",
+    shlink: "fas fa-link",
+    short: "fas fa-arrow-up-right-from-square",
     tools: "fas fa-screwdriver-wrench",
     pdf: "fas fa-file-pdf",
     router: "fas fa-wifi",
-    sunshine: "fas fa-sun",
-    shlink: "fas fa-link",
-    short: "fas fa-arrow-up-right-from-square"
+    sunshine: "fas fa-sun"
 };
 
 function setPill(element, state, text) {
@@ -43,21 +43,23 @@ function formatDateTime(value) {
 }
 
 function statusToDisplay(status) {
-    if (status === "online" || status === "ok") {
+    const value = String(status || "").toLowerCase();
+
+    if (value === "online" || value === "ok") {
         return {
             state: "online",
             text: "Online"
         };
     }
 
-    if (status === "protected") {
+    if (value === "protected") {
         return {
             state: "protected",
             text: "Protected"
         };
     }
 
-    if (status === "offline") {
+    if (value === "offline") {
         return {
             state: "offline",
             text: "Offline"
@@ -108,16 +110,48 @@ function createServiceCard(service) {
     return card;
 }
 
+function normaliseServices(data) {
+    if (Array.isArray(data.services)) {
+        return data.services;
+    }
+
+    const ignoredKeys = [
+        "status",
+        "service",
+        "checked_at",
+        "checkedAt",
+        "total",
+        "online",
+        "protected",
+        "offline",
+        "note"
+    ];
+
+    return Object.entries(data)
+        .filter(([key, value]) => {
+            return !ignoredKeys.includes(key) && value && typeof value === "object";
+        })
+        .map(([key, value]) => ({
+            key,
+            ...value
+        }));
+}
+
 async function loadStatusPage() {
     const overallStatus = document.getElementById("overall-status");
     const servicesOnline = document.getElementById("services-online");
+    const servicesProtected = document.getElementById("services-protected");
+    const servicesOffline = document.getElementById("services-offline");
     const lastChecked = document.getElementById("last-checked");
     const servicesContainer = document.getElementById("status-services");
 
     try {
         const response = await fetch(PORTAL_STATUS_ENDPOINT, {
             method: "GET",
-            cache: "no-store"
+            cache: "no-store",
+            headers: {
+                "Accept": "application/json"
+            }
         });
 
         if (!response.ok) {
@@ -125,12 +159,14 @@ async function loadStatusPage() {
         }
 
         const data = await response.json();
+        const services = normaliseServices(data);
 
-        const services = Array.isArray(data.services) ? data.services : [];
         const onlineCount = services.filter((service) => service.status === "online").length;
+        const protectedCount = services.filter((service) => service.status === "protected").length;
+        const offlineCount = services.filter((service) => service.status === "offline").length;
         const totalCount = services.length;
 
-        const overall = data.status === "ok"
+        const overall = offlineCount === 0
             ? { state: "online", text: "Operational" }
             : { state: "offline", text: "Degraded" };
 
@@ -140,8 +176,16 @@ async function loadStatusPage() {
             servicesOnline.textContent = `${onlineCount}/${totalCount}`;
         }
 
+        if (servicesProtected) {
+            servicesProtected.textContent = `${protectedCount}/${totalCount}`;
+        }
+
+        if (servicesOffline) {
+            servicesOffline.textContent = `${offlineCount}/${totalCount}`;
+        }
+
         if (lastChecked) {
-            lastChecked.textContent = formatDateTime(data.checked_at);
+            lastChecked.textContent = formatDateTime(data.checked_at || data.checkedAt);
         }
 
         if (servicesContainer) {
@@ -156,7 +200,7 @@ async function loadStatusPage() {
                     <div class="link disabled">
                         <i class="fas fa-circle-exclamation"></i>
                         <span>No services returned</span>
-                        <small>Check the Worker portal-status endpoint</small>
+                        <small>Check the status API endpoint</small>
                     </div>
                 `;
             }
@@ -168,6 +212,14 @@ async function loadStatusPage() {
 
         if (servicesOnline) {
             servicesOnline.textContent = "Unknown";
+        }
+
+        if (servicesProtected) {
+            servicesProtected.textContent = "Unknown";
+        }
+
+        if (servicesOffline) {
+            servicesOffline.textContent = "Unknown";
         }
 
         if (lastChecked) {

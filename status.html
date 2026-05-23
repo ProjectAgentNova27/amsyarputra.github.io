@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Status | Amsyar Putra</title>
 
-    <meta name="description" content="Live service status for Amsyar Putra's public and private portal hostnames.">
+    <meta name="description"
+        content="Live status page for Amsyar Putra's public site and private home portal services.">
     <meta name="theme-color" content="#0b0f16">
 
     <link rel="canonical" href="https://amsyarputra.net/status.html">
@@ -26,67 +27,148 @@
         <p class="tagline">PORTAL HEALTH</p>
 
         <p class="intro">
-            Live reachability checks for public and protected portal hostnames.
+            Live reachability status for the public website and selected home portal services.
+            Protected means the hostname is reachable but guarded by Cloudflare Access or authentication.
         </p>
 
-        <section class="info-strip" aria-label="Status summary">
-            <div>
-                <span class="info-label">Overall status</span>
-                <strong>
-                    <span id="overall-status" class="status-pill pending">Checking</span>
-                </strong>
-            </div>
+        <section class="card">
+            <h2 class="section-title">Overview</h2>
 
-            <div>
-                <span class="info-label">Services online</span>
-                <strong id="services-online">Checking...</strong>
-            </div>
+            <div class="links">
+                <div class="link disabled">
+                    <i class="fas fa-signal"></i>
+                    <span>Overall Status</span>
+                    <small>
+                        Portal health
+                        <span id="overall-status" class="status-pill pending">Checking</span>
+                    </small>
+                </div>
 
-            <div>
-                <span class="info-label">Last checked</span>
-                <strong id="last-checked">Checking...</strong>
+                <div class="link disabled">
+                    <i class="fas fa-circle-check"></i>
+                    <span>Online</span>
+                    <small>
+                        Publicly reachable
+                        <span id="services-online" class="status-pill pending">Checking</span>
+                    </small>
+                </div>
+
+                <div class="link disabled">
+                    <i class="fas fa-shield-halved"></i>
+                    <span>Protected</span>
+                    <small>
+                        Reachable but access-protected
+                        <span id="services-protected" class="status-pill pending">Checking</span>
+                    </small>
+                </div>
+
+                <div class="link disabled">
+                    <i class="fas fa-circle-xmark"></i>
+                    <span>Offline</span>
+                    <small>
+                        Failed or unreachable
+                        <span id="services-offline" class="status-pill pending">Checking</span>
+                    </small>
+                </div>
+
+                <div class="link disabled">
+                    <i class="fas fa-clock"></i>
+                    <span>Last Checked</span>
+                    <small id="last-checked">Checking</small>
+                </div>
             </div>
         </section>
 
         <section class="card">
             <h2 class="section-title">Services</h2>
 
-            <p class="warning">
-                Cloudflare Access-protected services may show as online when the protected hostname is reachable,
-                even if authentication is required.
-            </p>
-
-            <div id="status-services" class="links" aria-live="polite">
+            <div class="links" id="status-services">
                 <div class="link disabled">
-                    <i class="fas fa-circle-notch fa-spin"></i>
-                    <span>Loading services</span>
-                    <small>Please wait...</small>
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <span>Loading</span>
+                    <small>Checking service status</small>
                 </div>
             </div>
         </section>
 
-        <nav class="socials" aria-label="Navigation links">
-            <a href="/" aria-label="Home">
-                <i class="fas fa-house"></i>
-            </a>
+        <section class="card">
+            <h2 class="section-title">Status Meaning</h2>
 
-            <a href="https://home.amsyarputra.net" target="_blank" rel="noopener noreferrer" aria-label="Home Dashboard">
-                <i class="fas fa-house-laptop"></i>
-            </a>
+            <div class="links">
+                <div class="link disabled">
+                    <i class="fas fa-circle-check"></i>
+                    <span>Online</span>
+                    <small>
+                        The hostname responded normally
+                        <span class="status-pill online">Online</span>
+                    </small>
+                </div>
 
-            <a href="https://dash.cloudflare.com" target="_blank" rel="noopener noreferrer" aria-label="Cloudflare">
-                <i class="fas fa-cloud"></i>
-            </a>
+                <div class="link disabled">
+                    <i class="fas fa-shield-halved"></i>
+                    <span>Protected</span>
+                    <small>
+                        Cloudflare Access or login is blocking public access
+                        <span class="status-pill protected">Protected</span>
+                    </small>
+                </div>
 
-            <a href="https://github.com/ProjectAgentNova27" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                <i class="fab fa-github"></i>
-            </a>
-        </nav>
+                <div class="link disabled">
+                    <i class="fas fa-circle-xmark"></i>
+                    <span>Offline</span>
+                    <small>
+                        Tunnel, backend, or origin failed
+                        <span class="status-pill offline">Offline</span>
+                    </small>
+                </div>
+
+                <div class="link disabled">
+                    <i class="fas fa-circle-question"></i>
+                    <span>Unknown</span>
+                    <small>
+                        Status API could not be read
+                        <span class="status-pill unknown">Unknown</span>
+                    </small>
+                </div>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2 class="section-title">Useful Links</h2>
+
+            <div class="links">
+                <a href="/" class="link">
+                    <i class="fas fa-house"></i>
+                    <span>Home</span>
+                    <small>Return to homepage</small>
+                </a>
+
+                <a href="https://status-api.amsyarputra.net/status.json" class="link" target="_blank"
+                    rel="noopener noreferrer">
+                    <i class="fas fa-code"></i>
+                    <span>Status API</span>
+                    <small>View raw JSON status</small>
+                </a>
+
+                <a href="/.well-known/portal-status" class="link" target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-network-wired"></i>
+                    <span>Portal Status Endpoint</span>
+                    <small>Well-known forwarded status endpoint</small>
+                </a>
+
+                <a href="/.well-known/api-catalog" class="link" target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-diagram-project"></i>
+                    <span>API Catalog</span>
+                    <small>Discovery metadata</small>
+                </a>
+            </div>
+        </section>
 
         <footer>
             © <span id="year"></span> Amsyar Putra ·
             <a href="/">Home</a> ·
-            <a href="/privacy.html">Privacy</a>
+            <a href="/privacy.html">Privacy</a> ·
+            <a href="/vpn.html">VPN Guide</a>
         </footer>
     </main>
 
