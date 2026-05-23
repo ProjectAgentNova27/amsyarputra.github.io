@@ -58,7 +58,17 @@
           "href": "https://drop.amsyarputra.net",
           "title": "PairDrop",
           "type": "text/html"
-        }
+        },
+        {
+          "href": "https://shlink.amsyarputra.net",
+          "title": "Shlink Admin",
+          "type": "text/html"
+        },
+        {
+          "href": "https://s.amsyarputra.net",
+          "title": "Short Links",
+          "type": "text/html"
+        },
         {
           "href": "https://tools.amsyarputra.net",
           "title": "IT Tools",

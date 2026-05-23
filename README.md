@@ -24,6 +24,8 @@ These services are intended to be protected by Cloudflare Access or local authen
 - `https://router.amsyarputra.net` — Router admin
 - `https://sunshine.amsyarputra.net` — Sunshine admin
 - `https://drop.amsyarputra.net` — PairDrop
+- `https://shlink.amsyarputra.net` — Shlink Admin
+- `https://s.amsyarputra.net` — public short-link domain
 
 ## Discovery endpoints
 

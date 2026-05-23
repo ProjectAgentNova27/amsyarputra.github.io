@@ -7,6 +7,8 @@ const KNOWN_STATUS_KEYS = [
     "docker",
     "files",
     "drop",
+    "shlink",
+    "short",
     "tools",
     "pdf",
     "router",

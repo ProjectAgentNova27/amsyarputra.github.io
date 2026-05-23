@@ -10,7 +10,9 @@ const SERVICE_ICONS = {
     tools: "fas fa-screwdriver-wrench",
     pdf: "fas fa-file-pdf",
     router: "fas fa-wifi",
-    sunshine: "fas fa-sun"
+    sunshine: "fas fa-sun",
+    shlink: "fas fa-link",
+    short: "fas fa-arrow-up-right-from-square"
 };
 
 function setPill(element, state, text) {
