@@ -1,4 +1,4 @@
-const STATUS_ENDPOINT = "https://amsyarputra.net/.well-known/portal-status";
+const STATUS_ENDPOINT = "https://status-api.amsyarputra.net/status.json";
 
 const KNOWN_STATUS_KEYS = [
     "website",
@@ -32,6 +32,10 @@ function normaliseStatus(status) {
         return ["online", "Online"];
     }
 
+    if (status === "protected") {
+        return ["protected", "Protected"];
+    }
+
     if (status === "offline") {
         return ["offline", "Offline"];
     }
@@ -55,12 +59,13 @@ async function refreshPortalStatus() {
         }
 
         const data = await response.json();
+        const services = Array.isArray(data.services)
+            ? data.services
+            : Object.entries(data)
+                .filter(([key, value]) => key !== "checkedAt" && value && typeof value === "object")
+                .map(([key, value]) => ({ key, ...value }));
 
-        if (!Array.isArray(data.services)) {
-            throw new Error("Invalid status response");
-        }
-
-        data.services.forEach((service) => {
+        services.forEach((service) => {
             const [state, text] = normaliseStatus(service.status);
             setStatus(service.key, state, text);
         });

@@ -1,4 +1,4 @@
-const PORTAL_STATUS_ENDPOINT = "https://amsyarputra.net/.well-known/portal-status";
+const PORTAL_STATUS_ENDPOINT = "https://status-api.amsyarputra.net/status.json";
 
 const SERVICE_ICONS = {
     website: "fas fa-globe",
@@ -47,6 +47,13 @@ function statusToDisplay(status) {
         return {
             state: "online",
             text: "Online"
+        };
+    }
+
+    if (status === "protected") {
+        return {
+            state: "protected",
+            text: "Protected"
         };
     }
 
