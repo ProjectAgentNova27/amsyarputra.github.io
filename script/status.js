@@ -18,7 +18,9 @@ const KNOWN_STATUS_KEYS = [
 function setStatus(key, state, text) {
     const pills = document.querySelectorAll(`[data-status-key="${key}"]`);
 
-    if (!pills.length) return;
+    if (!pills.length) {
+        return;
+    }
 
     pills.forEach((pill) => {
         pill.textContent = text;
@@ -28,19 +30,40 @@ function setStatus(key, state, text) {
 }
 
 function normaliseStatus(status) {
-    if (status === "online" || status === "ok") {
+    const value = String(status || "").toLowerCase();
+
+    if (value === "online" || value === "ok") {
         return ["online", "Online"];
     }
 
-    if (status === "protected") {
+    if (value === "protected") {
         return ["protected", "Protected"];
     }
 
-    if (status === "offline") {
+    if (value === "offline") {
         return ["offline", "Offline"];
     }
 
     return ["unknown", "Unknown"];
+}
+
+function extractServices(data) {
+    if (Array.isArray(data.services)) {
+        return data.services;
+    }
+
+    return Object.entries(data)
+        .filter(([key, value]) => {
+            return (
+                KNOWN_STATUS_KEYS.includes(key) &&
+                value &&
+                typeof value === "object"
+            );
+        })
+        .map(([key, value]) => ({
+            key,
+            ...value
+        }));
 }
 
 async function refreshPortalStatus() {
@@ -51,7 +74,10 @@ async function refreshPortalStatus() {
     try {
         const response = await fetch(STATUS_ENDPOINT, {
             method: "GET",
-            cache: "no-store"
+            cache: "no-store",
+            headers: {
+                "Accept": "application/json"
+            }
         });
 
         if (!response.ok) {
@@ -59,13 +85,17 @@ async function refreshPortalStatus() {
         }
 
         const data = await response.json();
-        const services = Array.isArray(data.services)
-            ? data.services
-            : Object.entries(data)
-                .filter(([key, value]) => key !== "checkedAt" && value && typeof value === "object")
-                .map(([key, value]) => ({ key, ...value }));
+        const services = extractServices(data);
+
+        if (!services.length) {
+            throw new Error("No services found in status response");
+        }
 
         services.forEach((service) => {
+            if (!service.key) {
+                return;
+            }
+
             const [state, text] = normaliseStatus(service.status);
             setStatus(service.key, state, text);
         });
