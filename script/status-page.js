@@ -13,7 +13,8 @@ const SERVICE_ICONS = {
     pdf: "fas fa-file-pdf",
     convert: "fas fa-right-left",
     router: "fas fa-wifi",
-    sunshine: "fas fa-sun"
+    sunshine: "fas fa-sun",
+    actions: "fas fa-hand-pointer"
 };
 
 function setPill(element, state, text) {

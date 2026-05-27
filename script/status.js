@@ -13,7 +13,8 @@ const KNOWN_STATUS_KEYS = [
     "pdf",
     "convert",
     "router",
-    "sunshine"
+    "sunshine",
+    "actions"
 ];
 
 function setStatus(key, state, text) {
