@@ -11,6 +11,7 @@ const KNOWN_STATUS_KEYS = [
     "short",
     "tools",
     "pdf",
+    "convert",
     "router",
     "sunshine"
 ];

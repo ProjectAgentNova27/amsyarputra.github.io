@@ -26,6 +26,7 @@ These services are intended to be protected by Cloudflare Access or local authen
 - `https://drop.amsyarputra.net` — PairDrop
 - `https://shlink.amsyarputra.net` — Shlink Admin
 - `https://s.amsyarputra.net` — public short-link domain
+- `https://convert.amsyarputra.net` — ConvertX file converter
 
 ## Discovery endpoints
 

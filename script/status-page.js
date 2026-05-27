@@ -11,6 +11,7 @@ const SERVICE_ICONS = {
     short: "fas fa-arrow-up-right-from-square",
     tools: "fas fa-screwdriver-wrench",
     pdf: "fas fa-file-pdf",
+    convert: "fas fa-right-left",
     router: "fas fa-wifi",
     sunshine: "fas fa-sun"
 };
