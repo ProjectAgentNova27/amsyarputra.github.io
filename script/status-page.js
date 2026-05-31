@@ -13,6 +13,7 @@ const SERVICE_ICONS = {
     pdf: "fas fa-file-pdf",
     convert: "fas fa-right-left",
     paste: "fas fa-paste",
+    beszel: "fas fa-chart-line",
     router: "fas fa-wifi",
     sunshine: "fas fa-sun",
     actions: "fas fa-hand-pointer"

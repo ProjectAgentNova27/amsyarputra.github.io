@@ -28,6 +28,7 @@ These services are intended to be protected by Cloudflare Access or local authen
 - `https://s.amsyarputra.net` — public short-link domain
 - `https://convert.amsyarputra.net` — ConvertX file converter
 - `https://paste.amsyarputra.net` — PrivateBin encrypted paste sharing
+- `https://beszel.amsyarputra.net` — Beszel Mac mini and container monitoring
 - `https://actions.amsyarputra.net` — OliveTin Mac mini maintenance actions
 
 ## Discovery endpoints
@@ -56,6 +57,7 @@ Core stack:
 - Shlink
 - ConvertX
 - PrivateBin
+- Beszel
 - OliveTin
 - DIUN
 - Telegram bot
