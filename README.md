@@ -27,6 +27,8 @@ These services are intended to be protected by Cloudflare Access or local authen
 - `https://shlink.amsyarputra.net` — Shlink Admin
 - `https://s.amsyarputra.net` — public short-link domain
 - `https://convert.amsyarputra.net` — ConvertX file converter
+- `https://paste.amsyarputra.net` — PrivateBin encrypted paste sharing
+- `https://actions.amsyarputra.net` — OliveTin Mac mini maintenance actions
 
 ## Discovery endpoints
 
@@ -50,6 +52,13 @@ Core stack:
 - File Browser
 - IT-Tools
 - Stirling PDF
+- PairDrop
+- Shlink
+- ConvertX
+- PrivateBin
+- OliveTin
+- DIUN
+- Telegram bot
 
 Local Mac mini IP:
 

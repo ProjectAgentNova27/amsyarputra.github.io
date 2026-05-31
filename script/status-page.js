@@ -12,6 +12,7 @@ const SERVICE_ICONS = {
     tools: "fas fa-screwdriver-wrench",
     pdf: "fas fa-file-pdf",
     convert: "fas fa-right-left",
+    paste: "fas fa-paste",
     router: "fas fa-wifi",
     sunshine: "fas fa-sun",
     actions: "fas fa-hand-pointer"

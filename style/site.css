@@ -306,6 +306,12 @@ h1 {
     border-color: rgba(142, 142, 147, 0.28);
 }
 
+.status-pill.protected {
+    color: var(--accent);
+    border-color: rgba(56, 189, 248, 0.35);
+    background: rgba(56, 189, 248, 0.12);
+}
+
 .link small .status-pill {
     display: inline-flex;
     margin-top: 6px;
@@ -388,11 +394,5 @@ footer a:focus {
 
     .tagline {
         letter-spacing: 3px;
-    }
-
-    .status-pill.protected {
-        color: #38bdf8;
-        border-color: rgba(56, 189, 248, 0.35);
-        background: rgba(56, 189, 248, 0.12);
     }
 }

@@ -93,6 +93,16 @@
           "href": "https://convert.amsyarputra.net",
           "title": "ConvertX",
           "type": "text/html"
+        },
+        {
+          "href": "https://paste.amsyarputra.net",
+          "title": "PrivateBin",
+          "type": "text/html"
+        },
+        {
+          "href": "https://actions.amsyarputra.net",
+          "title": "OliveTin Actions",
+          "type": "text/html"
         }
       ]
     }
