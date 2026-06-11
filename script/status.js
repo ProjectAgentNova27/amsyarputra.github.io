@@ -12,6 +12,7 @@ const KNOWN_STATUS_KEYS = [
     "tools",
     "pdf",
     "convert",
+    "news",
     "paste",
     "beszel",
     "router",

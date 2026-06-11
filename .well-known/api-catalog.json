@@ -95,6 +95,11 @@
           "type": "text/html"
         },
         {
+          "href": "https://news.amsyarputra.net",
+          "title": "FreshRSS",
+          "type": "text/html"
+        },
+        {
           "href": "https://paste.amsyarputra.net",
           "title": "PrivateBin",
           "type": "text/html"
