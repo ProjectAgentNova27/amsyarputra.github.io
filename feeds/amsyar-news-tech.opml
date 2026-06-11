@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<opml version="2.0">
+  <head>
+    <title>Amsyar News, Science, Tech, and Singapore Feeds</title>
+    <dateCreated>Thu, 11 Jun 2026 19:30:00 +0800</dateCreated>
+    <ownerName>Amsyar Putra</ownerName>
+  </head>
+  <body>
+    <outline text="Singapore" title="Singapore">
+      <outline text="Mothership" title="Mothership" type="rss" xmlUrl="https://news.google.com/rss/search?q=site:mothership.sg&amp;hl=en-SG&amp;gl=SG&amp;ceid=SG:en" htmlUrl="https://mothership.sg/" />
+      <outline text="CNA" title="CNA" type="rss" xmlUrl="https://www.channelnewsasia.com/api/v1/rss-outbound-feed?_format=xml" htmlUrl="https://www.channelnewsasia.com/" />
+      <outline text="The Straits Times - Singapore" title="The Straits Times - Singapore" type="rss" xmlUrl="https://www.straitstimes.com/news/singapore/rss.xml" htmlUrl="https://www.straitstimes.com/singapore" />
+      <outline text="The Straits Times - Asia" title="The Straits Times - Asia" type="rss" xmlUrl="https://www.straitstimes.com/news/asia/rss.xml" htmlUrl="https://www.straitstimes.com/asia" />
+    </outline>
+    <outline text="World Briefing" title="World Briefing">
+      <outline text="BBC World" title="BBC World" type="rss" xmlUrl="https://feeds.bbci.co.uk/news/world/rss.xml" htmlUrl="https://www.bbc.com/news/world" />
+      <outline text="The Guardian - World" title="The Guardian - World" type="rss" xmlUrl="https://www.theguardian.com/world/rss" htmlUrl="https://www.theguardian.com/world" />
+      <outline text="Al Jazeera" title="Al Jazeera" type="rss" xmlUrl="https://www.aljazeera.com/xml/rss/all.xml" htmlUrl="https://www.aljazeera.com/" />
+      <outline text="Rest of World" title="Rest of World" type="rss" xmlUrl="https://restofworld.org/feed/latest/" htmlUrl="https://restofworld.org/" />
+    </outline>
+    <outline text="Science and Space" title="Science and Space">
+      <outline text="Nature" title="Nature" type="rss" xmlUrl="https://www.nature.com/nature.rss" htmlUrl="https://www.nature.com/" />
+      <outline text="Science Magazine News" title="Science Magazine News" type="rss" xmlUrl="https://www.science.org/rss/news_current.xml" htmlUrl="https://www.science.org/news" />
+      <outline text="Science News" title="Science News" type="rss" xmlUrl="https://www.sciencenews.org/feed" htmlUrl="https://www.sciencenews.org/" />
+      <outline text="Quanta Magazine" title="Quanta Magazine" type="rss" xmlUrl="https://www.quantamagazine.org/feed/" htmlUrl="https://www.quantamagazine.org/" />
+      <outline text="NASA" title="NASA" type="rss" xmlUrl="https://www.nasa.gov/feed/" htmlUrl="https://www.nasa.gov/" />
+      <outline text="IEEE Spectrum" title="IEEE Spectrum" type="rss" xmlUrl="https://spectrum.ieee.org/feeds/feed.rss" htmlUrl="https://spectrum.ieee.org/" />
+    </outline>
+    <outline text="Tech and AI" title="Tech and AI">
+      <outline text="The Verge" title="The Verge" type="rss" xmlUrl="https://www.theverge.com/rss/index.xml" htmlUrl="https://www.theverge.com/" />
+      <outline text="Ars Technica" title="Ars Technica" type="rss" xmlUrl="https://feeds.arstechnica.com/arstechnica/index" htmlUrl="https://arstechnica.com/" />
+      <outline text="MIT Technology Review" title="MIT Technology Review" type="rss" xmlUrl="https://www.technologyreview.com/feed/" htmlUrl="https://www.technologyreview.com/" />
+      <outline text="WIRED" title="WIRED" type="rss" xmlUrl="https://www.wired.com/feed/rss" htmlUrl="https://www.wired.com/" />
+      <outline text="Hacker News Front Page" title="Hacker News Front Page" type="rss" xmlUrl="https://hnrss.org/frontpage" htmlUrl="https://news.ycombinator.com/" />
+      <outline text="OpenAI News" title="OpenAI News" type="rss" xmlUrl="https://openai.com/news/rss.xml" htmlUrl="https://openai.com/news/" />
+      <outline text="Apple Newsroom" title="Apple Newsroom" type="rss" xmlUrl="https://www.apple.com/newsroom/rss-feed.rss" htmlUrl="https://www.apple.com/newsroom/" />
+    </outline>
+    <outline text="Security and Cloud" title="Security and Cloud">
+      <outline text="BleepingComputer" title="BleepingComputer" type="rss" xmlUrl="https://www.bleepingcomputer.com/feed/" htmlUrl="https://www.bleepingcomputer.com/" />
+      <outline text="Krebs on Security" title="Krebs on Security" type="rss" xmlUrl="https://krebsonsecurity.com/feed/" htmlUrl="https://krebsonsecurity.com/" />
+      <outline text="Cloudflare Blog" title="Cloudflare Blog" type="rss" xmlUrl="https://blog.cloudflare.com/rss/" htmlUrl="https://blog.cloudflare.com/" />
+      <outline text="GitHub Blog" title="GitHub Blog" type="rss" xmlUrl="https://github.blog/feed/" htmlUrl="https://github.blog/" />
+      <outline text="CNCF Blog" title="CNCF Blog" type="rss" xmlUrl="https://www.cncf.io/feed/" htmlUrl="https://www.cncf.io/blog/" />
+    </outline>
+    <outline text="Homelab and Self Hosting" title="Homelab and Self Hosting">
+      <outline text="Docker Blog" title="Docker Blog" type="rss" xmlUrl="https://www.docker.com/blog/feed/" htmlUrl="https://www.docker.com/blog/" />
+      <outline text="Home Assistant" title="Home Assistant" type="rss" xmlUrl="https://www.home-assistant.io/atom.xml" htmlUrl="https://www.home-assistant.io/blog/" />
+      <outline text="Tailscale Blog" title="Tailscale Blog" type="rss" xmlUrl="https://tailscale.com/blog/index.xml" htmlUrl="https://tailscale.com/blog/" />
+    </outline>
+  </body>
+</opml>

@@ -45,6 +45,10 @@ These services are intended to be protected by Cloudflare Access or local authen
 - `/sitemap.xml`
 - `/robots.txt`
 
+## Feed Lists
+
+- `https://amsyarputra.net/feeds/amsyar-news-tech.opml` — OPML import list for FreshRSS and Reeder
+
 ## Local Mac Mini Stack
 
 Core stack:
