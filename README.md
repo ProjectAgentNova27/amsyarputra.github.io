@@ -22,7 +22,7 @@ These services are intended to be protected by Cloudflare Access or local authen
 | `https://docker.amsyarputra.net` | Portainer | Docker container management |
 | `https://files.amsyarputra.net` | File Browser | Web file manager |
 | `https://tools.amsyarputra.net` | IT-Tools | Browser utility tools |
-| `https://pdf.amsyarputra.net` | Stirling PDF | PDF tools |
+| `https://pdf.amsyarputra.net` | BentoPDF | Browser-based PDF tools |
 | `https://drop.amsyarputra.net` | PairDrop | Browser file transfer |
 | `https://shlink.amsyarputra.net` | Shlink Admin | Short-link admin UI |
 | `https://s.amsyarputra.net` | Shlink | Public short-link redirect domain |
@@ -59,7 +59,7 @@ Core stack:
 - Portainer
 - File Browser
 - IT-Tools
-- Stirling PDF
+- BentoPDF
 - PairDrop
 - Shlink
 - ConvertX
