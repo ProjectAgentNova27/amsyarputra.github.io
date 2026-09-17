@@ -11,6 +11,7 @@ const KNOWN_STATUS_KEYS = [
     "short",
     "tools",
     "pdf",
+    "emu",
     "convert",
     "news",
     "paste",
@@ -95,6 +96,8 @@ async function refreshPortalStatus() {
         if (!services.length) {
             throw new Error("No services found in status response");
         }
+
+        KNOWN_STATUS_KEYS.forEach(key => setStatus(key, "unknown", "Unknown"));
 
         services.forEach((service) => {
             if (!service.key) {

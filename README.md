@@ -13,7 +13,7 @@ This site is hosted using GitHub Pages and fronted by Cloudflare. It provides a 
 
 ## Private Portal Services
 
-The Cloudflare Access-protected browser emulator at `https://emu.amsyarputra.net` lets invited visitors bring
+The public browser emulator at `https://emu.amsyarputra.net` lets visitors bring
 their own local game and BIOS files. Files stay on their device; the Mac mini
 serves only the static frontend and pinned EmulatorJS 4.2.3 assets. No games,
 BIOS, firmware, keys or ROM library are provided. LAN access is available at
@@ -23,9 +23,12 @@ retention, an automatic save attempt every 60 seconds, and a save-before-quit
 confirmation. Reselect the same game to restore; game and BIOS files are not
 persisted. Core support and browser storage availability vary. Export saves for
 a durable backup. Public and LAN hostnames have separate browser storage.
-No status badge is added until the separate status API knows about this service.
+The portal status badge uses the `emu` key from the status API. Emulator does not
+require Cloudflare Access; a successful public response is checked like other
+public services.
 
-These services are intended to be protected by Cloudflare Access or local authentication:
+Most services below use Cloudflare Access or local authentication; Emulator and
+the short-link redirect domain are public:
 
 | URL | Service | Purpose |
 | --- | --- | --- |
