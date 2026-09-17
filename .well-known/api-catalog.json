@@ -30,6 +30,11 @@
       ],
       "item": [
         {
+          "href": "https://emu.amsyarputra.net",
+          "title": "Emulator - bring your own game files",
+          "type": "text/html"
+        },
+        {
           "href": "https://amsyarputra.net/",
           "title": "Public Website",
           "type": "text/html"

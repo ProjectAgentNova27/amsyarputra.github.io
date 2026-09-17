@@ -172,9 +172,12 @@ async function loadStatusPage() {
         const offlineCount = services.filter((service) => service.status === "offline").length;
         const totalCount = services.length;
 
-        const overall = offlineCount === 0
-            ? { state: "online", text: "Operational" }
-            : { state: "offline", text: "Degraded" };
+        const unknownCount = totalCount - onlineCount - protectedCount - offlineCount;
+        const overall = offlineCount > 0
+            ? { state: "offline", text: "Degraded" }
+            : totalCount === 0 || unknownCount > 0
+                ? { state: "unknown", text: "Unknown" }
+                : { state: "online", text: "Operational" };
 
         setPill(overallStatus, overall.state, overall.text);
 

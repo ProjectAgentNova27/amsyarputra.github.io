@@ -52,6 +52,15 @@ the short-link redirect domain are public:
 
 ## Discovery Endpoints
 
+The static `.well-known/api-catalog.json` lists services, including the public
+Emulator. The markdown Cloudflare Worker separately serves `/openapi.json`,
+`/docs/api`, `/.well-known/api-catalog`, and status aliases; these are not missing
+GitHub Pages files. Keep the Worker's service inventory synchronized when adding
+services. `status.html` renders service cards from the status API rather than
+maintaining a duplicate HTML list. Emulator is keyed as `emu` in both Workers.
+The main-domain sitemap and robots file do not control crawling on the separate
+Emulator hostname.
+
 - `/.well-known/api-catalog`
 - `/.well-known/api-catalog.json`
 - `/.well-known/status`
