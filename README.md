@@ -13,6 +13,18 @@ This site is hosted using GitHub Pages and fronted by Cloudflare. It provides a 
 
 ## Private Portal Services
 
+The Cloudflare Access-protected browser emulator at `https://emu.amsyarputra.net` lets invited visitors bring
+their own local game and BIOS files. Files stay on their device; the Mac mini
+serves only the static frontend and pinned EmulatorJS 4.2.3 assets. No games,
+BIOS, firmware, keys or ROM library are provided. LAN access is available at
+`https://emu.lan.amsyarputra.net`. The service and public route are deployed.
+Progress checkpoints are stored only in the player's browser, with seven-day
+retention, an automatic save attempt every 60 seconds, and a save-before-quit
+confirmation. Reselect the same game to restore; game and BIOS files are not
+persisted. Core support and browser storage availability vary. Export saves for
+a durable backup. Public and LAN hostnames have separate browser storage.
+No status badge is added until the separate status API knows about this service.
+
 These services are intended to be protected by Cloudflare Access or local authentication:
 
 | URL | Service | Purpose |
@@ -23,6 +35,7 @@ These services are intended to be protected by Cloudflare Access or local authen
 | `https://files.amsyarputra.net` | File Browser | Web file manager |
 | `https://tools.amsyarputra.net` | IT-Tools | Browser utility tools |
 | `https://pdf.amsyarputra.net` | BentoPDF | Browser-based PDF tools |
+| `https://emu.amsyarputra.net` | Emulator | Browser retro emulation using your own local game files |
 | `https://drop.amsyarputra.net` | PairDrop | Browser file transfer |
 | `https://shlink.amsyarputra.net` | Shlink Admin | Short-link admin UI |
 | `https://s.amsyarputra.net` | Shlink | Public short-link redirect domain |
@@ -60,6 +73,7 @@ Core stack:
 - File Browser
 - IT-Tools
 - BentoPDF
+- Emulator (self-hosted EmulatorJS 4.2.3 assets; client-side emulation)
 - PairDrop
 - Shlink
 - ConvertX
