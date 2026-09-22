@@ -12,6 +12,7 @@ const SERVICE_ICONS = {
     tools: "fas fa-screwdriver-wrench",
     pdf: "fas fa-file-pdf",
     emu: "fas fa-gamepad",
+    booth: "fas fa-camera",
     lab: "fas fa-flask",
     convert: "fas fa-right-left",
     news: "fas fa-square-rss",
@@ -166,7 +167,17 @@ async function loadStatusPage() {
         }
 
         const data = await response.json();
-        const services = normaliseServices(data);
+        const services = normaliseServices(data).slice();
+        // Keep newly listed services visible while the Worker inventory catches up.
+        if (!services.some((service) => service.key === "booth")) {
+            services.push({
+                key: "booth",
+                name: "Mini Booth",
+                url: "https://booth.amsyarputra.net",
+                description: "iPhone/iPad photobooth; not yet reported by the status API",
+                status: "unknown"
+            });
+        }
 
         const onlineCount = services.filter((service) => service.status === "online").length;
         const protectedCount = services.filter((service) => service.status === "protected").length;

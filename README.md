@@ -27,7 +27,7 @@ The portal status badge uses the `emu` key from the status API. Emulator does no
 require Cloudflare Access; a successful public response is checked like other
 public services.
 
-Most services below use Cloudflare Access or local authentication; Emulator and
+Most services below use Cloudflare Access or local authentication; Emulator, Mini Booth and
 the short-link redirect domain are public:
 
 | URL | Service | Purpose |
@@ -39,6 +39,7 @@ the short-link redirect domain are public:
 | `https://tools.amsyarputra.net` | IT-Tools | Browser utility tools |
 | `https://pdf.amsyarputra.net` | BentoPDF | Browser-based PDF tools |
 | `https://emu.amsyarputra.net` | Emulator | Browser retro emulation using your own local game files |
+| `https://booth.amsyarputra.net` | Mini Booth | iPhone/iPad photobooth, print layouts and approved remote shutter |
 | `https://lab.amsyarputra.net` | Amsyar Lab | Cloudflare Access-protected image, media, OCR and file processing |
 | `https://drop.amsyarputra.net` | PairDrop | Browser file transfer |
 | `https://shlink.amsyarputra.net` | Shlink Admin | Short-link admin UI |
@@ -52,6 +53,25 @@ the short-link redirect domain are public:
 | `https://sunshine.amsyarputra.net` | Sunshine Admin | Game streaming host admin |
 
 ## Discovery Endpoints
+
+Mini Booth is public at `https://booth.amsyarputra.net` for compatible iPhone/iPad
+browsers and Home Screen web apps. It preserves eight-shot/four-selection sessions,
+themes, editing, image/PDF/GIF exports and session ZIPs with motion and silent video.
+Additional finished formats are Modern 2x6, Retro 1.5x6, Extended 2.5x8 and Wide
+3.5x5 inches, with exact-size PDFs and suitable print-sheet layouts.
+Remote shutter pairs a second device after host approval, captures one photo per
+command and waits for manual progression. Optional framing preview is end-to-end
+encrypted; originals stay in browser memory on the host. Remote pairings expire
+after 30 minutes. Explicit download QR sharing uploads only an encrypted finished
+copy for up to 15 minutes; this is separate from remote pairing.
+
+The homepage, status page and static discovery catalog now recognize `booth`.
+Add `booth` to the deployed portal-status-api and amsyar-markdown-agent inventories
+separately, using the public URL and `https://booth.amsyarputra.net/healthz` for the
+health probe. Missing API results remain Unknown. This website commit does not
+deploy Workers or alter Cloudflare configuration. The existing root sitemap,
+robots.txt, security contact and VPN guide need no new routes for this separate
+public hostname; they do not govern crawling of Mini Booth or its private links.
 
 Amsyar Lab is deployed at `https://lab.amsyarputra.net` behind Cloudflare Access,
 with LAN/VPN access at `https://lab.lan.amsyarputra.net`.
@@ -105,6 +125,7 @@ Core stack:
 - BentoPDF
 - Emulator (self-hosted EmulatorJS 4.2.3 assets; client-side emulation)
 - Amsyar Lab (Access-protected server processing; temporary files)
+- Mini Booth (iPhone/iPad; browser-local photos, physical print presets, remote shutter)
 - PairDrop
 - Shlink
 - ConvertX

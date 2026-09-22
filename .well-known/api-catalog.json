@@ -30,6 +30,11 @@
       ],
       "item": [
         {
+          "href": "https://booth.amsyarputra.net",
+          "title": "Mini Booth - iPhone/iPad photobooth, print layouts and remote shutter",
+          "type": "text/html"
+        },
+        {
           "href": "https://lab.amsyarputra.net",
           "title": "Amsyar Lab - Cloudflare Access required; temporary server uploads",
           "type": "text/html"
