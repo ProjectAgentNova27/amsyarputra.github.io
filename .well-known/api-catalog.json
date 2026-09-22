@@ -30,6 +30,11 @@
       ],
       "item": [
         {
+          "href": "https://lab.amsyarputra.net",
+          "title": "Amsyar Lab - Cloudflare Access required; temporary server uploads",
+          "type": "text/html"
+        },
+        {
           "href": "https://emu.amsyarputra.net",
           "title": "Emulator - bring your own game files",
           "type": "text/html"

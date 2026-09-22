@@ -39,6 +39,7 @@ the short-link redirect domain are public:
 | `https://tools.amsyarputra.net` | IT-Tools | Browser utility tools |
 | `https://pdf.amsyarputra.net` | BentoPDF | Browser-based PDF tools |
 | `https://emu.amsyarputra.net` | Emulator | Browser retro emulation using your own local game files |
+| `https://lab.amsyarputra.net` | Amsyar Lab | Cloudflare Access-protected image, media, OCR and file processing |
 | `https://drop.amsyarputra.net` | PairDrop | Browser file transfer |
 | `https://shlink.amsyarputra.net` | Shlink Admin | Short-link admin UI |
 | `https://s.amsyarputra.net` | Shlink | Public short-link redirect domain |
@@ -51,6 +52,23 @@ the short-link redirect domain are public:
 | `https://sunshine.amsyarputra.net` | Sunshine Admin | Game streaming host admin |
 
 ## Discovery Endpoints
+
+Amsyar Lab is deployed at `https://lab.amsyarputra.net` behind Cloudflare Access,
+with LAN/VPN access at `https://lab.lan.amsyarputra.net`.
+It offers 48 image, media, OCR, QR, metadata and file operations using temporary
+server uploads, with completed results expiring after 30 minutes. Network tools
+are disabled. The portal and both Worker inventories use status key `lab`.
+An unauthenticated Access redirect is reported as Protected, not Offline, and
+does not prove the underlying processing backend is healthy. The Cloudflare
+Published Application target remains `http://lab-ingress:8080`.
+
+Deploy the updated portal-status-api and amsyar-markdown-agent Workers before
+publishing these website changes. Until the status Worker includes `lab`, its
+badge correctly shows Unknown rather than fabricating a health result.
+
+The existing sitemap, robots, security contact and crawler exclusions need no
+new entries for this separate protected subdomain. The VPN guide includes Lab.
+Discovery metadata does not grant access or override Cloudflare Access.
 
 The static `.well-known/api-catalog.json` lists services, including the public
 Emulator. The markdown Cloudflare Worker separately serves `/openapi.json`,
@@ -86,6 +104,7 @@ Core stack:
 - IT-Tools
 - BentoPDF
 - Emulator (self-hosted EmulatorJS 4.2.3 assets; client-side emulation)
+- Amsyar Lab (Access-protected server processing; temporary files)
 - PairDrop
 - Shlink
 - ConvertX
