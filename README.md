@@ -27,7 +27,7 @@ The portal status badge uses the `emu` key from the status API. Emulator does no
 require Cloudflare Access; a successful public response is checked like other
 public services.
 
-Most services below use Cloudflare Access or local authentication; Emulator, Mini Booth and
+Most services below use Cloudflare Access or local authentication; Emulator, Mini Booth, Mini Photo and
 the short-link redirect domain are public:
 
 | URL | Service | Purpose |
@@ -40,6 +40,7 @@ the short-link redirect domain are public:
 | `https://pdf.amsyarputra.net` | BentoPDF | Browser-based PDF tools |
 | `https://emu.amsyarputra.net` | Emulator | Browser retro emulation using your own local game files |
 | `https://booth.amsyarputra.net` | Mini Booth | iPhone/iPad photobooth, print layouts and approved remote shutter |
+| `https://photo.amsyarputra.net` | Mini Photo | iPhone/iPad local photo editing and metadata frames |
 | `https://lab.amsyarputra.net` | Amsyar Lab | Cloudflare Access-protected image, media, OCR and file processing |
 | `https://drop.amsyarputra.net` | PairDrop | Browser file transfer |
 | `https://shlink.amsyarputra.net` | Shlink Admin | Short-link admin UI |
@@ -76,11 +77,13 @@ public hostname; they do not govern crawling of Mini Booth or its private links.
 Amsyar Lab is deployed at `https://lab.amsyarputra.net` behind Cloudflare Access,
 with LAN/VPN access at `https://lab.lan.amsyarputra.net`.
 It offers 48 image, media, OCR, QR, metadata and file operations using temporary
-server uploads, with completed results expiring after 30 minutes. Network tools
+server uploads, up to 500 MB total per conversion job (QR limits stay smaller),
+with completed results expiring after five minutes. Network tools
 are disabled. The portal and both Worker inventories use status key `lab`.
 An unauthenticated Access redirect is reported as Protected, not Offline, and
 does not prove the underlying processing backend is healthy. The Cloudflare
-Published Application target remains `http://lab-ingress:8080`.
+Published Application uses the existing maintenance gateway `http://caddy:8080`,
+which routes Lab to `lab-ingress:8080`.
 
 Deploy the updated portal-status-api and amsyar-markdown-agent Workers before
 publishing these website changes. Until the status Worker includes `lab`, its
@@ -126,6 +129,7 @@ Core stack:
 - Emulator (self-hosted EmulatorJS 4.2.3 assets; client-side emulation)
 - Amsyar Lab (Access-protected server processing; temporary files)
 - Mini Booth (iPhone/iPad; browser-local photos, physical print presets, remote shutter)
+- Mini Photo (iPhone/iPad; browser-local editing, metadata frames, optional local recovery)
 - PairDrop
 - Shlink
 - ConvertX

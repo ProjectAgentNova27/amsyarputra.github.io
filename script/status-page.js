@@ -13,6 +13,7 @@ const SERVICE_ICONS = {
     pdf: "fas fa-file-pdf",
     emu: "fas fa-gamepad",
     booth: "fas fa-camera",
+    photo: "fas fa-image",
     lab: "fas fa-flask",
     convert: "fas fa-right-left",
     news: "fas fa-square-rss",
@@ -179,6 +180,10 @@ async function loadStatusPage() {
             });
         }
 
+        if (!services.some((service) => service.key === "photo")) {
+            services.push({key: "photo", name: "Mini Photo", url: "https://photo.amsyarputra.net",
+                description: "iPhone/iPad photo editor; not yet reported by the status API", status: "unknown"});
+        }
         const onlineCount = services.filter((service) => service.status === "online").length;
         const protectedCount = services.filter((service) => service.status === "protected").length;
         const offlineCount = services.filter((service) => service.status === "offline").length;

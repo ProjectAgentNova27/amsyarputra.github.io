@@ -13,6 +13,7 @@ const KNOWN_STATUS_KEYS = [
     "pdf",
     "emu",
     "booth",
+    "photo",
     "lab",
     "convert",
     "news",
