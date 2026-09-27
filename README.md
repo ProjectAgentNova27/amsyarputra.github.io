@@ -23,6 +23,9 @@ retention, an automatic save attempt every 60 seconds, and a save-before-quit
 confirmation. Reselect the same game to restore; game and BIOS files are not
 persisted. Core support and browser storage availability vary. Export saves for
 a durable backup. Public and LAN hostnames have separate browser storage.
+Settings, controls and cheats persist locally per game without an account. Save-state
+and in-game save exports offer a prepared Save / Share action where supported, with
+a browser download fallback. No cross-device synchronization is provided.
 The portal status badge uses the `emu` key from the status API. Emulator does not
 require Cloudflare Access; a successful public response is checked like other
 public services.
