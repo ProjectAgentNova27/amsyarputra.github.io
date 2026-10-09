@@ -1,6 +1,10 @@
 # AP. Identity
 
 Owner-approved on 9 October 2026 for future portal and Mini Hosting branding.
+The same-day universal policy now requires appropriate owner-controlled ap.
+co-branding for all Mini Hosting services, including future ones. Adoption is phased
+and approval-gated. Preserve third-party trademarks through portal or approved
+wrapper co-branding; do not indiscriminately replace upstream assets.
 Preserve the existing lowercase `ap.` form: Inter Bold (700), zero letter spacing,
 with a cyan full stop. Do not substitute an uppercase/redesigned mark by default.
 The live navigation remains accessible text, using the same local font and colors.
