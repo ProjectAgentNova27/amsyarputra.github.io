@@ -12,5 +12,9 @@ Preserve service hostname/status keys unless migration explicitly requires chang
 Main-domain sitemap/robots do not govern separate service subdomains. Do not change
 Access/DNS/Tunnel routes merely to make a status probe pass.
 
+Owner-approved identity: preserve and reuse the existing lowercase ap. wordmark.
+See assets/brand/README.md for canonical artwork and exports; do not reinvent it
+for future portal or Mini Hosting work without owner approval.
+
 Homelab infrastructure changes require its live AGENTS.md and maintenance SOP.
 Never touch Technitium; retain legacy resources until separate retirement approval.

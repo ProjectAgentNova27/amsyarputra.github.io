@@ -3,7 +3,12 @@
 :root[data-theme=light]{color-scheme:light;--bg:#f7f8fa;--surface:#fff;--surface-raised:#edf0f4;--text:#17202a;--muted:#566170;--border:#d2d8e0;--accent:#076b83;--accent-strong:#007f9e;--online:#16643c;--offline:#aa2534;--protected:#26598b;--pending:#735816;--unknown:#566170;--shadow:0 16px 48px #10203012}
 @media(prefers-color-scheme:light){:root:not([data-theme]){color-scheme:light;--bg:#f7f8fa;--surface:#fff;--surface-raised:#edf0f4;--text:#17202a;--muted:#566170;--border:#d2d8e0;--accent:#076b83;--accent-strong:#007f9e;--online:#16643c;--offline:#aa2534;--protected:#26598b;--pending:#735816;--unknown:#566170}}
 *{box-sizing:border-box;letter-spacing:0}
-html{scroll-behavior:smooth;scroll-padding-top:100px}
+html{scroll-behavior:smooth;scroll-padding-top:100px;scrollbar-width:thin;scrollbar-color:var(--border) var(--bg)}
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border);border:2px solid var(--bg);border-radius:8px}
+::-webkit-scrollbar-thumb:hover{background:var(--muted)}
+@media(forced-colors:active){html{scrollbar-color:auto}}
 body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 button,input{font:inherit}

@@ -11,11 +11,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const totals={online:0,protected:0,offline:0,unknown:0};
         KNOWN_STATUS_KEYS.forEach(key=>totals[states.get(key) || 'unknown']++);
         Object.entries(counts).forEach(([state,element])=>{if(element)element.textContent=String(totals[state]);});
-        if (error || totals.unknown) setOverall('unknown','Unknown');
-        else if (totals.offline) setOverall('offline','Degraded');
-        else if (totals.protected) setOverall('protected','Protected checks present');
-        else setOverall('online','Public checks OK');
-        if (!error && totals.offline) setOverall('offline','Degraded');
+        const reachable=totals.online+totals.protected;
+        const summary=`${reachable} of ${KNOWN_STATUS_KEYS.length} reachable`;
+        if (error || totals.unknown===KNOWN_STATUS_KEYS.length) setOverall('unknown','Unknown');
+        else if (totals.offline) setOverall('offline',`Degraded · ${summary}`);
+        else if (totals.unknown) setOverall('pending',`${summary} · ${totals.unknown} unverified`);
+        else setOverall('online',summary);
         const checked=document.getElementById('last-checked');
         const timestamp=data?.checked_at || data?.checkedAt;
         const date=timestamp?new Date(timestamp):null;
