@@ -2,6 +2,14 @@
 
 Personal tech portal for Amsyar Putra.
 
+## Modern portal release
+
+9 October 2026: the owner approved publication of the modern portal overhaul.
+This source release retains the static GitHub Pages architecture. Pages build and
+live-site verification are recorded separately in the private operations documentation;
+a source commit alone is not deployment evidence. No Worker deployment is required.
+See [PORTAL-HANDOVER.md](PORTAL-HANDOVER.md) for design, assets, tested scope and rollback.
+
 This site is hosted using GitHub Pages and fronted by Cloudflare. It provides a public homepage, discovery metadata, status pages, and links to selected private services protected through Cloudflare Access, VPN, or local authentication.
 
 ## Public Site

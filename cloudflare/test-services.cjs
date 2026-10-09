@@ -40,6 +40,7 @@ function load(file) {
   assert(catalog.linkset[0].item.some(s => s.href === docs.url));
   const html = fs.readFileSync(path.join(__dirname, '../index.html'), 'utf8');
   assert.match(html, /data-status-key="docs"/);
-  assert.match(html, /<span>Mini Links<\/span>/);
+  assert.match(html, /data-service="shlink"/);
+  assert.match(html, /<h3>Mini Links<\/h3>/);
   console.log('PASS: matching inventories, docs/short health probes/body disposal, unchanged protected admin key, static discovery/listings');
 })().catch(error => {console.error(error); process.exitCode = 1;});

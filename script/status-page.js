@@ -1,269 +1,31 @@
-const PORTAL_STATUS_ENDPOINT = "https://status-api.amsyarputra.net/status.json";
-
-const SERVICE_ICONS = {
-    website: "fas fa-globe",
-    home: "fas fa-house-laptop",
-    dns: "fas fa-network-wired",
-    docker: "fas fa-cubes",
-    files: "fas fa-folder-open",
-    drop: "fas fa-share-nodes",
-    shlink: "fas fa-link",
-    short: "fas fa-arrow-up-right-from-square",
-    tools: "fas fa-screwdriver-wrench",
-    pdf: "fas fa-file-pdf",
-    emu: "fas fa-gamepad",
-    booth: "fas fa-camera",
-    photo: "fas fa-image",
-    lab: "fas fa-flask",
-    convert: "fas fa-right-left",
-    news: "fas fa-square-rss",
-    paste: "fas fa-paste",
-    beszel: "fas fa-chart-line",
-    router: "fas fa-wifi",
-    sunshine: "fas fa-sun",
-    actions: "fas fa-hand-pointer"
-};
-
-function setPill(element, state, text) {
-    if (!element) return;
-
-    element.textContent = text;
-    element.classList.remove("pending", "online", "offline", "unknown", "protected");
-    element.classList.add(state);
-}
-
-function formatDateTime(value) {
-    if (!value) return "Unknown";
-
-    const date = new Date(value);
-
-    if (Number.isNaN(date.getTime())) {
-        return "Unknown";
+document.addEventListener('DOMContentLoaded', () => {
+    const refresh=document.getElementById('refresh-status');
+    const counts={online:document.getElementById('services-online'),protected:document.getElementById('services-protected'),offline:document.getElementById('services-offline'),unknown:document.getElementById('services-unknown')};
+    function setOverall(state,text) {
+        const pill=document.getElementById('overall-status');
+        pill.className='status-pill '+state;pill.textContent=text;
     }
-
-    return new Intl.DateTimeFormat(undefined, {
-        year: "numeric",
-        month: "short",
-        day: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit"
-    }).format(date);
-}
-
-function statusToDisplay(status) {
-    const value = String(status || "").toLowerCase();
-
-    if (value === "online" || value === "ok") {
-        return {
-            state: "online",
-            text: "Online"
-        };
-    }
-
-    if (value === "protected") {
-        return {
-            state: "protected",
-            text: "Protected"
-        };
-    }
-
-    if (value === "offline") {
-        return {
-            state: "offline",
-            text: "Offline"
-        };
-    }
-
-    return {
-        state: "unknown",
-        text: "Unknown"
-    };
-}
-
-function createServiceCard(service) {
-    const card = document.createElement("a");
-    card.className = "link";
-    card.href = service.url || "#";
-
-    if (service.url) {
-        card.target = "_blank";
-        card.rel = "noopener noreferrer";
-    }
-
-    const icon = document.createElement("i");
-    icon.className = SERVICE_ICONS[service.key] || "fas fa-server";
-
-    const title = document.createElement("span");
-    title.textContent = service.name || service.key || "Service";
-
-    const small = document.createElement("small");
-
-    const status = statusToDisplay(service.status);
-
-    const description = document.createElement("span");
-    description.textContent = service.description || "Service endpoint";
-
-    const pill = document.createElement("span");
-    pill.className = `status-pill ${status.state}`;
-    pill.textContent = status.text;
-
-    small.appendChild(description);
-    small.appendChild(document.createTextNode(" "));
-    small.appendChild(pill);
-
-    card.appendChild(icon);
-    card.appendChild(title);
-    card.appendChild(small);
-
-    return card;
-}
-
-function normaliseServices(data) {
-    if (Array.isArray(data.services)) {
-        return data.services;
-    }
-
-    const ignoredKeys = [
-        "status",
-        "service",
-        "checked_at",
-        "checkedAt",
-        "total",
-        "online",
-        "protected",
-        "offline",
-        "note"
-    ];
-
-    return Object.entries(data)
-        .filter(([key, value]) => {
-            return !ignoredKeys.includes(key) && value && typeof value === "object";
-        })
-        .map(([key, value]) => ({
-            key,
-            ...value
-        }));
-}
-
-async function loadStatusPage() {
-    const overallStatus = document.getElementById("overall-status");
-    const servicesOnline = document.getElementById("services-online");
-    const servicesProtected = document.getElementById("services-protected");
-    const servicesOffline = document.getElementById("services-offline");
-    const lastChecked = document.getElementById("last-checked");
-    const servicesContainer = document.getElementById("status-services");
-
-    try {
-        const response = await fetch(PORTAL_STATUS_ENDPOINT, {
-            method: "GET",
-            cache: "no-store",
-            headers: {
-                "Accept": "application/json"
-            }
-        });
-
-        if (!response.ok) {
-            throw new Error(`Portal status returned HTTP ${response.status}`);
-        }
-
-        const data = await response.json();
-        const services = normaliseServices(data).slice();
-        // Keep newly listed services visible while the Worker inventory catches up.
-        if (!services.some((service) => service.key === "booth")) {
-            services.push({
-                key: "booth",
-                name: "Mini Booth",
-                url: "https://booth.amsyarputra.net",
-                description: "iPhone/iPad photobooth; not yet reported by the status API",
-                status: "unknown"
-            });
-        }
-
-        if (!services.some((service) => service.key === "photo")) {
-            services.push({key: "photo", name: "Mini Photo", url: "https://photo.amsyarputra.net",
-                description: "iPhone/iPad photo editor; not yet reported by the status API", status: "unknown"});
-        }
-        const onlineCount = services.filter((service) => service.status === "online").length;
-        const protectedCount = services.filter((service) => service.status === "protected").length;
-        const offlineCount = services.filter((service) => service.status === "offline").length;
-        const totalCount = services.length;
-
-        const unknownCount = totalCount - onlineCount - protectedCount - offlineCount;
-        const overall = offlineCount > 0
-            ? { state: "offline", text: "Degraded" }
-            : totalCount === 0 || unknownCount > 0
-                ? { state: "unknown", text: "Unknown" }
-                : { state: "online", text: "Operational" };
-
-        setPill(overallStatus, overall.state, overall.text);
-
-        if (servicesOnline) {
-            servicesOnline.textContent = `${onlineCount}/${totalCount}`;
-        }
-
-        if (servicesProtected) {
-            servicesProtected.textContent = `${protectedCount}/${totalCount}`;
-        }
-
-        if (servicesOffline) {
-            servicesOffline.textContent = `${offlineCount}/${totalCount}`;
-        }
-
-        if (lastChecked) {
-            lastChecked.textContent = formatDateTime(data.checked_at || data.checkedAt);
-        }
-
-        if (servicesContainer) {
-            servicesContainer.innerHTML = "";
-
-            services.forEach((service) => {
-                servicesContainer.appendChild(createServiceCard(service));
-            });
-
-            if (!services.length) {
-                servicesContainer.innerHTML = `
-                    <div class="link disabled">
-                        <i class="fas fa-circle-exclamation"></i>
-                        <span>No services returned</span>
-                        <small>Check the status API endpoint</small>
-                    </div>
-                `;
-            }
-        }
-    } catch (error) {
-        console.error("Failed to load status page:", error);
-
-        setPill(overallStatus, "unknown", "Unknown");
-
-        if (servicesOnline) {
-            servicesOnline.textContent = "Unknown";
-        }
-
-        if (servicesProtected) {
-            servicesProtected.textContent = "Unknown";
-        }
-
-        if (servicesOffline) {
-            servicesOffline.textContent = "Unknown";
-        }
-
-        if (lastChecked) {
-            lastChecked.textContent = "Failed to check";
-        }
-
-        if (servicesContainer) {
-            servicesContainer.innerHTML = `
-                <div class="link disabled">
-                    <i class="fas fa-triangle-exclamation"></i>
-                    <span>Status unavailable</span>
-                    <small>Unable to reach the portal status endpoint</small>
-                </div>
-            `;
-        }
-    }
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-    loadStatusPage();
+    document.addEventListener('portal:status',event=>{
+        const {data,services,error}=event.detail;
+        const states=new Map(services.filter(s=>KNOWN_STATUS_KEYS.includes(s.key)).map(s=>[s.key,normaliseStatus(s.status)[0]]));
+        const totals={online:0,protected:0,offline:0,unknown:0};
+        KNOWN_STATUS_KEYS.forEach(key=>totals[states.get(key) || 'unknown']++);
+        Object.entries(counts).forEach(([state,element])=>{if(element)element.textContent=String(totals[state]);});
+        if (error || totals.unknown) setOverall('unknown','Unknown');
+        else if (totals.offline) setOverall('offline','Degraded');
+        else if (totals.protected) setOverall('protected','Protected checks present');
+        else setOverall('online','Public checks OK');
+        if (!error && totals.offline) setOverall('offline','Degraded');
+        const checked=document.getElementById('last-checked');
+        const timestamp=data?.checked_at || data?.checkedAt;
+        const date=timestamp?new Date(timestamp):null;
+        checked.textContent=error?'Status unavailable':date && !Number.isNaN(date.getTime())?new Intl.DateTimeFormat(undefined,{dateStyle:'medium',timeStyle:'short'}).format(date):'Unknown';
+        document.getElementById('status-error').hidden=!error;
+        refresh.disabled=false;
+    });
+    refresh?.addEventListener('click',()=>{
+        refresh.disabled=true;
+        setOverall('pending','Checking');
+        refreshPortalStatus();
+    });
 });

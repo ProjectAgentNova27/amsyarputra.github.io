@@ -7,20 +7,24 @@
     <title>404 | Amsyar Putra</title>
 
     <meta name="description" content="Page not found.">
-    <meta name="theme-color" content="#0b0f16">
+    <meta name="theme-color" content="#111317">
 
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png">
     <link rel="apple-touch-icon" href="/favicon.png">
 
-    <link rel="preload" href="/style/background.webp" as="image">
-    <link rel="preload" href="/style/site.css" as="style">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="/style/site.css">
+    <link rel="stylesheet" href="/style/site.css?v=portal-20261009">
+    <script src="/script/theme.js?v=portal-20261009"></script>
 </head>
 
 <body>
-    <main class="container">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell header-inner">
+<a class="brand" href="/" aria-label="Amsyar Putra home"><span class="brand-mark">ap<span>.</span></span><span>Amsyar Putra<small>TECH PORTAL</small></span></a>
+<nav id="site-nav" aria-label="Main navigation"><a href="/#applications">Applications</a><a href="/status.html">System status</a><a href="/vpn.html">Private access</a><a href="mailto:work@amsyarputra.net" class="nav-contact">Get in touch <svg class="icon " aria-hidden="true"><use href="/assets/icons.svg#arrow-up-right"></use></svg></a></nav>
+<div class="header-actions"><button class="icon-button" data-open-search data-enhancement title="Search applications" aria-label="Search applications"><svg class="icon " aria-hidden="true"><use href="/assets/icons.svg#search"></use></svg></button><button class="icon-button" data-theme-toggle data-enhancement title="Appearance" aria-label="Appearance"><svg class="icon " aria-hidden="true"><use href="/assets/icons.svg#laptop"></use></svg></button><button class="icon-button menu-button" data-menu-toggle data-enhancement title="Open navigation" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav"><svg class="icon " aria-hidden="true"><use href="/assets/icons.svg#menu"></use></svg></button></div>
+</div></header>
+    <main class="container" id="main">
         <h1>404</h1>
         <p class="tagline">PAGE NOT FOUND</p>
 
@@ -33,39 +37,36 @@
 
             <div class="links">
                 <a href="/" class="link">
-                    <i class="fas fa-house"></i>
+                    <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#house"></use></svg>
                     <span>Home</span>
                     <small>Return to the public portal</small>
                 </a>
 
                 <a href="/status.html" class="link">
-                    <i class="fas fa-chart-simple"></i>
+                    <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#chart-no-axes-combined"></use></svg>
                     <span>Status</span>
                     <small>Check portal hostname status</small>
                 </a>
 
                 <a href="/privacy.html" class="link">
-                    <i class="fas fa-user-shield"></i>
+                    <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#shield-check"></use></svg>
                     <span>Privacy</span>
                     <small>View privacy information</small>
                 </a>
 
                 <a href="https://github.com/ProjectAgentNova27" class="link" target="_blank" rel="noopener noreferrer">
-                    <i class="fab fa-github"></i>
+                    <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#external-link"></use></svg>
                     <span>GitHub</span>
                     <small>View public repositories</small>
                 </a>
             </div>
         </section>
 
-        <footer>
-            © <span id="year"></span> Amsyar Putra ·
-            <a href="/">Home</a> ·
-            <a href="/privacy.html">Privacy</a>
-        </footer>
-    </main>
 
-    <script src="/script/main.js" defer></script>
+    </main>
+<footer class="site-footer shell"><div><a class="footer-brand" href="/">Amsyar Putra<span>.</span></a><p>A personal corner of the internet, built around useful tools.</p></div><nav aria-label="Footer"><a href="/status.html">Status</a><a href="/privacy.html">Privacy</a><a href="/vpn.html">Private access</a><a href="mailto:work@amsyarputra.net">Contact <svg class="icon " aria-hidden="true"><use href="/assets/icons.svg#arrow-up-right"></use></svg></a></nav><div class="footer-bottom"><span>&copy; <span id="year">2026</span> Amsyar Putra</span><a href="https://github.com/ProjectAgentNova27" target="_blank" rel="noopener noreferrer">GitHub <svg class="icon " aria-hidden="true"><use href="/assets/icons.svg#arrow-up-right"></use></svg></a></div></footer>
+
+    <script src="/script/main.js?v=portal-20261009" defer></script>
 </body>
 
 </html>

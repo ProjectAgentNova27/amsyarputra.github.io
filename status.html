@@ -1,182 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Status | Amsyar Putra</title>
-
-    <meta name="description"
-        content="Hostname reachability for Amsyar Putra's website, public Emulator, Mini Booth and home portal services.">
-    <meta name="theme-color" content="#0b0f16">
-
-    <link rel="canonical" href="https://amsyarputra.net/status.html">
-    <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png">
-    <link rel="apple-touch-icon" href="/favicon.png">
-
-    <link rel="preload" href="/style/background.webp" as="image">
-    <link rel="preload" href="/style/site.css" as="style">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="/style/site.css">
-</head>
-
-<body>
-    <main class="container">
-        <h1>Status</h1>
-        <p class="tagline">PORTAL HEALTH</p>
-
-        <p class="intro">
-            Live reachability status for the public website and selected home portal services.
-            Protected means the hostname is reachable but guarded by Cloudflare Access or authentication.
-            These checks do not verify authenticated backend health or whether an individual game runs.
-            Amsyar Lab requires Cloudflare Access. A protected result confirms the login gate is reachable, not the health of processing behind it.
-            Mini Booth uses status key booth; Unknown means the API has not supplied a result, not that the photobooth is offline.
-        </p>
-
-        <section class="card">
-            <h2 class="section-title">Overview</h2>
-
-            <div class="links">
-                <div class="link disabled">
-                    <i class="fas fa-signal"></i>
-                    <span>Overall Status</span>
-                    <small>
-                        Portal health
-                        <span id="overall-status" class="status-pill pending">Checking</span>
-                    </small>
-                </div>
-
-                <div class="link disabled">
-                    <i class="fas fa-circle-check"></i>
-                    <span>Online</span>
-                    <small>
-                        Publicly reachable
-                        <span id="services-online" class="status-pill pending">Checking</span>
-                    </small>
-                </div>
-
-                <div class="link disabled">
-                    <i class="fas fa-shield-halved"></i>
-                    <span>Protected</span>
-                    <small>
-                        Reachable but access-protected
-                        <span id="services-protected" class="status-pill pending">Checking</span>
-                    </small>
-                </div>
-
-                <div class="link disabled">
-                    <i class="fas fa-circle-xmark"></i>
-                    <span>Offline</span>
-                    <small>
-                        Failed or unreachable
-                        <span id="services-offline" class="status-pill pending">Checking</span>
-                    </small>
-                </div>
-
-                <div class="link disabled">
-                    <i class="fas fa-clock"></i>
-                    <span>Last Checked</span>
-                    <small id="last-checked">Checking</small>
-                </div>
-            </div>
-        </section>
-
-        <section class="card">
-            <h2 class="section-title">Services</h2>
-
-            <div class="links" id="status-services">
-                <div class="link disabled">
-                    <i class="fas fa-spinner fa-spin"></i>
-                    <span>Loading</span>
-                    <small>Checking service status</small>
-                </div>
-            </div>
-        </section>
-
-        <section class="card">
-            <h2 class="section-title">Status Meaning</h2>
-
-            <div class="links">
-                <div class="link disabled">
-                    <i class="fas fa-circle-check"></i>
-                    <span>Online</span>
-                    <small>
-                        The hostname responded normally
-                        <span class="status-pill online">Online</span>
-                    </small>
-                </div>
-
-                <div class="link disabled">
-                    <i class="fas fa-shield-halved"></i>
-                    <span>Protected</span>
-                    <small>
-                        Cloudflare Access or login is blocking public access
-                        <span class="status-pill protected">Protected</span>
-                    </small>
-                </div>
-
-                <div class="link disabled">
-                    <i class="fas fa-circle-xmark"></i>
-                    <span>Offline</span>
-                    <small>
-                        Hostname check failed; the cause is not yet confirmed
-                        <span class="status-pill offline">Offline</span>
-                    </small>
-                </div>
-
-                <div class="link disabled">
-                    <i class="fas fa-circle-question"></i>
-                    <span>Unknown</span>
-                    <small>
-                        Status API could not be read
-                        <span class="status-pill unknown">Unknown</span>
-                    </small>
-                </div>
-            </div>
-        </section>
-
-        <section class="card">
-            <h2 class="section-title">Useful Links</h2>
-
-            <div class="links">
-                <a href="/" class="link">
-                    <i class="fas fa-house"></i>
-                    <span>Home</span>
-                    <small>Return to homepage</small>
-                </a>
-
-                <a href="https://status-api.amsyarputra.net/status.json" class="link" target="_blank"
-                    rel="noopener noreferrer">
-                    <i class="fas fa-code"></i>
-                    <span>Status API</span>
-                    <small>View raw JSON status</small>
-                </a>
-
-                <a href="/.well-known/portal-status" class="link" target="_blank" rel="noopener noreferrer">
-                    <i class="fas fa-network-wired"></i>
-                    <span>Portal Status Endpoint</span>
-                    <small>Well-known forwarded status endpoint</small>
-                </a>
-
-                <a href="/.well-known/api-catalog" class="link" target="_blank" rel="noopener noreferrer">
-                    <i class="fas fa-diagram-project"></i>
-                    <span>API Catalog</span>
-                    <small>Discovery metadata</small>
-                </a>
-            </div>
-        </section>
-
-        <footer>
-            © <span id="year"></span> Amsyar Putra ·
-            <a href="/">Home</a> ·
-            <a href="/privacy.html">Privacy</a> ·
-            <a href="/vpn.html">VPN Guide</a>
-        </footer>
-    </main>
-
-    <script src="/script/main.js" defer></script>
-    <script src="/script/status-page.js" defer></script>
-</body>
-
-</html>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Status | Amsyar Putra</title><meta name="description" content="Hostname reachability for Amsyar Putra's public applications and selected protected services.">
+<meta name="theme-color" content="#111317"><link rel="canonical" href="https://amsyarputra.net/status.html">
+<link rel="icon" type="image/png" sizes="512x512" href="/favicon.png"><link rel="apple-touch-icon" href="/favicon.png">
+<link rel="stylesheet" href="/style/site.css?v=portal-20261009"><script src="/script/theme.js?v=portal-20261009"></script></head>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell header-inner">
+<a class="brand" href="/" aria-label="Amsyar Putra home"><span class="brand-mark">ap<span>.</span></span><span>Amsyar Putra<small>TECH PORTAL</small></span></a>
+<nav id="site-nav" aria-label="Main navigation"><a href="/#applications">Applications</a><a href="/status.html" aria-current="page">System status</a><a href="/vpn.html">Private access</a><a href="mailto:work@amsyarputra.net" class="nav-contact">Get in touch <svg class="icon " aria-hidden="true"><use href="/assets/icons.svg#arrow-up-right"></use></svg></a></nav>
+<div class="header-actions"><button class="icon-button" data-open-search data-enhancement title="Search applications" aria-label="Search applications"><svg class="icon " aria-hidden="true"><use href="/assets/icons.svg#search"></use></svg></button><button class="icon-button" data-theme-toggle data-enhancement title="Appearance" aria-label="Appearance"><svg class="icon " aria-hidden="true"><use href="/assets/icons.svg#laptop"></use></svg></button><button class="icon-button menu-button" data-menu-toggle data-enhancement title="Open navigation" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav"><svg class="icon " aria-hidden="true"><use href="/assets/icons.svg#menu"></use></svg></button></div>
+</div></header>
+<main class="container" id="main"><p class="tagline">SYSTEM STATUS</p><h1>Signals, not assumptions.</h1>
+<p class="intro">Live hostname reachability for the public website and selected services. Protected means an authentication gate responded, not that the application behind it is healthy. These checks do not verify authenticated processing or whether an individual game runs. Missing or unverified results remain Unknown.</p>
+<section class="card"><div class="refresh-heading"><h2 class="section-title">At a glance</h2><button id="refresh-status" class="icon-button" data-enhancement aria-label="Refresh status" title="Refresh status"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#refresh-cw"></use></svg></button></div>
+<div class="info-strip"><div><span class="info-label">Overall reachability</span><span class="status-pill unknown" id="overall-status">Unknown</span></div><div><span class="info-label">Checked by the API</span><strong id="last-checked">Unknown</strong></div><div><span class="info-label">Source</span><a href="https://status-api.amsyarputra.net/status.json" target="_blank" rel="noopener noreferrer">Status API <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#arrow-up-right"></use></svg></a></div></div>
+<div class="links"><div class="link disabled"><span>Online</span><strong id="services-online">Unknown</strong><small>Public hostname responded</small></div><div class="link disabled"><span>Protected</span><strong id="services-protected">Unknown</strong><small>Login gate responded; backend unverified</small></div><div class="link disabled"><span>Offline</span><strong id="services-offline">Unknown</strong><small>Check failed; cause not confirmed</small></div><div class="link disabled"><span>Unknown</span><strong id="services-unknown">22</strong><small>Missing or unreadable status</small></div></div>
+<p id="status-error" class="warning" hidden>Status is temporarily unavailable. All listed destinations remain accessible below; their current health is unknown.</p>
+<noscript><p class="noscript-note">Live status needs JavaScript. Destinations below remain available with Unknown status.</p></noscript>
+</section>
+<section class="card"><h2 class="section-title">All destinations</h2><div class="links" id="status-services"><a class="link" href="https://amsyarputra.net/" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#globe"></use></svg><span>Public Website</span><small>This public portal.<br>Public destination</small><span class="status-pill unknown" data-status-key="website">Unknown</span></a>
+<a class="link" href="https://docs.amsyarputra.net" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#scan-line"></use></svg><span>Document Studio</span><small>On-device scanning, recoverable drafts and offline document export.<br>Public destination</small><span class="status-pill unknown" data-status-key="docs">Unknown</span></a>
+<a class="link" href="https://photo.amsyarputra.net" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#image"></use></svg><span>Mini Photo</span><small>Local photo editing and photographic metadata frames for iPhone and iPad.<br>Public destination</small><span class="status-pill unknown" data-status-key="photo">Unknown</span></a>
+<a class="link" href="https://booth.amsyarputra.net" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#camera"></use></svg><span>Mini Booth</span><small>Photo strips, physical print layouts and an approved remote shutter.<br>Public destination</small><span class="status-pill unknown" data-status-key="booth">Unknown</span></a>
+<a class="link" href="https://emu.amsyarputra.net" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#gamepad2"></use></svg><span>Emulator</span><small>Bring your own game files. Browser-local play and progress saves.<br>Public destination</small><span class="status-pill unknown" data-status-key="emu">Unknown</span></a>
+<a class="link" href="https://lab.amsyarputra.net" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#flask-conical"></use></svg><span>Amsyar Lab</span><small>Image, media, OCR and file processing with temporary server uploads.<br>Protected access</small><span class="status-pill unknown" data-status-key="lab">Unknown</span></a>
+<a class="link" href="https://shlink.amsyarputra.net" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#link"></use></svg><span>Mini Links</span><small>Create and manage short links. Access and application authentication required.<br>Protected access</small><span class="status-pill unknown" data-status-key="shlink">Unknown</span></a>
+<a class="link" href="https://s.amsyarputra.net" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#arrow-up-right"></use></svg><span>Short Links</span><small>The public short-link redirect domain.<br>Public destination</small><span class="status-pill unknown" data-status-key="short">Unknown</span></a>
+<a class="link" href="https://tools.amsyarputra.net" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#wrench"></use></svg><span>IT Tools</span><small>Browser-based utilities for everyday technical tasks.<br>Protected access</small><span class="status-pill unknown" data-status-key="tools">Unknown</span></a>
+<a class="link" href="https://pdf.amsyarputra.net" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#file-text"></use></svg><span>BentoPDF</span><small>Browser-based PDF tools.<br>Protected access</small><span class="status-pill unknown" data-status-key="pdf">Unknown</span></a>
+<a class="link" href="https://convert.amsyarputra.net" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#arrow-left-right"></use></svg><span>ConvertX</span><small>Self-hosted file, document and media conversion.<br>Protected access</small><span class="status-pill unknown" data-status-key="convert">Unknown</span></a>
+<a class="link" href="https://drop.amsyarputra.net" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#share2"></use></svg><span>PairDrop</span><small>AirDrop-style browser file transfer.<br>Protected access</small><span class="status-pill unknown" data-status-key="drop">Unknown</span></a>
+<a class="link" href="https://paste.amsyarputra.net" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#clipboard"></use></svg><span>PrivateBin</span><small>Encrypted paste sharing.<br>Protected access</small><span class="status-pill unknown" data-status-key="paste">Unknown</span></a>
+<a class="link" href="https://news.amsyarputra.net" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#rss"></use></svg><span>FreshRSS</span><small>A self-hosted RSS and news reader.<br>Protected access</small><span class="status-pill unknown" data-status-key="news">Unknown</span></a>
+<a class="link" href="https://files.amsyarputra.net" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#folder-open"></use></svg><span>File Browser</span><small>Private file management.<br>Protected access</small><span class="status-pill unknown" data-status-key="files">Unknown</span></a>
+<a class="link" href="https://home.amsyarputra.net" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#house"></use></svg><span>Home Dashboard</span><small>The main private home portal.<br>Protected access</small><span class="status-pill unknown" data-status-key="home">Unknown</span></a>
+<a class="link" href="https://docker.amsyarputra.net" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#container"></use></svg><span>Portainer</span><small>Docker container management.<br>Protected access</small><span class="status-pill unknown" data-status-key="docker">Unknown</span></a>
+<a class="link" href="https://dns.amsyarputra.net" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#network"></use></svg><span>Technitium DNS</span><small>Private DNS administration.<br>Protected access</small><span class="status-pill unknown" data-status-key="dns">Unknown</span></a>
+<a class="link" href="https://beszel.amsyarputra.net" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#chart-no-axes-combined"></use></svg><span>Beszel</span><small>Host and container monitoring.<br>Protected access</small><span class="status-pill unknown" data-status-key="beszel">Unknown</span></a>
+<a class="link" href="https://actions.amsyarputra.net" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#mouse-pointer2"></use></svg><span>OliveTin Actions</span><small>Protected maintenance actions.<br>Protected access</small><span class="status-pill unknown" data-status-key="actions">Unknown</span></a>
+<a class="link" href="https://router.amsyarputra.net" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#wifi"></use></svg><span>Router</span><small>Private network administration.<br>Protected access</small><span class="status-pill unknown" data-status-key="router">Unknown</span></a>
+<a class="link" href="https://sunshine.amsyarputra.net" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#sun"></use></svg><span>Sunshine Admin</span><small>Game streaming host management.<br>Protected access</small><span class="status-pill unknown" data-status-key="sunshine">Unknown</span></a></div></section>
+<section class="card text-card"><h2 class="section-title">Reading the signals</h2><p>Online means the hostname responded normally. Protected means Cloudflare Access or authentication blocks public access. Offline means the hostname check failed, with the cause still unconfirmed. Unknown means the status API did not supply a usable result.</p><p>Amsyar Lab requires Cloudflare Access. A Protected result confirms only its login gate. Mini Booth uses the existing booth key; a missing result does not establish that the photobooth is offline.</p><div class="quick-links"><a href="/.well-known/portal-status" target="_blank" rel="noopener noreferrer">Portal status <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#arrow-up-right"></use></svg></a><a href="/.well-known/api-catalog" target="_blank" rel="noopener noreferrer">API catalog <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#arrow-up-right"></use></svg></a></div></section>
+</main><footer class="site-footer shell"><div><a class="footer-brand" href="/">Amsyar Putra<span>.</span></a><p>A personal corner of the internet, built around useful tools.</p></div><nav aria-label="Footer"><a href="/status.html">Status</a><a href="/privacy.html">Privacy</a><a href="/vpn.html">Private access</a><a href="mailto:work@amsyarputra.net">Contact <svg class="icon " aria-hidden="true"><use href="/assets/icons.svg#arrow-up-right"></use></svg></a></nav><div class="footer-bottom"><span>&copy; <span id="year">2026</span> Amsyar Putra</span><a href="https://github.com/ProjectAgentNova27" target="_blank" rel="noopener noreferrer">GitHub <svg class="icon " aria-hidden="true"><use href="/assets/icons.svg#arrow-up-right"></use></svg></a></div></footer><script src="/script/main.js?v=portal-20261009" defer></script><script src="/script/status.js?v=portal-20261009" defer></script><script src="/script/status-page.js?v=portal-20261009" defer></script></body></html>
