@@ -30,7 +30,7 @@ The portal status badge uses the `emu` key from the status API. Emulator does no
 require Cloudflare Access; a successful public response is checked like other
 public services.
 
-Most services below use Cloudflare Access or local authentication; Emulator, Mini Booth, Mini Photo and
+Most services below use Cloudflare Access or local authentication; Document Studio, Emulator, Mini Booth, Mini Photo and
 the short-link redirect domain are public:
 
 | URL | Service | Purpose |
@@ -41,13 +41,14 @@ the short-link redirect domain are public:
 | `https://files.amsyarputra.net` | File Browser | Web file manager |
 | `https://tools.amsyarputra.net` | IT-Tools | Browser utility tools |
 | `https://pdf.amsyarputra.net` | BentoPDF | Browser-based PDF tools |
+| `https://docs.amsyarputra.net` | Document Studio | On-device document scanner and offline document workspace |
 | `https://emu.amsyarputra.net` | Emulator | Browser retro emulation using your own local game files |
 | `https://booth.amsyarputra.net` | Mini Booth | iPhone/iPad photobooth, print layouts and approved remote shutter |
 | `https://photo.amsyarputra.net` | Mini Photo | iPhone/iPad local photo editing and metadata frames |
 | `https://lab.amsyarputra.net` | Amsyar Lab | Cloudflare Access-protected image, media, OCR and file processing |
 | `https://drop.amsyarputra.net` | PairDrop | Browser file transfer |
-| `https://shlink.amsyarputra.net` | Shlink Admin | Short-link admin UI |
-| `https://s.amsyarputra.net` | Shlink | Public short-link redirect domain |
+| `https://shlink.amsyarputra.net` | Mini Links | Access-protected short-link management with application authentication |
+| `https://s.amsyarputra.net` | Mini Links redirects | Existing public short-link redirect domain |
 | `https://convert.amsyarputra.net` | ConvertX | File, document, media, and image converter |
 | `https://news.amsyarputra.net` | FreshRSS | Self-hosted RSS/news aggregator |
 | `https://paste.amsyarputra.net` | PrivateBin | Encrypted paste sharing |
@@ -57,6 +58,34 @@ the short-link redirect domain are public:
 | `https://sunshine.amsyarputra.net` | Sunshine Admin | Game streaming host admin |
 
 ## Discovery Endpoints
+
+### Document Studio and Mini Links (9 October 2026)
+
+Document Studio is deployed via the existing Caddy gateway at docs.amsyarputra.net.
+Documents are processed locally, with recoverable temporary sessions and optional
+saved projects in browser storage. Storage can be evicted: export backups. Core
+editing/export works offline after caching; optional English OCR needs its local
+assets cached separately. No uploads or remote processing. Searchable PDF text
+layers are not implemented; physical mobile camera/share acceptance is pending.
+
+Mini Links replaced the public Shlink routes after a backed-up, verified migration
+of 1 link and 12,918 historical visit records including orphan history. Existing
+redirect semantics and encoded query strings were checked. Access protection,
+application authentication and LAN management hostname are preserved. Legacy
+Shlink/database/client remain retained until separate retirement approval.
+
+Reviewed Worker sources now live in `cloudflare/`. Deploy each file to its SAME
+existing Worker (portal-status-api and amsyar-markdown-agent), preserving bindings,
+routes, Access and secrets. GitHub Pages publication does NOT deploy Workers.
+`docs` uses /healthz; existing `shlink` and `short` keys are retained, with the public
+shortener checked through /healthz rather than its homepage redirect. Until deployed,
+a missing docs status remains Unknown. See cloudflare/README.md for verification.
+Existing sitemap/robots/security files govern the main domain only; these separate
+service subdomains do not need added main-domain sitemap entries or crawler grants.
+
+After every service addition/update, review website listings/discovery, both Worker
+inventories, and documentation; update as needed, test the changed contracts, then
+commit/push only relevant source. Verify Pages and Worker publication separately.
 
 Mini Booth is public at `https://booth.amsyarputra.net` for compatible iPhone/iPad
 browsers and Home Screen web apps. It preserves eight-shot/four-selection sessions,
@@ -129,12 +158,13 @@ Core stack:
 - File Browser
 - IT-Tools
 - BentoPDF
+- Document Studio (browser-local scanning; cached offline export and optional OCR)
 - Emulator (self-hosted EmulatorJS 4.2.3 assets; client-side emulation)
 - Amsyar Lab (Access-protected server processing; temporary files)
 - Mini Booth (iPhone/iPad; browser-local photos, physical print presets, remote shutter)
 - Mini Photo (iPhone/iPad; browser-local editing, metadata frames, optional local recovery)
 - PairDrop
-- Shlink
+- Mini Links (Python/SQLite; legacy Shlink retained for rollback)
 - ConvertX
 - FreshRSS
 - PrivateBin

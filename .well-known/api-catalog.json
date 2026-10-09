@@ -30,6 +30,11 @@
       ],
       "item": [
         {
+          "href": "https://docs.amsyarputra.net",
+          "title": "Document Studio - on-device scanning and offline document export",
+          "type": "text/html"
+        },
+        {
           "href": "https://photo.amsyarputra.net",
           "title": "Mini Photo - iPhone/iPad local photo editor and metadata frames",
           "type": "text/html"
@@ -81,7 +86,7 @@
         },
         {
           "href": "https://shlink.amsyarputra.net",
-          "title": "Shlink Admin",
+          "title": "Mini Links - protected short-link management",
           "type": "text/html"
         },
         {

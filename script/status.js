@@ -2,6 +2,7 @@ const STATUS_ENDPOINT = "https://status-api.amsyarputra.net/status.json";
 
 const KNOWN_STATUS_KEYS = [
     "website",
+    "docs",
     "home",
     "dns",
     "docker",
