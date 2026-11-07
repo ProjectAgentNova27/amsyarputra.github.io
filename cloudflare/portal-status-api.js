@@ -79,9 +79,9 @@ const SERVICES = [
   },
   {
     key: "drop",
-    name: "PairDrop",
+    name: "ap. transfer",
     url: "https://drop.amsyarputra.net",
-    description: "Browser-based AirDrop-style file transfer",
+    description: "Direct browser file transfer",
     access: "cloudflare-access"
   },
   {

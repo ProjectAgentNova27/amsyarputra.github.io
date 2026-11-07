@@ -54,7 +54,7 @@ the short-link redirect domain are public:
 | `https://booth.amsyarputra.net` | Mini Booth | iPhone/iPad photobooth, print layouts and approved remote shutter |
 | `https://photo.amsyarputra.net` | Mini Photo | iPhone/iPad local photo editing and metadata frames |
 | `https://lab.amsyarputra.net` | Amsyar Lab | Cloudflare Access-protected image, media, OCR and file processing |
-| `https://drop.amsyarputra.net` | PairDrop | Browser file transfer |
+| `https://drop.amsyarputra.net` | ap. transfer | Browser file transfer |
 | `https://shlink.amsyarputra.net` | Mini Links | Access-protected short-link management with application authentication |
 | `https://s.amsyarputra.net` | Mini Links redirects | Existing public short-link redirect domain |
 | `https://convert.amsyarputra.net` | ConvertX | File, document, media, and image converter |
@@ -171,7 +171,7 @@ Core stack:
 - Amsyar Lab (Access-protected server processing; temporary files)
 - Mini Booth (iPhone/iPad; browser-local photos, physical print presets, remote shutter)
 - Mini Photo (iPhone/iPad; browser-local editing, metadata frames, optional local recovery)
-- PairDrop
+- ap. transfer
 - Mini Links (Python/SQLite; legacy Shlink retained for rollback)
 - ConvertX
 - FreshRSS
