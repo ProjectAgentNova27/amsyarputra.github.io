@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0c1117"><meta name="robots" content="noindex,nofollow,noarchive,nosnippet"><meta name="referrer" content="no-referrer">
+<meta name="description" content="AP. QR: offline-first, private QR generator.">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="AP. QR">
+<title>AP. QR — Offline QR Generator</title>
+<link rel="icon" href="/favicon.png" type="image/png"><link rel="apple-touch-icon" href="/favicon.png">
+<link rel="manifest" href="./manifest.webmanifest"><link rel="stylesheet" href="./styles.css">
+<script src="./vendor/qrcode.light.min.js" defer></script><script type="module" src="./app.js"></script>
+</head>
+<body>
+<div class="app-shell">
+<header class="topbar"><div class="brand"><span class="brand-symbol" aria-hidden="true">ap<span>.</span></span><div><strong>AP. QR</strong><small>OFFLINE QR GENERATOR</small></div></div><span id="offline-status" class="status-tag pending" role="status">Preparing offline access</span></header>
+<main>
+<section class="intro"><p class="eyebrow">LOCAL BY DESIGN</p><h1>Text in. QR out.</h1><p>Paste your text. Multiple paragraphs stay together when they fit, and longer notes split cleanly into scannable QR codes.</p></section>
+<section class="panel input-panel"><div class="section-head"><div><h2>Your text</h2><p>Preserved exactly as entered — no rewriting or AI.</p></div><span class="small-tag">800 characters per QR</span></div>
+<label class="sr-only" for="input-text">Text to encode</label><textarea id="input-text" placeholder="Paste or type your text here..." spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" rows="11"></textarea>
+<div class="counter"><span id="input-count">0 characters</span><span id="estimated-count">0 QR codes</span></div>
+<div class="actions"><button id="generate" class="btn primary" type="button">Generate QR codes</button><button id="paste" class="btn secondary" type="button">Paste</button><button id="clear" class="btn ghost" type="button">Clear</button></div>
+<p class="input-hint">Paragraph first, then sentence, then word boundaries. No text is intentionally cut off or discarded.</p></section>
+<section id="results" class="results hidden"><div class="results-head"><div><h2>Your QR codes</h2><p id="result-summary"></p></div><div class="actions compact"><button id="share-all" class="btn secondary" type="button">Share all</button><button id="save-all" class="btn secondary" type="button">Save all (.zip)</button></div></div><div id="qr-list" class="qr-list"></div></section>
+<p id="notice" class="notice hidden" role="status" aria-live="polite"></p>
+<details class="howto"><summary>Install for offline use</summary><p><strong>iPhone:</strong> In Safari, tap Share, then <em>Add to Home Screen</em> and enable <em>Open as Web App</em>. <strong>Android:</strong> choose <em>Install app</em> or <em>Add to Home screen</em> from the browser menu.</p><p>Open online once and allow the offline assets to finish caching. After that QR creation does not require internet. If the browser removes cached files, reopen it online.</p></details>
+</main>
+<footer><strong>AP. QR</strong><span>Processing stays on this device. No account, analytics, AI or text uploads.</span><span class="footnote">Use with workplace information only when permitted by your organisation.</span></footer>
+</div></body></html>

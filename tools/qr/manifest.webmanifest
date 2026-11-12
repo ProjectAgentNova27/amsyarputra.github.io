@@ -1,0 +1,19 @@
+{
+  "name": "AP. QR — Offline QR Generator",
+  "short_name": "AP. QR",
+  "description": "Private offline-first QR generation with lossless text splitting.",
+  "id": "/tools/qr/",
+  "start_url": "/tools/qr/",
+  "scope": "/tools/qr/",
+  "display": "standalone",
+  "background_color": "#0c1117",
+  "theme_color": "#0c1117",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
