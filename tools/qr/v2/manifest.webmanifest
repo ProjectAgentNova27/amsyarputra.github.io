@@ -1,0 +1,15 @@
+{
+  "name": "AP. QR",
+  "short_name": "AP. QR",
+  "description": "Generate QR codes on your device with offline support.",
+  "id": "/tools/qr/",
+  "start_url": "/tools/qr/",
+  "scope": "/tools/qr/",
+  "display": "standalone",
+  "background_color": "#111317",
+  "theme_color": "#111317",
+  "icons": [
+    { "src": "./icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "./icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

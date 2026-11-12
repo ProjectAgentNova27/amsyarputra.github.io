@@ -1,28 +1,102 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0c1117"><meta name="robots" content="noindex,nofollow,noarchive,nosnippet"><meta name="referrer" content="no-referrer">
-<meta name="description" content="AP. QR: offline-first, private QR generator.">
-<meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="AP. QR">
-<title>AP. QR — Offline QR Generator</title>
-<link rel="icon" href="/favicon.png" type="image/png"><link rel="apple-touch-icon" href="/favicon.png">
-<link rel="manifest" href="./manifest.webmanifest"><link rel="stylesheet" href="./styles.css">
-<script src="./vendor/qrcode.light.min.js" defer></script><script type="module" src="./app.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#111317">
+  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+  <meta name="referrer" content="no-referrer">
+  <meta name="ap-qr-release" content="2">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="AP. QR">
+  <title>AP. QR</title>
+  <link rel="icon" href="/assets/brand/ap.ico">
+  <link rel="apple-touch-icon" href="./v2/apple-touch-icon.png">
+  <link rel="manifest" href="./v2/manifest.webmanifest">
+  <link rel="stylesheet" href="./v2/styles.css">
+  <script src="./v2/theme.js"></script>
+  <script src="./vendor/qrcode.light.min.js" defer></script>
+  <script type="module" src="./v2/app.js"></script>
 </head>
 <body>
-<div class="app-shell">
-<header class="topbar"><div class="brand"><span class="brand-symbol" aria-hidden="true">ap<span>.</span></span><div><strong>AP. QR</strong><small>OFFLINE QR GENERATOR</small></div></div><span id="offline-status" class="status-tag pending" role="status">Preparing offline access</span></header>
-<main>
-<section class="intro"><p class="eyebrow">LOCAL BY DESIGN</p><h1>Text in. QR out.</h1><p>Paste your text. Multiple paragraphs stay together when they fit, and longer notes split cleanly into scannable QR codes.</p></section>
-<section class="panel input-panel"><div class="section-head"><div><h2>Your text</h2><p>Preserved exactly as entered — no rewriting or AI.</p></div><span class="small-tag">800 characters per QR</span></div>
-<label class="sr-only" for="input-text">Text to encode</label><textarea id="input-text" placeholder="Paste or type your text here..." spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" rows="11"></textarea>
-<div class="counter"><span id="input-count">0 characters</span><span id="estimated-count">0 QR codes</span></div>
-<div class="actions"><button id="generate" class="btn primary" type="button">Generate QR codes</button><button id="paste" class="btn secondary" type="button">Paste</button><button id="clear" class="btn ghost" type="button">Clear</button></div>
-<p class="input-hint">Paragraph first, then sentence, then word boundaries. No text is intentionally cut off or discarded.</p></section>
-<section id="results" class="results hidden"><div class="results-head"><div><h2>Your QR codes</h2><p id="result-summary"></p></div><div class="actions compact"><button id="share-all" class="btn secondary" type="button">Share all</button><button id="save-all" class="btn secondary" type="button">Save all (.zip)</button></div></div><div id="qr-list" class="qr-list"></div></section>
-<p id="notice" class="notice hidden" role="status" aria-live="polite"></p>
-<details class="howto"><summary>Install for offline use</summary><p><strong>iPhone:</strong> In Safari, tap Share, then <em>Add to Home Screen</em> and enable <em>Open as Web App</em>. <strong>Android:</strong> choose <em>Install app</em> or <em>Add to Home screen</em> from the browser menu.</p><p>Open online once and allow the offline assets to finish caching. After that QR creation does not require internet. If the browser removes cached files, reopen it online.</p></details>
-</main>
-<footer><strong>AP. QR</strong><span>Processing stays on this device. No account, analytics, AI or text uploads.</span><span class="footnote">Use with workplace information only when permitted by your organisation.</span></footer>
-</div></body></html>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <div class="brand">
+        <span class="wordmark" aria-hidden="true">
+          <img class="mark-dark" src="/assets/brand/ap-on-dark.svg" alt="" width="49" height="49">
+          <img class="mark-light" src="/assets/brand/ap-on-light.svg" alt="" width="49" height="49">
+        </span>
+        <h1><span class="sr-only">AP. </span>QR</h1>
+      </div>
+      <button class="icon-button" id="appearance" type="button" hidden aria-label="Appearance">
+        <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#laptop"></use></svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="editor" aria-labelledby="editor-title">
+      <div class="editor-head">
+        <h2 id="editor-title"><label for="input-text">Text to encode</label></h2>
+        <div class="editor-actions">
+          <button id="paste" class="button quiet" type="button"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#clipboard"></use></svg>Paste</button>
+          <button id="clear" class="button quiet" type="button">Clear</button>
+        </div>
+      </div>
+      <textarea id="input-text" rows="6" placeholder="Paste or type your text" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" aria-describedby="qr-limit"></textarea>
+      <div class="editor-meta">
+        <span id="input-count">0 characters</span>
+        <span id="qr-limit">Up to 800 per QR</span>
+      </div>
+      <div class="generate-row">
+        <button id="generate" class="button primary" type="button">
+          <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#scan-line"></use></svg>
+          <span id="generate-label">Generate QR</span>
+        </button>
+        <span class="local-note"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#shield-check"></use></svg>Processed on this device</span>
+      </div>
+      <p id="editor-notice" class="notice" role="status"></p>
+      <noscript><p>Enable JavaScript to generate QR codes on this device.</p></noscript>
+    </section>
+
+    <section id="results" class="results" aria-labelledby="results-title" hidden>
+      <div class="results-head">
+        <div>
+          <h2 id="results-title" tabindex="-1">QR results</h2>
+          <p id="result-summary"></p>
+        </div>
+        <div id="batch-actions" class="batch-actions" hidden>
+          <button id="share-all" class="button secondary" type="button"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#share2"></use></svg>Share all</button>
+          <button id="save-all" class="button secondary" type="button"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#download"></use></svg>Save ZIP</button>
+        </div>
+      </div>
+      <p id="batch-notice" class="notice" role="status"></p>
+      <div id="qr-list" class="qr-list"></div>
+    </section>
+    <template id="qr-card">
+      <article class="qr-card">
+        <div class="qr-heading"><h3></h3><span class="qr-count"></span></div>
+        <img class="qr-image" width="256" height="256" loading="lazy" alt="">
+        <div class="card-actions">
+          <button type="button" class="button secondary" data-action="save"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#download"></use></svg>Save PNG</button>
+          <button type="button" class="button secondary" data-action="share"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#share2"></use></svg>Share</button>
+          <button type="button" class="button quiet" data-action="copy">Copy text</button>
+        </div>
+        <p class="notice" role="status"></p>
+      </article>
+    </template>
+
+    <footer class="app-footer">
+      <div class="footer-line">
+        <details>
+          <summary>Install app</summary>
+          <p>On iPhone, open Safari’s Share menu, choose Add to Home Screen and enable Open as Web App if offered. On Android, choose Install app or Add to Home screen from the browser menu.</p>
+          <p>Open online until the app shows Offline ready. If your browser removes cached files, reopen online.</p>
+        </details>
+        <span id="offline-status" class="offline-status" role="status">Setting up offline access</span>
+      </div>
+    </footer>
+  </main>
+</body>
+</html>
