@@ -1,9 +1,9 @@
 /* Cache the complete static release. Let open clients finish before activation. */
-const CACHE_NAME = 'ap-qr-static-v2';
+const CACHE_NAME = 'ap-qr-static-v2.1';
 const scope = self.registration.scope;
 const shell = new URL('./index.html', scope).href;
 const assets = [
-    './v2/app.js', './v2/splitter.js', './v2/editor.js', './v2/zip.js',
+    './v2.1/app.js', './v2.1/splitter.js', './v2/editor.js', './v2/zip.js',
     './v2/theme.js', './v2/styles.css', './v2/manifest.webmanifest',
     './v2/icon-192.png', './v2/icon-512.png', './v2/apple-touch-icon.png',
     './vendor/qrcode.light.min.js',
@@ -14,7 +14,7 @@ const assetSet = new Set(assets);
 
 async function cacheRelease() {
     const response = await fetch(shell, { cache: 'reload', redirect: 'error' });
-    if (!response.ok || !(await response.clone().text()).includes('<meta name="ap-qr-release" content="2">')) {
+    if (!response.ok || !(await response.clone().text()).includes('<meta name="ap-qr-release" content="2.1">')) {
         throw new Error('AP. QR release assets are still publishing.');
     }
     const cache = await caches.open(CACHE_NAME);
@@ -24,13 +24,9 @@ async function cacheRelease() {
 
 self.addEventListener('install', event => event.waitUntil(cacheRelease()));
 
-self.addEventListener('activate', event => {
-    event.waitUntil((async () => {
-        const keys = await caches.keys();
-        await Promise.all(keys.filter(key => key.startsWith('ap-qr-static-') && key !== CACHE_NAME).map(key => caches.delete(key)));
-        await self.clients.claim();
-    })());
-});
+// Keep the prior release's cache available for rollback. The worker waits
+// for existing controlled clients to close before this activation runs.
+self.addEventListener('activate', event => event.waitUntil(self.clients.claim()));
 
 async function cached(url) {
     if (!(await caches.has(CACHE_NAME))) return undefined;
@@ -60,8 +56,8 @@ async function offlineReady() {
 }
 
 self.addEventListener('message', event => {
-    if (event.data !== 'qr-2-status' || !event.ports[0]) return;
+    if (event.data !== 'qr-2.1-status' || !event.ports[0]) return;
     event.waitUntil((async () => {
-        event.ports[0].postMessage(await offlineReady() ? 'qr-2-ready' : 'qr-2-incomplete');
+        event.ports[0].postMessage(await offlineReady() ? 'qr-2.1-ready' : 'qr-2.1-incomplete');
     })());
 });
