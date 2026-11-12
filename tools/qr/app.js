@@ -22,14 +22,15 @@ function buildChunks(original){
  return output;
 }
 async function pngFromSvg(svg){
- const source=URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(svg)],{type:'image/svg+xml;charset=utf-8'}));
+ const source='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(new XMLSerializer().serializeToString(svg));
  try{
   const image=await new Promise((resolve,reject)=>{const img=new Image();img.onload=()=>resolve(img);img.onerror=()=>reject(new Error('Unable to render QR image.'));img.src=source;});
   const canvas=document.createElement('canvas');canvas.width=1024;canvas.height=1024;const ctx=canvas.getContext('2d',{alpha:false});if(!ctx)throw new Error('Canvas not supported.');
   ctx.imageSmoothingEnabled=false;ctx.fillStyle='#ffffff';ctx.fillRect(0,0,1024,1024);ctx.drawImage(image,0,0,1024,1024);
   const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));if(!blob||!blob.size)throw new Error('PNG export failed.');return blob;
- }finally{URL.revokeObjectURL(source);}
+ }finally{/* data SVG image — no object URL to revoke */}
 }
+function blobToDataUrl(blob){return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=()=>reject(new Error('Could not display the generated PNG.'));r.readAsDataURL(blob);});}
 function fileName(i,n){const width=Math.max(2,String(n).length);return 'AP_QR_'+String(i+1).padStart(width,'0')+'_of_'+n+'.png';}
 function saveBlob(blob,name){const href=URL.createObjectURL(blob),link=document.createElement('a');link.download=name;link.href=href;document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(href),20000);}
 function render(){
@@ -56,7 +57,7 @@ async function generate(){
   for(const chunk of chunks){
    await new Promise(resolve=>requestAnimationFrame(resolve));
    const blob=await pngFromSvg(qrSvg(chunk));
-   staged.push({text:chunk,blob,url:URL.createObjectURL(blob)});
+   staged.push({text:chunk,blob,url:await blobToDataUrl(blob)});
   }
   if(staged.map(x=>x.text).join('')!==text||staged.some(x=>countCharacters(x.text)>MAX_QR_CHARACTERS))throw new Error('Final text verification failed.');
   generated=staged;render();message('Generated '+generated.length+' QR code'+(generated.length===1?'':'s')+' locally. No text was uploaded.');
