@@ -1,0 +1,9 @@
+.app-version {
+    padding: 1px 5px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--muted);
+    font-size: .6875rem;
+    line-height: 1.35;
+    white-space: nowrap;
+}

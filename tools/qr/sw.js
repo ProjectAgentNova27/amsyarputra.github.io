@@ -1,10 +1,10 @@
 /* Cache the complete static release. Let open clients finish before activation. */
-const CACHE_NAME = 'ap-qr-static-v2.1';
+const CACHE_NAME = 'ap-qr-static-v2.1.1';
 const scope = self.registration.scope;
 const shell = new URL('./index.html', scope).href;
 const assets = [
     './v2.1/app.js', './v2.1/splitter.js', './v2/editor.js', './v2/zip.js',
-    './v2/theme.js', './v2/styles.css', './v2/manifest.webmanifest',
+    './v2/theme.js', './v2/styles.css', './v2.1.1/version.css', './v2/manifest.webmanifest',
     './v2/icon-192.png', './v2/icon-512.png', './v2/apple-touch-icon.png',
     './vendor/qrcode.light.min.js',
     '/assets/brand/ap-on-dark.svg', '/assets/brand/ap-on-light.svg', '/assets/brand/ap.ico',
@@ -14,7 +14,7 @@ const assetSet = new Set(assets);
 
 async function cacheRelease() {
     const response = await fetch(shell, { cache: 'reload', redirect: 'error' });
-    if (!response.ok || !(await response.clone().text()).includes('<meta name="ap-qr-release" content="2.1">')) {
+    if (!response.ok || !(await response.clone().text()).includes('<meta name="ap-qr-release" content="2.1.1">')) {
         throw new Error('AP. QR release assets are still publishing.');
     }
     const cache = await caches.open(CACHE_NAME);

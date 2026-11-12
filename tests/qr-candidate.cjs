@@ -11,9 +11,9 @@ const sharp = require('sharp');
 const JSZip = require('jszip');
 
 const root = path.resolve(__dirname, '..');
-const baseline = '89b20e42deff4c93d39564573c084aafe304e378';
-const priorCache = 'ap-qr-static-v2';
-const candidateCache = 'ap-qr-static-v2.1';
+const baseline = '56a1be0e35a5f08195f94f10d31f2c5dc4aca3a7';
+const priorCache = 'ap-qr-static-v2.1';
+const candidateCache = 'ap-qr-static-v2.1.1';
 const screenshotDir = process.env.SCREENSHOT_DIR;
 const capturing = new WeakSet();
 const single = 'Workshop handover\n\nThe demo kits are on shelf B.\nLabel the spare cables before packing.\n\nTomorrow\nSet out four practice boards and test the projector before the practice session.';
@@ -250,6 +250,7 @@ async function browserSuite(browser, engine, url, split) {
     assert.equal(await page.locator('html').getAttribute('data-theme'), 'dark');
     assert.equal(await page.locator('#appearance').getAttribute('aria-label'), 'Appearance: system. Switch to light');
     await layout(page);
+    await assertVersionLabel(page);
     if (isWebKit) await screenshot(page, 'A-iphone-dark-empty.png');
     await page.locator('#generate').click();
     await page.getByText('Paste or type some text first.', { exact: true }).waitFor();
@@ -334,6 +335,7 @@ async function browserSuite(browser, engine, url, split) {
 
     await page.getByRole('button', { name: /Appearance/ }).click();
     assert.equal(await page.locator('html').getAttribute('data-theme'), 'light');
+    await assertVersionLabel(page);
     if (isWebKit) {
         await generate(page, single);
         await screenshot(page, 'D-iphone-light.png');
@@ -348,6 +350,7 @@ async function browserSuite(browser, engine, url, split) {
     try {
         await coldPage.goto(url);
         await waitOffline(coldPage);
+        await assertVersionLabel(coldPage);
         const offlinePreviews = await generate(coldPage, single);
         assert.equal(await decode(offlinePreviews[0]), single);
     } finally {
@@ -359,7 +362,7 @@ async function browserSuite(browser, engine, url, split) {
         return { keys, entries: entries.map(entry => entry.url) };
     });
     assert.deepEqual(cache.keys, [candidateCache]);
-    assert.equal(cache.entries.length, 17);
+    assert.equal(cache.entries.length, 18);
     assert.ok(cache.entries.every(entry => /^http:\/\/127\.0\.0\.1:\d+\/(tools\/qr|assets)\//.test(entry)));
     assert.ok(requests.slice(requestCount).every(([method, target]) => method === 'GET' &&
         /^\/(tools\/qr|assets)\/[a-z0-9/_.-]*$/i.test(target)), 'only static GET requests');
@@ -378,10 +381,20 @@ async function browserSuite(browser, engine, url, split) {
     for (const width of [320, 390, 440, 768, 1440]) {
         await wide.setViewportSize({ width, height: 1000 });
         await layout(wide);
+        await assertVersionLabel(wide);
     }
     if (isWebKit) await screenshot(wide, 'E-desktop-dark.png');
     await desktop.close();
     console.log(engine + ': 320/390/440/768/1440px, dark/light, reduced motion PASS');
+}
+
+async function assertVersionLabel(page) {
+    const release = await page.locator('meta[name=ap-qr-release]').getAttribute('content');
+    assert.equal(release, '2.1.1');
+    const label = page.locator('.app-version');
+    assert.ok(await label.isVisible());
+    assert.equal(await label.textContent(), 'v' + release);
+    assert.equal(await label.evaluate(element => getComputedStyle(element).borderTopWidth), '1px');
 }
 
 async function updates(browser, url) {
@@ -392,7 +405,7 @@ async function updates(browser, url) {
     await page.goto(url);
     await waitOffline(page);
     version = 'candidate';
-    missing = 'tools/qr/v2.1/splitter.js';
+    missing = 'tools/qr/v2.1.1/version.css';
     await page.evaluate(async () => {
         const reg = await navigator.serviceWorker.getRegistration();
         const finish = new Promise((resolve, reject) => {
@@ -410,13 +423,13 @@ async function updates(browser, url) {
         await reg.update();
         await finish;
     });
-    assert.equal(await page.locator('meta[name=ap-qr-release]').getAttribute('content'), '2');
+    assert.equal(await page.locator('meta[name=ap-qr-release]').getAttribute('content'), '2.1');
     assert.equal(await decode((await generate(page, single))[0]), single);
     const prior = await context.newPage();
     originUnavailable = true;
     await prior.goto(url);
     await waitOffline(prior);
-    assert.equal(await prior.locator('meta[name=ap-qr-release]').getAttribute('content'), '2');
+    assert.equal(await prior.locator('meta[name=ap-qr-release]').getAttribute('content'), '2.1');
     assert.equal(await decode((await generate(prior, single))[0]), single);
     await prior.close();
     originUnavailable = false;
@@ -429,13 +442,14 @@ async function updates(browser, url) {
 
     const next = await finishUpdate(context, page, url);
     await waitOffline(next);
-    assert.equal(await next.locator('meta[name=ap-qr-release]').getAttribute('content'), '2.1');
+    await assertVersionLabel(next);
     assert.deepEqual((await next.evaluate(() => caches.keys())).sort(), [priorCache, candidateCache].sort());
     const [, first, second] = pairs.find(([name]) => name === 'Dr. Smith');
     originUnavailable = true;
     const cold = await context.newPage();
     await cold.goto(url);
     await waitOffline(cold);
+    await assertVersionLabel(cold);
     assert.deepEqual(await Promise.all((await generate(cold, first + second)).map(decode)), [first, second]);
     await cold.close();
     originUnavailable = false;
@@ -447,7 +461,7 @@ async function updates(browser, url) {
     originUnavailable = false;
     await next.reload();
     await waitOffline(next);
-    assert.equal(await next.evaluate(cache => caches.open(cache).then(value => value.keys()).then(keys => keys.length), candidateCache), 17);
+    assert.equal(await next.evaluate(cache => caches.open(cache).then(value => value.keys()).then(keys => keys.length), candidateCache), 18);
 
     version = 'baseline';
     await next.evaluate(async () => (await navigator.serviceWorker.getRegistration()).update());
@@ -455,10 +469,11 @@ async function updates(browser, url) {
     assert.deepEqual(await Promise.all((await generate(next, first + second)).map(decode)), [first, second]);
     const rolledBack = await finishUpdate(context, next, url);
     await waitOffline(rolledBack);
-    assert.equal(await rolledBack.locator('meta[name=ap-qr-release]').getAttribute('content'), '2');
-    assert.equal(await decode((await generate(rolledBack, first + second))[0]), prefix + ' Dr. ');
+    assert.equal(await rolledBack.locator('meta[name=ap-qr-release]').getAttribute('content'), '2.1');
+    assert.equal(await rolledBack.locator('.app-version').count(), 0);
+    assert.deepEqual(await Promise.all((await generate(rolledBack, first + second)).map(decode)), [first, second]);
     await context.close();
-    console.log('Chromium: v2 → v2.1 partial install, waiting update, prior offline availability, candidate offline decode, cache repair and rollback PASS');
+    console.log('Chromium: v2.1 → v2.1.1 partial install, waiting update, prior offline availability, candidate offline decode, cache repair and rollback PASS');
 }
 
 async function finishUpdate(context, previous, url) {
