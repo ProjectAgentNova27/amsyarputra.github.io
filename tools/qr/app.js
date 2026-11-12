@@ -81,9 +81,9 @@ async function zipFiles(items){
  const dirLength=directory.reduce((sum,part)=>sum+part.length,0),footer=new Uint8Array([80,75,5,6,...u16(0),...u16(0),...u16(items.length),...u16(items.length),...u32(dirLength),...u32(offset),...u16(0)]);
  return new Blob([...parts,...directory,footer],{type:'application/zip'});
 }
-function makeFiles(items){return items.map((item,i)=>new File([item.blob],fileName(i,generated.length),{type:'image/png'}));}
-async function shareImages(items){
- const files=makeFiles(items);
+function makeFiles(items,firstIndex=0){return items.map((item,i)=>new File([item.blob],fileName(i+firstIndex,generated.length),{type:'image/png'}));}
+async function shareImages(items,firstIndex=0){
+ const files=makeFiles(items,firstIndex);
  if(navigator.share&&(!navigator.canShare||navigator.canShare({files}))){await navigator.share({files,title:'AP. QR codes'});return true;}
  return false;
 }
@@ -100,7 +100,7 @@ ui.list.addEventListener('click',async event=>{
  try{
   if(button.dataset.action==='save')saveBlob(item.blob,fileName(index,generated.length));
   if(button.dataset.action==='share'){
-   if(!(await shareImages([item]))){saveBlob(item.blob,fileName(index,generated.length));message('Sharing is unavailable; the image was saved instead.');}
+   if(!(await shareImages([item],index))){saveBlob(item.blob,fileName(index,generated.length));message('Sharing is unavailable; the image was saved instead.');}
   }
   if(button.dataset.action==='copy'){if(!navigator.clipboard?.writeText)throw new Error('Clipboard copy is unavailable.');await navigator.clipboard.writeText(item.text);message('Copied text for QR '+(index+1)+'.');}
  }catch(err){if(err.name!=='AbortError')message(err.message||'Action failed.',true);}
